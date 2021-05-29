@@ -1,4 +1,20 @@
 <p id="notice"><%= notice %></p>
 
+<iframe title="vimeo-player" src="<%= @template.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+<p>
+  <strong>Name:</strong>
+  <%= @template.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @template.description %>
+</p>
+
+<%= button_to 'Buy', @template.checkout_url, method: :get %>
+
+<br>
+
 <%= link_to 'Edit', edit_template_path(@template) %> |
 <%= link_to 'Back', templates_path %>
