@@ -64,6 +64,6 @@ class TemplatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def template_params
-      params.require(:template).permit(:preview_url, :name, :description)
+      params.require(:template).permit(:preview_url, :name, :description, :price)
     end
 end

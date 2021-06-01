@@ -12,21 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :preview_url %>
-    <%= form.text_field :preview_url %>
+    <%= form.label :preview_url, class: 'form-label' %>
+    <%= form.text_field :preview_url, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control', min: 0, step: 0.01 %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
