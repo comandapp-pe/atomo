@@ -1,38 +1,21 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%#= notice %></p>-->
 
-<iframe title="vimeo-player" src="<%= @template.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<div class="container p-4">
+  <iframe title="vimeo-player" src="<%= @template.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
-<p>
-  <strong>Name:</strong>
-  <%= @template.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @template.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency @template.price %>
-</p>
-
-<div class="container">
   <div class="row justify-content-md-center mt-5">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Basic implementation for the 2Pay.js client</h5>
-
           <form type="post" id="payment-form">
             <div class="form-group">
               <label for="name" class="label control-label">Name</label>
               <input type="text" id="name" class="field form-control">
             </div>
-
             <div id="card-element">
-            </div>
 
+            </div>
             <button class="btn btn-primary" type="submit">Generate token</button>
           </form>
         </div>
