@@ -12,9 +12,7 @@ merchant_secret_key = '~o^76=q+zaZSDue5CLc%'
 
 hash = OpenSSL::HMAC.hexdigest("MD5", merchant_secret_key, hashable)
 
-url = 'https://webhook.site/7f1209c6-2255-44c9-bc41-8e5abdaf22e6'
-
-# url = 'https://api.2checkout.com/rpc/6.0'
+url = 'https://api.2checkout.com/rpc/6.0'
 
 res = Faraday.post(
   url,
@@ -26,6 +24,26 @@ res = Faraday.post(
       merchantCode: merchant_code,
       date: time,
       hash: hash
+    }
+  }.to_json,
+  {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+)
+
+session_id = JSON.parse(res.body)['result']
+
+puts session_id
+
+res = Faraday.post(
+  url,
+  {
+    id: 1,
+    jsonrpc: '2.0',
+    method: 'placeOrder',
+    params: {
+      session_id: session_id
     }
   }.to_json,
   {

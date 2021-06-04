@@ -62,7 +62,7 @@
     // Call the generate method using the component as the first parameter
     // and the billing details as the second one
     jsPaymentClient.tokens.generate(component, billingDetails).then((response) => {
-      alert(response.token);
+      console.log(response.token);
     }).catch((error) => {
       console.error(error);
     });
