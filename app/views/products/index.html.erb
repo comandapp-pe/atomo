@@ -1,0 +1,49 @@
+<div class="container">
+  <%= render 'application/header' %>
+  <main>
+<!--    <p id="notice"><%#= notice %></p>-->
+
+    <h1>Productos</h1>
+
+<!--    <div class="container mt-3 mb-3">-->
+      <%#= link_to 'New Template', new_product_path, class: 'btn btn-primary' %>
+<!--    </div>-->
+
+    <div class="container">
+      <div class="row">
+        <% @products.each do |template| %>
+          <div class="card col-12 col-sm-6 col-md-4 col-lg-3">
+            <iframe title="vimeo-player" src="<%= template.preview_url %>"></iframe>
+            <div class="card-body">
+              <%= link_to 'Comprar', template, class: 'btn btn-outline-primary w-100' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!--<table>-->
+    <!--  <thead>-->
+    <!--    <tr>-->
+    <!--      <th>Name</th>-->
+    <!--      <th>Description</th>-->
+    <!--      <th colspan="3"></th>-->
+    <!--    </tr>-->
+    <!--  </thead>-->
+
+    <!--  <tbody>-->
+<%# @templates.each do |template| %>
+    <!--      <tr>-->
+    <!--        <td><%#= template.name %></td>-->
+    <!--        <td><%#= template.description %></td>-->
+    <!--        <td><%#= link_to 'Show', template %></td>-->
+    <!--        <td><%#= link_to 'Edit', edit_template_path(template) %></td>-->
+    <!--        <td><%#= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    <!--      </tr>-->
+<%# end %>
+    <!--  </tbody>-->
+    <!--</table>-->
+  </main>
+  <%= render 'application/footer' %>
+</div>
+

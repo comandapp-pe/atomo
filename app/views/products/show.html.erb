@@ -1,7 +1,7 @@
 <!--<p id="notice"><%#= notice %></p>-->
 
 <div class="container p-4">
-  <iframe title="vimeo-player" src="<%= @template.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+  <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
   <div class="row justify-content-md-center mt-5">
     <div class="col-12">
@@ -26,8 +26,8 @@
 
 <br>
 
-<%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
 
 <style>
   #checkout {

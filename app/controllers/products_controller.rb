@@ -1,9 +1,9 @@
-class TemplatesController < ApplicationController
+class ProductsController < ApplicationController
   before_action :set_template, only: %i[ show edit update destroy ]
 
   # GET /templates or /templates.json
   def index
-    @templates = Template.all
+    @products = Product.all
   end
 
   # GET /templates/1 or /templates/1.json
@@ -12,7 +12,7 @@ class TemplatesController < ApplicationController
 
   # GET /templates/new
   def new
-    @template = Template.new
+    @product = Product.new
   end
 
   # GET /templates/1/edit
@@ -21,15 +21,15 @@ class TemplatesController < ApplicationController
 
   # POST /templates or /templates.json
   def create
-    @template = Template.new(template_params)
+    @product = Product.new(template_params)
 
     respond_to do |format|
-      if @template.save
-        format.html { redirect_to @template, notice: "Template was successfully created." }
-        format.json { render :show, status: :created, location: @template }
+      if @product.save
+        format.html { redirect_to @product, notice: "Template was successfully created." }
+        format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -37,21 +37,21 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1 or /templates/1.json
   def update
     respond_to do |format|
-      if @template.update(template_params)
-        format.html { redirect_to @template, notice: "Template was successfully updated." }
-        format.json { render :show, status: :ok, location: @template }
+      if @product.update(template_params)
+        format.html { redirect_to @product, notice: "Template was successfully updated." }
+        format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /templates/1 or /templates/1.json
   def destroy
-    @template.destroy
+    @product.destroy
     respond_to do |format|
-      format.html { redirect_to templates_url, notice: "Template was successfully destroyed." }
+      format.html { redirect_to products_url, notice: "Template was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -59,11 +59,11 @@ class TemplatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_template
-      @template = Template.find(params[:id])
+      @product = Product.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def template_params
-      params.require(:template).permit(:preview_url, :name, :description, :price)
+      params.require(:product).permit(:preview_url, :name, :description, :price)
     end
 end
