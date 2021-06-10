@@ -3,80 +3,88 @@
 
   <div class="row row-cols-1 row-cols-md-3 flex-md-grow-1">
     <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
+
+      <%= form_with model: Order.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">15 segundos</h4>
         </div>
+        <%= form.hidden_field :length, value: 15 %>
+        <%= form.hidden_field :code, value: params[:code] %>
         <div class="card-body">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="horizontal" id="15s-horizontal">
+            <input class="form-check-input" type="radio" name="order[format]" value="horizontal" id="15s-horizontal" required>
             <label class="form-check-label" for="15s-horizontal">Horizontal</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="vertical" id="15s-vertical">
+            <input class="form-check-input" type="radio" name="order[format]" value="vertical" id="15s-vertical" required>
             <label class="form-check-label" for="15s-vertical">Vertical</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="square" id="15s-square">
+            <input class="form-check-input" type="radio" name="order[format]" value="square" id="15s-square" required>
             <label class="form-check-label" for="15s-square">Square</label>
           </div>
-          <button class="mt-3 btn btn-lg btn-outline-primary w-100">Comprar</button>
+          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
         </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
+      <%= form_with model: Order.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">30 segundos</h4>
         </div>
+        <%= form.hidden_field :length, value: 30 %>
+        <%= form.hidden_field :code, value: params[:code] %>
         <div class="card-body">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="horizontal" id="30s-horizontal">
+            <input class="form-check-input" type="radio" name="order[format]" value="horizontal" id="30s-horizontal" required>
             <label class="form-check-label" for="30s-horizontal">Horizontal</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="vertical" id="30s-vertical">
+            <input class="form-check-input" type="radio" name="order[format]" value="vertical" id="30s-vertical" required>
             <label class="form-check-label" for="30s-vertical">Vertical</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="square" id="30s-square">
+            <input class="form-check-input" type="radio" name="order[format]" value="square" id="30s-square" required>
             <label class="form-check-label" for="30s-square">Square</label>
           </div>
-          <button class="mt-3 btn btn-lg btn-outline-primary w-100">Comprar</button>
+          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
         </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
+      <%= form_with model: Order.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
           <h4 class="my-0 fw-normal">60 segundos</h4>
         </div>
+        <%= form.hidden_field :length, value: 60 %>
+        <%= form.hidden_field :code, value: params[:code] %>
         <div class="card-body">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="horizontal" id="60s-horizontal">
+            <input class="form-check-input" type="radio" name="order[format]" value="horizontal" id="60s-horizontal" required>
             <label class="form-check-label" for="60s-horizontal">Horizontal</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="vertical" id="60s-vertical">
+            <input class="form-check-input" type="radio" name="order[format]" value="vertical" id="60s-vertical" required>
             <label class="form-check-label" for="60s-vertical">Vertical</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="layout" value="square" id="60s-square">
+            <input class="form-check-input" type="radio" name="order[format]" value="square" id="60s-square" required>
             <label class="form-check-label" for="60s-square">Square</label>
           </div>
-          <button class="mt-3 btn btn-lg btn-outline-primary w-100">Comprar</button>
+          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
         </div>
-      </div>
+      <% end %>
     </div>
 
   </div>
-<!--    <h1>New Order</h1>-->
 
-    <%#= render 'form', order: @order %>
+  <!--    <h1>New Order</h1>-->
 
-    <%#= link_to 'Back', orders_path %>
+  <%#= render 'form', order: @order %>
+
+  <%#= link_to 'Back', orders_path %>
 
   <%= render 'application/footer' %>
 </div>

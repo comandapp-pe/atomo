@@ -21,17 +21,28 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
+    length = order_params[:length]
+
+    format = order_params[:format]
+
+    code = order_params[:code]
+
+    url = "https://secure.2checkout.com/checkout/buy?test=1&empty-cart=1&merchant=251019015085&tpl=default&prod=#{code}&qty=1&product-additional-fields=format:#{format},length:#{length}"
 
     respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to url }
     end
+    # @order = Order.new(order_params)
+    #
+    # respond_to do |format|
+    #   if @order.save
+    #     format.html { redirect_to @order, notice: "Order was successfully created." }
+    #     format.json { render :show, status: :created, location: @order }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
@@ -64,6 +75,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {})
+      params.require(:order).permit(:length, :format, :code)
     end
 end

@@ -15,31 +15,31 @@
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card ">
               <img
-                src="https://vumbnail.com/<%= '518420404' %>.jpg"
+                src="https://vumbnail.com/<%= template.preview_url.split('/').last %>.jpg"
                 role="button"
                 data-bs-toggle="modal"
-                data-bs-target="#modal"
+                data-bs-target="#modal-<%= template.code %>"
               >
               <div class="card-body">
-                <%= link_to 'Comprar', new_order_path, class: 'btn btn-outline-primary w-100' %>
+                <%= link_to 'Comprar', new_order_path(params: { code: template.code }), class: 'btn btn-outline-primary w-100' %>
               </div>
             </div>
 
-            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+            <div class="modal fade" id="modal-<%= template.code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">CODE</h5>
+                    <h5 class="modal-title"><%= template.code %></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <div class="ratio ratio-16x9">
-                      <iframe src="https://player.vimeo.com/video/518420404"></iframe>
+                      <iframe src="<%= template.preview_url %>"></iframe>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <%= link_to 'Comprar', new_order_path, class: 'btn btn-primary' %>
+                    <%= link_to 'Comprar', new_order_path(params: { code: template.code }), class: 'btn btn-primary' %>
                   </div>
                 </div>
               </div>
