@@ -27,11 +27,34 @@ class OrdersController < ApplicationController
 
     code = order_params[:code]
 
-    url = "https://secure.2checkout.com/checkout/buy?test=1&empty-cart=1&merchant=251019015085&tpl=default&prod=#{code}&qty=1&product-additional-fields=format:#{format},length:#{length}"
+    signable = {
+      'return-type': 'redirect',
+      'return-url': 'https://serene-woodland-34280.herokuapp.com',
+    }
+
+    concat = signable.to_a.map { |key, value| "#{value.length}#{value}" }.join
+
+    secret_word = 'P4nS44ff!@NX5bPV8Wkk9xe8Rk3$vgTZxgU4sYUcCEzKS-wYyfAtvcBEAN!yQVA&'
+
+    args = {
+      'empty-cart': '1',
+      merchant: '251019015085',
+      'prod': code,
+      'product-additional-fields': "format:#{format},length:#{length}",
+      'qty': '1',
+      tpl: 'default',
+    }.merge(signable)
+
+    signature = OpenSSL::HMAC.hexdigest("sha256", secret_word, concat)
+
+    params = args.clone.merge({ 'return-url': CGI.escape(args[:'return-url']) }).to_a.map { |key, value| "#{key}=#{value}" }.join('&') + "&signature=#{signature}"
+
+    url = "https://secure.2checkout.com/checkout/buy?#{params}"
 
     respond_to do |format|
       format.html { redirect_to url }
     end
+
     # @order = Order.new(order_params)
     #
     # respond_to do |format|
