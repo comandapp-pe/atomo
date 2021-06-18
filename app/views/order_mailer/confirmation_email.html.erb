@@ -1,0 +1,25 @@
+<html>
+  <head>
+     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @first_name %> <%= @last_name %>!</h1>
+
+    <p>You order #<%= @order_id %> has been confirmed at <%= @sale_date %>.</p>
+
+    <h2>Order Details</h2>
+
+    <ul>
+      <li>Products: <%= @ids %> / <%= @codes %> / <%= @products %></li>
+      <li>Payment Method: <%= @payment_method %></li>
+      <li>Currency: <%= @currency %></li>
+      <li>Total: <%= @total %></li>
+    </ul>
+
+    <h2>Instructions</h2>
+
+    <p>Send your assets to <%= @url %>.</p>
+
+    <button>Click me to download the user's manual</button>
+  </body>
+</html>
