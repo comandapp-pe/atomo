@@ -79,5 +79,5 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
-  config.hosts << "clever-sloth-4.loca.lt"
+  config.hosts << "clever-earwig-48.loca.lt"
 end

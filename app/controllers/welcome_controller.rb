@@ -5,6 +5,24 @@ class WelcomeController < ApplicationController
   end
 
   def create
+    request.request_parameters
+
+    pid = request.request_parameters["IPN_PID"].first
+
+    pname = request.request_parameters["IPN_PNAME"].first
+
+    ipn_date = request.request_parameters["IPN_DATE"]
+
+    date = request.request_parameters["IPN_DATE"]
+
+    key = 'm&fsBk(ZxhMe)D%!|WqJ'
+
+    data = [pid, pname, ipn_date, date].map {|value| "#{value.bytesize}#{value}"}.join.to_s
+
+    result = OpenSSL::HMAC.hexdigest("md5", key, data)
+
+    tag = "<EPAYMENT>#{date}|#{result}</EPAYMENT>"
+
     OrderMailer.with(
       order_id: params[:ORDERNO],
       customer_email: params[:CUSTOMEREMAIL],
@@ -19,6 +37,6 @@ class WelcomeController < ApplicationController
       total: params[:IPN_TOTAL],
     ).confirmation_email.deliver_later
 
-    head :ok
+    render html: tag.html_safe, layout: 'application'
   end
 end
