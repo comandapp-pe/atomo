@@ -27,7 +27,12 @@ class OrdersController < ApplicationController
 
     code = order_params[:code]
 
+    # the signable's keys must be ordered alphabetically
     signable = {
+      currency: 'USD',
+      price: 'USD:12345',
+      prod: code,
+      qty: '1',
       'return-type': 'redirect',
       'return-url': 'https://serene-woodland-34280.herokuapp.com',
     }
@@ -39,9 +44,7 @@ class OrdersController < ApplicationController
     args = {
       'empty-cart': '1',
       merchant: '251019015085',
-      'prod': code,
       'product-additional-fields': "format:#{format},length:#{length}",
-      'qty': '1',
       tpl: 'default',
     }.merge(signable)
 
