@@ -11,44 +11,44 @@
 
     <div class="container">
       <div class="row g-2">
-        <% @products.each do |template| %>
+        <% @products.each do |product| %>
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card ">
               <img
-                src="https://vumbnail.com/<%= template.preview_url.split('/').last %>.jpg"
+                src="https://vumbnail.com/<%= product.preview_url.split('/').last %>.jpg"
                 role="button"
                 data-bs-toggle="modal"
-                data-bs-target="#modal-<%= template.code %>"
+                data-bs-target="#modal-<%= product.code %>"
               >
               <div class="card-body">
-                <%= link_to 'Comprar', new_order_path(params: { code: template.code }), class: 'btn btn-outline-primary w-100' %>
+                <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-outline-primary w-100' %>
               </div>
             </div>
 
-            <div class="modal fade" id="modal-<%= template.code %>" data-template="<%= template.code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+            <div class="modal fade" id="modal-<%= product.code %>" data-product="<%= product.code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title"><%= template.code %></h5>
+                    <h5 class="modal-title"><%= product.code %></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <div class="ratio ratio-16x9">
-                      <iframe id="video-<%= template.code %>" src="<%= template.preview_url %>"></iframe>
+                      <iframe id="video-<%= product.code %>" src="<%= product.preview_url %>"></iframe>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <%= link_to 'Comprar', new_order_path(params: { code: template.code }), class: 'btn btn-primary' %>
+                    <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-primary' %>
                   </div>
                 </div>
               </div>
             </div>
             <script>
-              document.getElementById('modal-<%= template.code %>').addEventListener('hidden.bs.modal', (event) => {
-                  const { template } = event.target.dataset
+              document.getElementById('modal-<%= product.code %>').addEventListener('hidden.bs.modal', (event) => {
+                  const { product } = event.target.dataset
 
-                  const iframe = document.getElementById('video-' + template)
+                  const iframe = document.getElementById('video-' + product)
 
                   iframe.src = iframe.src
                 }
@@ -69,13 +69,13 @@
     <!--  </thead>-->
 
     <!--  <tbody>-->
-<%# @templates.each do |template| %>
+<%# @templates.each do |product| %>
     <!--      <tr>-->
-    <!--        <td><%#= template.name %></td>-->
-    <!--        <td><%#= template.description %></td>-->
-    <!--        <td><%#= link_to 'Show', template %></td>-->
-    <!--        <td><%#= link_to 'Edit', edit_template_path(template) %></td>-->
-    <!--        <td><%#= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+    <!--        <td><%#= product.name %></td>-->
+    <!--        <td><%#= product.description %></td>-->
+    <!--        <td><%#= link_to 'Show', product %></td>-->
+    <!--        <td><%#= link_to 'Edit', edit_template_path(product) %></td>-->
+    <!--        <td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
     <!--      </tr>-->
 <%# end %>
     <!--  </tbody>-->

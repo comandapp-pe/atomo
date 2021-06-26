@@ -80,5 +80,7 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
-  config.hosts << "clever-earwig-48.loca.lt"
+  config.after_initialize do
+    ActiveRecord::Base.logger.level = 1 # Doesn't log database queries
+  end
 end

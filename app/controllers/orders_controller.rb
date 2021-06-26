@@ -22,55 +22,13 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    length = order_params[:length]
+    product = Product.find(order_params[:product_id])
 
-    format = order_params[:format]
-
-    code = order_params[:code]
-
-    signable = {
-      currency: 'USD',
-      price: "USD:#{Order.quote(length)}",
-      prod: code,
-      qty: '1',
-      'return-type': 'redirect',
-      'return-url': 'https://serene-woodland-34280.herokuapp.com',
-    }.sort.to_h # the signable's keys must be ordered alphabetically
-
-    puts signable
-
-    concat = signable.to_a.map { |key, value| "#{value.length}#{value}" }.join
-
-    secret_word = 'P4nS44ff!@NX5bPV8Wkk9xe8Rk3$vgTZxgU4sYUcCEzKS-wYyfAtvcBEAN!yQVA&'
-
-    args = {
-      'empty-cart': '1',
-      merchant: '251019015085',
-      'product-additional-fields': "format:#{format},length:#{length}",
-      tpl: 'default',
-    }.merge(signable)
-
-    signature = OpenSSL::HMAC.hexdigest("sha256", secret_word, concat)
-
-    params = args.clone.merge({ 'return-url': CGI.escape(args[:'return-url']) }).to_a.map { |key, value| "#{key}=#{value}" }.join('&') + "&signature=#{signature}"
-
-    url = "https://secure.2checkout.com/checkout/buy?#{params}"
+    order = Order.create!(order_params.merge({ total: product.price, status: 0 }))
 
     respond_to do |format|
-      format.html { redirect_to url }
+      format.html { redirect_to order.checkout_url }
     end
-
-    # @order = Order.new(order_params)
-    #
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: "Order was successfully created." }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
@@ -103,6 +61,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:length, :format, :code)
+      params.require(:order).permit(:product_id, :format, :length)
     end
 end
