@@ -22,9 +22,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    product = Product.find(order_params[:product_id])
-
-    order = Order.create!(order_params.merge({ total: product.price, status: 0 }))
+    order = Order.create!(order_params)
 
     respond_to do |format|
       format.html { redirect_to order.checkout_url }

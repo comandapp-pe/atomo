@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   def checkout_url
     signable = {
       currency: 'USD',
-      price: "USD:#{self.total}",
+      price: "USD:#{Order.quote(self.length)}",
       prod: self.product.code,
       qty: '1',
       'return-type': 'redirect',
