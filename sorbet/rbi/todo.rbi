@@ -7,3 +7,5 @@ module ::Anonymous_Delegator_8; end
 module ::Spring; end
 module ActionDispatch::Response::ContentTypeHeader; end
 module Rails::Engine::Configuration; end
+module T::Private::Methods::MethodHooks; end
+module T::Private::Methods::SingletonMethodHooks; end

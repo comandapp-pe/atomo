@@ -32683,6 +32683,11 @@ module Order::GeneratedAttributeMethods
   extend ::Mutex_m
 end
 
+class Order
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
 module PG
   include ::PG::Constants
   ERROR_CLASSES = ::T.let(nil, ::T.untyped)

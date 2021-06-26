@@ -28,21 +28,9 @@ class OrdersController < ApplicationController
 
     code = order_params[:code]
 
-    
-
-    def price(length)
-      if length == '15'
-        20
-      elsif length == '30'
-        30
-      elsif length == '60'
-        40
-      end
-    end
-
     signable = {
       currency: 'USD',
-      price: "USD:#{price(length)}",
+      price: "USD:#{Order.quote(length)}",
       prod: code,
       qty: '1',
       'return-type': 'redirect',
