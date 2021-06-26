@@ -27,15 +27,26 @@ class OrdersController < ApplicationController
 
     code = order_params[:code]
 
-    # the signable's keys must be ordered alphabetically
+    def price(length)
+      if length == '15'
+        20
+      elsif length == '30'
+        30
+      elsif length == '60'
+        40
+      end
+    end
+
     signable = {
       currency: 'USD',
-      price: 'USD:12345',
+      price: "USD:#{price(length)}",
       prod: code,
       qty: '1',
       'return-type': 'redirect',
       'return-url': 'https://serene-woodland-34280.herokuapp.com',
-    }
+    }.sort.to_h # the signable's keys must be ordered alphabetically
+
+    puts signable
 
     concat = signable.to_a.map { |key, value| "#{value.length}#{value}" }.join
 

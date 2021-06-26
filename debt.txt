@@ -1,2 +1,1 @@
 - put a play button on top of the vimeo thumbnail
-- make the vimeo embed autoplay when the modal opens, and autopause when it closes
