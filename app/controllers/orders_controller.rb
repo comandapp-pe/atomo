@@ -1,3 +1,4 @@
+# typed: false
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
 
@@ -26,6 +27,8 @@ class OrdersController < ApplicationController
     format = order_params[:format]
 
     code = order_params[:code]
+
+    
 
     def price(length)
       if length == '15'

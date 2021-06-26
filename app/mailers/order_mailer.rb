@@ -1,3 +1,4 @@
+# typed: true
 class OrderMailer < ApplicationMailer
   default from: 'waterquarks@gmail.com'
 

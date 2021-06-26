@@ -1,3 +1,4 @@
+# typed: false
 class ProductsController < ApplicationController
   before_action :set_template, only: %i[ show edit update destroy ]
 
