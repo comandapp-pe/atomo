@@ -2,6 +2,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
 
+  protect_from_forgery with: :null_session
+
   # GET /orders or /orders.json
   def index
     @orders = Order.all
@@ -22,11 +24,37 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    order = Order.new
+    pid = request.request_parameters["IPN_PID"].first
 
-    respond_to do |format|
-      format.html { redirect_to 'https://google.com' }
-    end
+    pname = request.request_parameters["IPN_PNAME"].first
+
+    ipn_date = request.request_parameters["IPN_DATE"]
+
+    date = request.request_parameters["IPN_DATE"]
+
+    key = 'm&fsBk(ZxhMe)D%!|WqJ'
+
+    data = [pid, pname, ipn_date, date].map { |value| "#{value.bytesize}#{value}" }.join.to_s
+
+    result = OpenSSL::HMAC.hexdigest("md5", key, data)
+
+    tag = "<EPAYMENT>#{date}|#{result}</EPAYMENT>"
+
+    OrderMailer.with(
+      order_id: params[:ORDERNO],
+      customer_email: params[:CUSTOMEREMAIL],
+      first_name: params[:FIRSTNAME],
+      last_name: params[:LASTNAME],
+      sale_date: params[:SALEDATE],
+      payment_method: params[:PAYMETHOD],
+      currency: params[:CURRENCY],
+      ids: params[:IPN_PID],
+      codes: params[:IPN_PCODE],
+      products: params[:IPN_PNAME],
+      total: params[:IPN_TOTAL],
+    ).confirmation_email.deliver_later
+
+    render html: tag.html_safe, layout: 'application'
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
@@ -52,13 +80,14 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit({})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def order_params
+    params.require(:order).permit({})
+  end
 end
