@@ -1,8 +1,15 @@
-price = case 20
-        when 20 then 40
-        end
+# typed: true
+require 'sorbet-runtime'
 
-puts price
+class MyStruct < T::Struct
+  const :id, Integer
+  const :code, String
+  const :name, String
+  const :quantity, Integer
+  const :price, Float
+end
+
+my_struct = MyStruct.new(foo: 40)
 
 params = {
   "SALEDATE" => "2021-06-27 19:02:31",
