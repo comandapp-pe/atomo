@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
 
     result = OpenSSL::HMAC.hexdigest("md5", key, data)
 
-    tag = "<EPAYMENT>#{date}|#{result}</EPAYMENT>"
+    tag = "<EPAYMENT>#{ipn_date}|#{result}</EPAYMENT>"
 
     OrderMailer.with(
       order_id: params["ORDERNO"],
