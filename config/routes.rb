@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   resources :products
   resources :orders
-  resources :checkout_links, only: :create
+  resources :checkout_links, only: [:create]
 end

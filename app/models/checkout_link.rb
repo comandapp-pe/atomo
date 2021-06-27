@@ -11,9 +11,15 @@ class CheckoutLink < ApplicationRecord
   validates :length, inclusion: { in: [15, 30, 60] }
 
   def url
+    price = case self.length
+              when 15 then 20
+              when 30 then 30
+              when 60 then 40
+            end
+
     signable = {
       currency: 'USD',
-      price: "USD:#{100}",
+      price: "USD:#{price}",
       prod: self.product.code,
       qty: '1',
       'return-type': 'redirect',
