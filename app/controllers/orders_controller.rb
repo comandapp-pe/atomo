@@ -22,10 +22,10 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    order = Order.create!(order_params)
+    order = Order.new
 
     respond_to do |format|
-      format.html { redirect_to order.checkout_url }
+      format.html { redirect_to 'https://google.com' }
     end
   end
 
@@ -59,6 +59,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:product_id, :format, :length)
+      params.require(:order).permit({})
     end
 end

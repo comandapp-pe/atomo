@@ -1,3 +1,4 @@
+# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_231717) do
+ActiveRecord::Schema.define(version: 2021_06_27_033813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "checkout_links", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "format", null: false
+    t.integer "length", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_checkout_links_on_product_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -34,5 +44,6 @@ ActiveRecord::Schema.define(version: 2021_06_26_231717) do
     t.string "code", null: false
   end
 
+  add_foreign_key "checkout_links", "products"
   add_foreign_key "orders", "products"
 end
