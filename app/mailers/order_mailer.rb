@@ -17,10 +17,6 @@ class OrderMailer < ApplicationMailer
 
     @currency = params[:currency]
 
-    @ids = params[:ids]
-
-    @codes = params[:codes]
-
     @products = params[:products]
 
     @total = params[:total]

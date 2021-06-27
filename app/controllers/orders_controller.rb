@@ -24,34 +24,43 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
+    products = params['IPN_PID'].zip(params['IPN_PCODE'], params['IPN_PNAME'], params['IPN_QTY'], params['IPN_PRICE'])
+
+    products = products.map { |array| [:id, :code, :name, :quantity, :price].zip(array) }.map(&:to_h)
+
+    products = products.map do |product|
+      text = params["IPN_CUSTOM_#{product[:id]}_TEXT"].map(&:downcase).map(&:to_sym)
+      value = params["IPN_CUSTOM_#{product[:id]}_VALUE"].map(&:downcase)
+
+      meta = text.zip(value).to_h
+
+      { **product, **meta }
+    end
+
     pid = request.request_parameters["IPN_PID"].first
 
     pname = request.request_parameters["IPN_PNAME"].first
 
     ipn_date = request.request_parameters["IPN_DATE"]
 
-    date = request.request_parameters["IPN_DATE"]
-
     key = 'm&fsBk(ZxhMe)D%!|WqJ'
 
-    data = [pid, pname, ipn_date, date].map { |value| "#{value.bytesize}#{value}" }.join.to_s
+    data = [pid, pname, ipn_date, ipn_date].map { |value| "#{value.bytesize}#{value}" }.join.to_s
 
     result = OpenSSL::HMAC.hexdigest("md5", key, data)
 
     tag = "<EPAYMENT>#{date}|#{result}</EPAYMENT>"
 
     OrderMailer.with(
-      order_id: params[:ORDERNO],
-      customer_email: params[:CUSTOMEREMAIL],
-      first_name: params[:FIRSTNAME],
-      last_name: params[:LASTNAME],
-      sale_date: params[:SALEDATE],
-      payment_method: params[:PAYMETHOD],
-      currency: params[:CURRENCY],
-      ids: params[:IPN_PID],
-      codes: params[:IPN_PCODE],
-      products: params[:IPN_PNAME],
-      total: params[:IPN_TOTAL],
+      order_id: params["ORDERNO"],
+      customer_email: params["CUSTOMEREMAIL"],
+      first_name: params["FIRSTNAME"],
+      last_name: params["LASTNAME"],
+      sale_date: params["SALEDATE"],
+      products: products,
+      payment_method: params["PAYMETHOD"],
+      currency: params["CURRENCY"],
+      total: params["IPN_TOTAL"],
     ).confirmation_email.deliver_later
 
     render html: tag.html_safe, layout: 'application'
