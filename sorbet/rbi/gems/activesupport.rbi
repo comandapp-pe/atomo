@@ -2376,11 +2376,6 @@ module ActiveSupport::Cache::MemoryStore::DupCoder
   def self.dump(entry); end
   def self.load(entry); end
 end
-class ActiveSupport::Digest
-  def self.hash_digest_class; end
-  def self.hash_digest_class=(klass); end
-  def self.hexdigest(arg); end
-end
 class ActiveSupport::Concurrency::LoadInterlockAwareMonitor < Monitor
   def mon_enter; end
   def synchronize; end
@@ -2411,6 +2406,11 @@ class ActiveSupport::Multibyte::Chars
   def to_str; end
   def wrapped_string; end
   include Comparable
+end
+class ActiveSupport::Digest
+  def self.hash_digest_class; end
+  def self.hash_digest_class=(klass); end
+  def self.hexdigest(arg); end
 end
 class ActiveSupport::CurrentAttributes
   def __callbacks; end

@@ -241,9 +241,9 @@ module ActiveStorage::Reflection::ActiveRecordExtensions::ClassMethods
 end
 class ActiveStorage::Engine < Rails::Engine
 end
-module Anonymous_Module_23
+module Anonymous_Module_22
 end
-module Anonymous_Module_24
+module Anonymous_Module_23
 end
 module ActiveStorage::Attached::Model
   def attachment_changes; end
@@ -301,9 +301,9 @@ class ActiveStorage::BaseController < ActionController::Base
   def stream(blob); end
   include ActionDispatch::Routing::UrlFor
   include ActiveStorage::SetCurrent
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
-module Anonymous_Module_25
+module Anonymous_Module_24
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -315,11 +315,11 @@ module Anonymous_Module_25
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
+  extend Anonymous_Module_22
   extend Anonymous_Module_23
-  extend Anonymous_Module_24
   include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_22
   include Anonymous_Module_23
-  include Anonymous_Module_24
 end
 class ActiveStorage::DirectUploadsController < ActiveStorage::BaseController
   def _layout(lookup_context, formats); end
@@ -329,7 +329,7 @@ class ActiveStorage::DirectUploadsController < ActiveStorage::BaseController
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 module ActiveStorage::FileServer
   def serve_file(path, content_type:, disposition:); end
@@ -347,7 +347,7 @@ class ActiveStorage::DiskController < ActiveStorage::BaseController
   def show; end
   def update; end
   include ActiveStorage::FileServer
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 module ActiveStorage::SetHeaders
   def set_content_headers_from(blob); end
@@ -533,7 +533,7 @@ class ActiveStorage::Blob < ActiveStorage::Record
   include ActiveStorage::Blob::GeneratedAttributeMethods
   include ActiveStorage::Blob::Identifiable
   include ActiveStorage::Blob::Representable
-  include Anonymous_Module_26
+  include Anonymous_Module_25
 end
 module ActiveStorage::Blob::GeneratedAssociationMethods
   def attachment_ids; end
@@ -575,7 +575,7 @@ class ActiveStorage::Blob::ActiveRecord_AssociationRelation < ActiveRecord::Asso
   include ActiveRecord::Delegation::ClassSpecificRelation
   include ActiveStorage::Blob::GeneratedRelationMethods
 end
-module Anonymous_Module_26
+module Anonymous_Module_25
   def analyzed; end
   def analyzed=(value); end
   def analyzed_before_last_save; end
@@ -732,9 +732,9 @@ end
 class ActiveStorage::Current < ActiveSupport::CurrentAttributes
   def self.host; end
   def self.host=(attribute); end
-  include Anonymous_Module_27
+  include Anonymous_Module_26
 end
-module Anonymous_Module_27
+module Anonymous_Module_26
   def host; end
   def host=(attribute); end
 end
@@ -766,7 +766,7 @@ class ActiveStorage::Representations::ProxyController < ActiveStorage::BaseContr
   def show; end
   include ActiveStorage::SetBlob
   include ActiveStorage::SetHeaders
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 class ActiveStorage::Representations::RedirectController < ActiveStorage::BaseController
   def _layout(lookup_context, formats); end
@@ -776,7 +776,7 @@ class ActiveStorage::Representations::RedirectController < ActiveStorage::BaseCo
   def self.middleware_stack; end
   def show; end
   include ActiveStorage::SetBlob
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 class ActiveStorage::Blobs::ProxyController < ActiveStorage::BaseController
   def _layout(lookup_context, formats); end
@@ -787,7 +787,7 @@ class ActiveStorage::Blobs::ProxyController < ActiveStorage::BaseController
   def show; end
   include ActiveStorage::SetBlob
   include ActiveStorage::SetHeaders
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 class ActiveStorage::Blobs::RedirectController < ActiveStorage::BaseController
   def _layout(lookup_context, formats); end
@@ -797,7 +797,7 @@ class ActiveStorage::Blobs::RedirectController < ActiveStorage::BaseController
   def self.middleware_stack; end
   def show; end
   include ActiveStorage::SetBlob
-  include Anonymous_Module_25
+  include Anonymous_Module_24
 end
 class ActiveStorage::Attached::Changes::CreateOne
   def attachable; end

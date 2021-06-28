@@ -55,9 +55,9 @@ module ActionMailbox
 end
 class ActionMailbox::Engine < Rails::Engine
 end
-module Anonymous_Module_29
+module Anonymous_Module_28
 end
-module Anonymous_Module_30
+module Anonymous_Module_29
 end
 class ActionMailbox::BaseController < ActionController::Base
   def _layout(lookup_context, formats); end
@@ -71,9 +71,9 @@ class ActionMailbox::BaseController < ActionController::Base
   def self.helpers_path; end
   def self.middleware_stack; end
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
-module Anonymous_Module_31
+module Anonymous_Module_30
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -85,11 +85,11 @@ module Anonymous_Module_31
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
+  extend Anonymous_Module_28
   extend Anonymous_Module_29
-  extend Anonymous_Module_30
   include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_28
   include Anonymous_Module_29
-  include Anonymous_Module_30
 end
 class ActionMailbox::IncinerationJob < ActiveJob::Base
   def perform(inbound_email); end
@@ -152,11 +152,13 @@ class ActionMailbox::InboundEmail < ActionMailbox::Record
   def mail; end
   def processed?; end
   def source; end
+  def typed_status; end
+  def typed_status=(value); end
   extend ActionMailbox::InboundEmail::MessageId::ClassMethods
   include ActionMailbox::InboundEmail::GeneratedAssociationMethods
   include ActionMailbox::InboundEmail::GeneratedAttributeMethods
   include ActionMailbox::InboundEmail::Incineratable
-  include Anonymous_ActiveRecord_Enum_EnumMethods_32
+  include Anonymous_ActiveRecord_Enum_EnumMethods_31
 end
 module ActionMailbox::InboundEmail::GeneratedAssociationMethods
   def build_raw_email_attachment(*args, &block); end
@@ -199,7 +201,7 @@ class ActionMailbox::InboundEmail::ActiveRecord_AssociationRelation < ActiveReco
   include ActionMailbox::InboundEmail::GeneratedRelationMethods
   include ActiveRecord::Delegation::ClassSpecificRelation
 end
-module Anonymous_ActiveRecord_Enum_EnumMethods_32
+module Anonymous_ActiveRecord_Enum_EnumMethods_31
   def bounced!; end
   def bounced?; end
   def delivered!; end
@@ -210,6 +212,8 @@ module Anonymous_ActiveRecord_Enum_EnumMethods_32
   def pending?; end
   def processing!; end
   def processing?; end
+end
+class ActionMailbox::InboundEmail::Status < T::Enum
 end
 module Rails
 end
@@ -224,14 +228,15 @@ class Rails::Conductor::BaseController < ActionController::Base
   def self.helpers_path; end
   def self.middleware_stack; end
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_22
+  include GeneratedUrlHelpers
 end
 module Rails::Conductor::BaseController::HelperMethods
   include ActionController::Base::HelperMethods
   include ApplicationHelper
+  include CheckoutLinksHelper
   include OrdersHelper
   include ProductsHelper
-  include WelcomeHelper
+  include RootHelper
 end
 class ActionMailbox::Ingresses::Postmark::InboundEmailsController < ActionMailbox::BaseController
   def _layout(lookup_context, formats); end
@@ -240,7 +245,7 @@ class ActionMailbox::Ingresses::Postmark::InboundEmailsController < ActionMailbo
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
 class ActionMailbox::Ingresses::Sendgrid::InboundEmailsController < ActionMailbox::BaseController
   def _layout(lookup_context, formats); end
@@ -251,7 +256,7 @@ class ActionMailbox::Ingresses::Sendgrid::InboundEmailsController < ActionMailbo
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
 class ActionMailbox::Ingresses::Mandrill::InboundEmailsController < ActionMailbox::BaseController
   def _layout(lookup_context, formats); end
@@ -266,7 +271,7 @@ class ActionMailbox::Ingresses::Mandrill::InboundEmailsController < ActionMailbo
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
 class ActionMailbox::Ingresses::Mandrill::InboundEmailsController::Authenticator
   def authenticated?; end
@@ -288,7 +293,7 @@ class ActionMailbox::Ingresses::Mailgun::InboundEmailsController < ActionMailbox
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
 class ActionMailbox::Ingresses::Mailgun::InboundEmailsController::Authenticator
   def authenticated?; end
@@ -309,7 +314,7 @@ class ActionMailbox::Ingresses::Relay::InboundEmailsController < ActionMailbox::
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_31
+  include Anonymous_Module_30
 end
 class Rails::Conductor::ActionMailbox::InboundEmailsController < Rails::Conductor::BaseController
   def _layout(lookup_context, formats); end
@@ -322,7 +327,7 @@ class Rails::Conductor::ActionMailbox::InboundEmailsController < Rails::Conducto
   def self.helpers_path; end
   def self.middleware_stack; end
   def show; end
-  include Anonymous_Module_22
+  include GeneratedUrlHelpers
 end
 class Rails::Conductor::ActionMailbox::ReroutesController < Rails::Conductor::BaseController
   def _layout(lookup_context, formats); end
@@ -331,7 +336,7 @@ class Rails::Conductor::ActionMailbox::ReroutesController < Rails::Conductor::Ba
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_22
+  include GeneratedUrlHelpers
 end
 class ActionMailbox::InboundEmail::Incineratable::Incineration
   def due?; end
@@ -346,7 +351,7 @@ class Rails::Conductor::ActionMailbox::InboundEmails::SourcesController < Rails:
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  include Anonymous_Module_22
+  include GeneratedUrlHelpers
 end
 module ActionMailbox::Callbacks
   extend ActiveSupport::Concern

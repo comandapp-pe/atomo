@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   def create
     products = params['IPN_PID'].zip(params['IPN_PCODE'], params['IPN_PNAME'], params['IPN_QTY'], params['IPN_PRICE'])
 
-    products = products.map { |array| [:id, :code, :name, :quantity, :price].zip(array) }.map(&:to_h)
+    products = products.map { |array| %i[id code name quantity price].zip(array) }.map(&:to_h)
 
     products = products.map do |product|
       text = params["IPN_CUSTOM_#{product[:id]}_TEXT"].map(&:downcase).map(&:to_sym)

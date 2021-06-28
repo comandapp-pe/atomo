@@ -2268,7 +2268,7 @@ module ActiveRecord::Enum
   def assert_valid_enum_definition_values(values); end
   def detect_enum_conflict!(enum_name, method_name, klass_method = nil); end
   def detect_negative_enum_conditions!(method_names); end
-  def enum(definitions); end
+  def enum(arg0, &blk); end
   def inherited(base); end
   def raise_conflict_error(enum_name, method_name, type: nil, source: nil); end
   def self.extended(base); end
@@ -4681,79 +4681,427 @@ class ActiveRecord::ConnectionAdapters::PoolManager
   def set_pool_config(role, shard, pool_config); end
   def shard_names; end
 end
-class ActiveRecord::Tasks::DatabaseNotSupported < StandardError
+module ActiveRecord::FinderMethods
+  def apply_join_dependency(eager_loading: nil); end
+  def check_reorder_deprecation; end
+  def construct_relation_for_exists(conditions); end
+  def exists?(conditions = nil); end
+  def fifth!; end
+  def fifth; end
+  def find(*args); end
+  def find_by!(arg, *args); end
+  def find_by(arg, *args); end
+  def find_last(limit); end
+  def find_nth(index); end
+  def find_nth_from_last(index); end
+  def find_nth_with_limit(index, limit); end
+  def find_one(id); end
+  def find_some(ids); end
+  def find_some_ordered(ids); end
+  def find_take; end
+  def find_take_with_limit(limit); end
+  def find_with_ids(*ids); end
+  def first!; end
+  def first(limit = nil); end
+  def forty_two!; end
+  def forty_two; end
+  def fourth!; end
+  def fourth; end
+  def include?(record); end
+  def last!; end
+  def last(limit = nil); end
+  def limited_ids_for(relation); end
+  def member?(record); end
+  def ordered_relation; end
+  def raise_record_not_found_exception!(ids = nil, result_size = nil, expected_size = nil, key = nil, not_found_ids = nil); end
+  def second!; end
+  def second; end
+  def second_to_last!; end
+  def second_to_last; end
+  def take!; end
+  def take(limit = nil); end
+  def third!; end
+  def third; end
+  def third_to_last!; end
+  def third_to_last; end
+  def using_limitable_reflections?(reflections); end
 end
-module ActiveRecord::Tasks::DatabaseTasks
-  def cache_dump_filename(db_config_name, schema_cache_path: nil); end
-  def charset(configuration, *arguments); end
-  def charset_current(env_name = nil, db_name = nil); end
-  def check_protected_environments!; end
-  def check_schema_file(filename); end
-  def check_target_version; end
-  def class_for_adapter(adapter); end
-  def clear_schema_cache(filename); end
-  def collation(configuration, *arguments); end
-  def collation_current(env_name = nil, db_name = nil); end
-  def create(configuration, *arguments); end
-  def create_all; end
-  def create_current(environment = nil, name = nil); end
-  def current_config(*args, &block); end
-  def current_config=(*args, &block); end
-  def database_adapter_for(db_config, *arguments); end
-  def database_configuration; end
-  def database_configuration=(arg0); end
-  def db_dir; end
-  def db_dir=(arg0); end
-  def drop(configuration, *arguments); end
-  def drop_all; end
-  def drop_current(environment = nil); end
-  def dump_filename(db_config_name, format = nil); end
-  def dump_schema(db_config, format = nil); end
-  def dump_schema_cache(conn, filename); end
-  def each_current_configuration(environment, name = nil); end
-  def each_local_configuration; end
-  def env; end
-  def env=(arg0); end
-  def fixtures_path; end
-  def fixtures_path=(arg0); end
-  def for_each(databases); end
-  def load_schema(db_config, format = nil, file = nil); end
-  def load_schema_current(format = nil, file = nil, environment = nil); end
-  def load_seed; end
-  def local_database?(db_config); end
-  def migrate; end
-  def migrate_status; end
-  def migrations_paths; end
-  def migrations_paths=(arg0); end
+module ActiveRecord::Calculations
+  def aggregate_column(column_name); end
+  def all_attributes?(column_names); end
+  def average(column_name); end
+  def build_count_subquery(relation, column_name, distinct); end
+  def calculate(operation, column_name); end
+  def column_alias_for(field); end
+  def count(column_name = nil); end
+  def distinct_select?(column_name); end
+  def execute_grouped_calculation(operation, column_name, distinct); end
+  def execute_simple_calculation(operation, column_name, distinct); end
+  def has_include?(column_name); end
+  def ids; end
+  def lookup_cast_type_from_join_dependencies(name, join_dependencies = nil); end
+  def maximum(column_name); end
+  def minimum(column_name); end
+  def operation_over_aggregate_column(column, operation, distinct); end
+  def perform_calculation(operation, column_name); end
+  def pick(*column_names); end
+  def pluck(*column_names); end
+  def select_for_count; end
+  def sum(column_name = nil); end
+  def type_cast_calculated_value(value, operation); end
+  def type_cast_pluck_values(result, columns); end
+  def type_for(field, &block); end
+end
+class ActiveRecord::Relation
+  def ==(other); end
+  def _create!(attributes, &block); end
+  def _create(attributes, &block); end
+  def _exec_scope(*args, &block); end
+  def _increment_attribute(attribute, value = nil); end
+  def _new(attributes, &block); end
+  def _scoping(scope); end
+  def _substitute_values(values); end
+  def alias_tracker(joins = nil, aliases = nil); end
+  def already_in_scope?; end
+  def any?; end
+  def arel_attribute(*args, &block); end
+  def bind_attribute(name, value); end
+  def blank?; end
+  def build(attributes = nil, &block); end
+  def build_preloader; end
+  def cache_key(timestamp_column = nil); end
+  def cache_key_with_version; end
+  def cache_version(timestamp_column = nil); end
+  def compute_cache_key(timestamp_column = nil); end
+  def compute_cache_version(timestamp_column); end
+  def create!(attributes = nil, &block); end
+  def create(attributes = nil, &block); end
+  def create_or_find_by!(attributes, &block); end
+  def create_or_find_by(attributes, &block); end
+  def current_scope_restoring_block(&block); end
+  def delete_all; end
+  def delete_by(*args); end
+  def destroy_all; end
+  def destroy_by(*args); end
+  def eager_loading?; end
+  def empty?; end
+  def empty_scope?; end
+  def encode_with(coder); end
+  def exec_queries(&block); end
+  def explain; end
+  def find_or_create_by!(attributes, &block); end
+  def find_or_create_by(attributes, &block); end
+  def find_or_initialize_by(attributes, &block); end
+  def first_or_create!(attributes = nil, &block); end
+  def first_or_create(attributes = nil, &block); end
+  def first_or_initialize(attributes = nil, &block); end
+  def has_limit_or_offset?; end
+  def initialize(klass, table: nil, predicate_builder: nil, values: nil); end
+  def initialize_copy(other); end
+  def inspect; end
+  def joined_includes_values; end
+  def klass; end
+  def load(&block); end
+  def load_records(records); end
+  def loaded; end
+  def loaded?; end
+  def locked?; end
+  def many?; end
+  def model; end
+  def new(attributes = nil, &block); end
+  def none?; end
+  def null_relation?; end
+  def one?; end
+  def predicate_builder; end
+  def preload_associations(records); end
+  def pretty_print(q); end
+  def records; end
+  def references_eager_loaded_tables?; end
+  def reload; end
+  def reset; end
+  def scope_for_create; end
+  def scoping; end
+  def size; end
+  def skip_preloading_value; end
+  def skip_preloading_value=(arg0); end
+  def skip_query_cache_if_necessary; end
+  def table; end
+  def tables_in_string(string); end
+  def to_a; end
+  def to_ary; end
+  def to_sql; end
+  def touch_all(*names, time: nil); end
+  def update(id = nil, attributes); end
+  def update_all(updates); end
+  def update_counters(counters); end
+  def values; end
+  def where_values_hash(relation_table_name = nil); end
+  extend ActiveRecord::Delegation::ClassMethods
+  include ActiveRecord::FinderMethods
+  include Enumerable
+  include SorbetRails::CustomFinderMethods
+  include SorbetRails::PluckToTStruct
+end
+class ActiveRecord::Relation::HashMerger
+  def hash; end
+  def initialize(relation, hash, rewhere = nil); end
+  def merge; end
+  def other; end
+  def relation; end
+end
+class ActiveRecord::Relation::Merger
+  def initialize(relation, other, rewhere = nil); end
+  def merge; end
+  def merge_clauses; end
+  def merge_joins; end
+  def merge_multi_values; end
+  def merge_outer_joins; end
+  def merge_preloads; end
+  def merge_single_values; end
+  def normal_values; end
+  def other; end
+  def relation; end
+  def replace_from_clause?; end
+  def values; end
+end
+module ActiveRecord::SpawnMethods
+  def except(*skips); end
+  def merge!(other, *rest); end
+  def merge(other, *rest); end
+  def only(*onlies); end
+  def relation_with(values); end
+  def spawn; end
+end
+class ActiveRecord::Relation::FromClause
+  def ==(other); end
+  def empty?; end
+  def initialize(value, name); end
+  def merge(other); end
   def name; end
-  def purge(configuration); end
-  def purge_all; end
-  def purge_current(environment = nil); end
-  def raise_for_multi_db(environment = nil, command:); end
-  def reconstruct_from_schema(db_config, format = nil, file = nil); end
-  def register_task(pattern, task); end
-  def resolve_configuration(configuration); end
-  def root; end
-  def root=(arg0); end
-  def schema_file(format = nil); end
-  def schema_file_type(format = nil); end
-  def schema_sha1(file); end
-  def schema_up_to_date?(configuration, format = nil, file = nil, environment = nil, name = nil); end
-  def seed_loader; end
-  def seed_loader=(arg0); end
-  def self.structure_dump_flags; end
-  def self.structure_dump_flags=(val); end
-  def self.structure_load_flags; end
-  def self.structure_load_flags=(val); end
-  def setup_initial_database_yaml; end
-  def spec(*args, &block); end
-  def structure_dump(configuration, *arguments); end
-  def structure_load(configuration, *arguments); end
-  def target_version; end
-  def truncate_all(environment = nil); end
-  def truncate_tables(db_config); end
-  def verbose?; end
-  extend ActiveRecord::Tasks::DatabaseTasks
+  def self.empty; end
+  def value; end
+end
+class ActiveRecord::Relation::QueryAttribute < ActiveModel::Attribute
+  def infinite?; end
+  def infinity?(value); end
+  def nil?; end
+  def type_cast(value); end
+  def unboundable?; end
+  def value_for_database; end
+  def with_cast_value(value); end
+end
+class ActiveRecord::Relation::WhereClause
+  def +(other); end
+  def -(other); end
+  def ==(other); end
+  def any?(**, &&); end
+  def ast; end
+  def contradiction?; end
+  def empty?(**, &&); end
+  def equalities(predicates, equality_only); end
+  def equality_node?(node); end
+  def except(*columns); end
+  def except_predicates(columns); end
+  def extract_attribute(node); end
+  def extract_attributes; end
+  def extract_node_value(node); end
+  def initialize(predicates); end
+  def invert; end
+  def invert_predicate(node); end
+  def merge(other, rewhere = nil); end
+  def non_empty_predicates; end
+  def or(other); end
+  def predicates; end
+  def predicates_unreferenced_by(other); end
+  def predicates_with_wrapped_sql_literals; end
+  def referenced_columns; end
+  def self.empty; end
+  def to_h(table_name = nil, equality_only: nil); end
+  def wrap_sql_literal(node); end
+  def |(other); end
+end
+module ActiveRecord::QueryMethods
+  def _select!(*fields); end
+  def and!(other); end
+  def and(other); end
+  def annotate!(*args); end
+  def annotate(*args); end
+  def annotate_values; end
+  def annotate_values=(value); end
+  def arel(aliases = nil); end
+  def arel_column(field); end
+  def arel_columns(columns); end
+  def assert_mutability!; end
+  def build_arel(aliases); end
+  def build_cast_value(name, value); end
+  def build_from; end
+  def build_having_clause(opts, rest = nil); end
+  def build_join_buckets; end
+  def build_join_dependencies; end
+  def build_joins(join_sources, aliases = nil); end
+  def build_order(arel); end
+  def build_select(arel); end
+  def build_subquery(subquery_alias, select_value); end
+  def build_where_clause(opts, rest = nil); end
+  def check_if_method_has_arguments!(method_name, args, message = nil); end
+  def column_references(order_args); end
+  def construct_join_dependency(associations, join_type); end
+  def create_with!(value); end
+  def create_with(value); end
+  def create_with_value; end
+  def create_with_value=(value); end
+  def distinct!(value = nil); end
+  def distinct(value = nil); end
+  def distinct_value; end
+  def distinct_value=(value); end
+  def does_not_support_reverse?(order); end
+  def each_join_dependencies(join_dependencies = nil); end
+  def eager_load!(*args); end
+  def eager_load(*args); end
+  def eager_load_values; end
+  def eager_load_values=(value); end
+  def extending!(*modules, &block); end
+  def extending(*modules, &block); end
+  def extending_values; end
+  def extending_values=(value); end
+  def extensions; end
+  def extract_associated(association); end
+  def from!(value, subquery_name = nil); end
+  def from(value, subquery_name = nil); end
+  def from_clause; end
+  def from_clause=(value); end
+  def group!(*args); end
+  def group(*args); end
+  def group_values; end
+  def group_values=(value); end
+  def having!(opts, *rest); end
+  def having(opts, *rest); end
+  def having_clause; end
+  def having_clause=(value); end
+  def includes!(*args); end
+  def includes(*args); end
+  def includes_values; end
+  def includes_values=(value); end
+  def joins!(*args); end
+  def joins(*args); end
+  def joins_values; end
+  def joins_values=(value); end
+  def left_joins(*args); end
+  def left_outer_joins!(*args); end
+  def left_outer_joins(*args); end
+  def left_outer_joins_values; end
+  def left_outer_joins_values=(value); end
+  def limit!(value); end
+  def limit(value); end
+  def limit_value; end
+  def limit_value=(value); end
+  def lock!(locks = nil); end
+  def lock(locks = nil); end
+  def lock_value; end
+  def lock_value=(value); end
+  def lookup_table_klass_from_join_dependencies(table_name); end
+  def none!; end
+  def none; end
+  def offset!(value); end
+  def offset(value); end
+  def offset_value; end
+  def offset_value=(value); end
+  def optimizer_hints!(*args); end
+  def optimizer_hints(*args); end
+  def optimizer_hints_values; end
+  def optimizer_hints_values=(value); end
+  def or!(other); end
+  def or(other); end
+  def order!(*args); end
+  def order(*args); end
+  def order_column(field); end
+  def order_values; end
+  def order_values=(value); end
+  def preload!(*args); end
+  def preload(*args); end
+  def preload_values; end
+  def preload_values=(value); end
+  def preprocess_order_args(order_args); end
+  def readonly!(value = nil); end
+  def readonly(value = nil); end
+  def readonly_value; end
+  def readonly_value=(value); end
+  def references!(*table_names); end
+  def references(*table_names); end
+  def references_values; end
+  def references_values=(value); end
+  def reorder!(*args); end
+  def reorder(*args); end
+  def reordering_value; end
+  def reordering_value=(value); end
+  def reselect!(*args); end
+  def reselect(*args); end
+  def resolve_arel_attributes(attrs); end
+  def reverse_order!; end
+  def reverse_order; end
+  def reverse_order_value; end
+  def reverse_order_value=(value); end
+  def reverse_sql_order(order_query); end
+  def rewhere(conditions); end
+  def sanitize_order_arguments(order_args); end
+  def select(*fields); end
+  def select_association_list(associations, stashed_joins = nil); end
+  def select_values; end
+  def select_values=(value); end
+  def skip_preloading!; end
+  def skip_query_cache!(value = nil); end
+  def skip_query_cache_value; end
+  def skip_query_cache_value=(value); end
+  def strict_loading!(value = nil); end
+  def strict_loading(value = nil); end
+  def strict_loading_value; end
+  def strict_loading_value=(value); end
+  def structurally_incompatible_values_for(other); end
+  def table_name_matches?(from); end
+  def uniq!(name); end
+  def unscope!(*args); end
+  def unscope(*args); end
+  def unscope_values; end
+  def unscope_values=(value); end
+  def validate_order_args(args); end
+  def where!(opts, *rest); end
+  def where(*args); end
+  def where_clause; end
+  def where_clause=(value); end
+  extend ActiveSupport::Concern
+  include ActiveModel::ForbiddenAttributesProtection
+end
+class ActiveRecord::QueryMethods::WhereChain
+  def initialize(scope); end
+  def missing(*args); end
+  def not(opts, *rest); end
+end
+class Arel::Nodes::LeadingJoin < Arel::Nodes::InnerJoin
+end
+class ActiveRecord::Relation::WhereClauseFactory
+end
+module ActiveRecord::Batches
+  def act_on_ignored_order(error_on_ignore); end
+  def apply_finish_limit(relation, finish, order); end
+  def apply_limits(relation, start, finish, order); end
+  def apply_start_limit(relation, start, order); end
+  def batch_order(order); end
+  def find_each(start: nil, finish: nil, batch_size: nil, error_on_ignore: nil, order: nil); end
+  def find_in_batches(start: nil, finish: nil, batch_size: nil, error_on_ignore: nil, order: nil); end
+  def in_batches(of: nil, start: nil, finish: nil, load: nil, error_on_ignore: nil, order: nil); end
+end
+class ActiveRecord::Batches::BatchEnumerator
+  def delete_all; end
+  def destroy_all; end
+  def each; end
+  def each_record; end
+  def initialize(relation:, of: nil, start: nil, finish: nil); end
+  def update_all(updates); end
+  include Enumerable
+end
+class ActiveRecord::Relation::StrictLoadingScope
+  def self.empty_scope?; end
+  def self.strict_loading_value; end
 end
 class ActiveRecord::Base
   def __callbacks; end
@@ -5023,6 +5371,8 @@ class ActiveRecord::Base
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::DescendantsTracker
+  extend SorbetRails::CustomFinderMethods
+  extend SorbetRails::PluckToTStruct
   include ActionText::Attribute
   include ActiveModel::AttributeMethods
   include ActiveModel::AttributeMethods
@@ -5084,425 +5434,79 @@ module ActiveRecord::Base::GeneratedAttributeMethods
 end
 module ActiveRecord::Base::GeneratedAssociationMethods
 end
-module ActiveRecord::FinderMethods
-  def apply_join_dependency(eager_loading: nil); end
-  def check_reorder_deprecation; end
-  def construct_relation_for_exists(conditions); end
-  def exists?(conditions = nil); end
-  def fifth!; end
-  def fifth; end
-  def find(*args); end
-  def find_by!(arg, *args); end
-  def find_by(arg, *args); end
-  def find_last(limit); end
-  def find_nth(index); end
-  def find_nth_from_last(index); end
-  def find_nth_with_limit(index, limit); end
-  def find_one(id); end
-  def find_some(ids); end
-  def find_some_ordered(ids); end
-  def find_take; end
-  def find_take_with_limit(limit); end
-  def find_with_ids(*ids); end
-  def first!; end
-  def first(limit = nil); end
-  def forty_two!; end
-  def forty_two; end
-  def fourth!; end
-  def fourth; end
-  def include?(record); end
-  def last!; end
-  def last(limit = nil); end
-  def limited_ids_for(relation); end
-  def member?(record); end
-  def ordered_relation; end
-  def raise_record_not_found_exception!(ids = nil, result_size = nil, expected_size = nil, key = nil, not_found_ids = nil); end
-  def second!; end
-  def second; end
-  def second_to_last!; end
-  def second_to_last; end
-  def take!; end
-  def take(limit = nil); end
-  def third!; end
-  def third; end
-  def third_to_last!; end
-  def third_to_last; end
-  def using_limitable_reflections?(reflections); end
+class ActiveRecord::Tasks::DatabaseNotSupported < StandardError
 end
-module ActiveRecord::Calculations
-  def aggregate_column(column_name); end
-  def all_attributes?(column_names); end
-  def average(column_name); end
-  def build_count_subquery(relation, column_name, distinct); end
-  def calculate(operation, column_name); end
-  def column_alias_for(field); end
-  def count(column_name = nil); end
-  def distinct_select?(column_name); end
-  def execute_grouped_calculation(operation, column_name, distinct); end
-  def execute_simple_calculation(operation, column_name, distinct); end
-  def has_include?(column_name); end
-  def ids; end
-  def lookup_cast_type_from_join_dependencies(name, join_dependencies = nil); end
-  def maximum(column_name); end
-  def minimum(column_name); end
-  def operation_over_aggregate_column(column, operation, distinct); end
-  def perform_calculation(operation, column_name); end
-  def pick(*column_names); end
-  def pluck(*column_names); end
-  def select_for_count; end
-  def sum(column_name = nil); end
-  def type_cast_calculated_value(value, operation); end
-  def type_cast_pluck_values(result, columns); end
-  def type_for(field, &block); end
-end
-class ActiveRecord::Relation
-  def ==(other); end
-  def _create!(attributes, &block); end
-  def _create(attributes, &block); end
-  def _exec_scope(*args, &block); end
-  def _increment_attribute(attribute, value = nil); end
-  def _new(attributes, &block); end
-  def _scoping(scope); end
-  def _substitute_values(values); end
-  def alias_tracker(joins = nil, aliases = nil); end
-  def already_in_scope?; end
-  def any?; end
-  def arel_attribute(*args, &block); end
-  def bind_attribute(name, value); end
-  def blank?; end
-  def build(attributes = nil, &block); end
-  def build_preloader; end
-  def cache_key(timestamp_column = nil); end
-  def cache_key_with_version; end
-  def cache_version(timestamp_column = nil); end
-  def compute_cache_key(timestamp_column = nil); end
-  def compute_cache_version(timestamp_column); end
-  def create!(attributes = nil, &block); end
-  def create(attributes = nil, &block); end
-  def create_or_find_by!(attributes, &block); end
-  def create_or_find_by(attributes, &block); end
-  def current_scope_restoring_block(&block); end
-  def delete_all; end
-  def delete_by(*args); end
-  def destroy_all; end
-  def destroy_by(*args); end
-  def eager_loading?; end
-  def empty?; end
-  def empty_scope?; end
-  def encode_with(coder); end
-  def exec_queries(&block); end
-  def explain; end
-  def find_or_create_by!(attributes, &block); end
-  def find_or_create_by(attributes, &block); end
-  def find_or_initialize_by(attributes, &block); end
-  def first_or_create!(attributes = nil, &block); end
-  def first_or_create(attributes = nil, &block); end
-  def first_or_initialize(attributes = nil, &block); end
-  def has_limit_or_offset?; end
-  def initialize(klass, table: nil, predicate_builder: nil, values: nil); end
-  def initialize_copy(other); end
-  def inspect; end
-  def joined_includes_values; end
-  def klass; end
-  def load(&block); end
-  def load_records(records); end
-  def loaded; end
-  def loaded?; end
-  def locked?; end
-  def many?; end
-  def model; end
-  def new(attributes = nil, &block); end
-  def none?; end
-  def null_relation?; end
-  def one?; end
-  def predicate_builder; end
-  def preload_associations(records); end
-  def pretty_print(q); end
-  def records; end
-  def references_eager_loaded_tables?; end
-  def reload; end
-  def reset; end
-  def scope_for_create; end
-  def scoping; end
-  def size; end
-  def skip_preloading_value; end
-  def skip_preloading_value=(arg0); end
-  def skip_query_cache_if_necessary; end
-  def table; end
-  def tables_in_string(string); end
-  def to_a; end
-  def to_ary; end
-  def to_sql; end
-  def touch_all(*names, time: nil); end
-  def update(id = nil, attributes); end
-  def update_all(updates); end
-  def update_counters(counters); end
-  def values; end
-  def where_values_hash(relation_table_name = nil); end
-  extend ActiveRecord::Delegation::ClassMethods
-  include ActiveRecord::FinderMethods
-  include Enumerable
-end
-class ActiveRecord::Relation::HashMerger
-  def hash; end
-  def initialize(relation, hash, rewhere = nil); end
-  def merge; end
-  def other; end
-  def relation; end
-end
-class ActiveRecord::Relation::Merger
-  def initialize(relation, other, rewhere = nil); end
-  def merge; end
-  def merge_clauses; end
-  def merge_joins; end
-  def merge_multi_values; end
-  def merge_outer_joins; end
-  def merge_preloads; end
-  def merge_single_values; end
-  def normal_values; end
-  def other; end
-  def relation; end
-  def replace_from_clause?; end
-  def values; end
-end
-module ActiveRecord::SpawnMethods
-  def except(*skips); end
-  def merge!(other, *rest); end
-  def merge(other, *rest); end
-  def only(*onlies); end
-  def relation_with(values); end
-  def spawn; end
-end
-class ActiveRecord::Relation::FromClause
-  def ==(other); end
-  def empty?; end
-  def initialize(value, name); end
-  def merge(other); end
+module ActiveRecord::Tasks::DatabaseTasks
+  def cache_dump_filename(db_config_name, schema_cache_path: nil); end
+  def charset(configuration, *arguments); end
+  def charset_current(env_name = nil, db_name = nil); end
+  def check_protected_environments!; end
+  def check_schema_file(filename); end
+  def check_target_version; end
+  def class_for_adapter(adapter); end
+  def clear_schema_cache(filename); end
+  def collation(configuration, *arguments); end
+  def collation_current(env_name = nil, db_name = nil); end
+  def create(configuration, *arguments); end
+  def create_all; end
+  def create_current(environment = nil, name = nil); end
+  def current_config(*args, &block); end
+  def current_config=(*args, &block); end
+  def database_adapter_for(db_config, *arguments); end
+  def database_configuration; end
+  def database_configuration=(arg0); end
+  def db_dir; end
+  def db_dir=(arg0); end
+  def drop(configuration, *arguments); end
+  def drop_all; end
+  def drop_current(environment = nil); end
+  def dump_filename(db_config_name, format = nil); end
+  def dump_schema(db_config, format = nil); end
+  def dump_schema_cache(conn, filename); end
+  def each_current_configuration(environment, name = nil); end
+  def each_local_configuration; end
+  def env; end
+  def env=(arg0); end
+  def fixtures_path; end
+  def fixtures_path=(arg0); end
+  def for_each(databases); end
+  def load_schema(db_config, format = nil, file = nil); end
+  def load_schema_current(format = nil, file = nil, environment = nil); end
+  def load_seed; end
+  def local_database?(db_config); end
+  def migrate; end
+  def migrate_status; end
+  def migrations_paths; end
+  def migrations_paths=(arg0); end
   def name; end
-  def self.empty; end
-  def value; end
-end
-class ActiveRecord::Relation::QueryAttribute < ActiveModel::Attribute
-  def infinite?; end
-  def infinity?(value); end
-  def nil?; end
-  def type_cast(value); end
-  def unboundable?; end
-  def value_for_database; end
-  def with_cast_value(value); end
-end
-class ActiveRecord::Relation::WhereClause
-  def +(other); end
-  def -(other); end
-  def ==(other); end
-  def any?(**, &&); end
-  def ast; end
-  def contradiction?; end
-  def empty?(**, &&); end
-  def equalities(predicates, equality_only); end
-  def equality_node?(node); end
-  def except(*columns); end
-  def except_predicates(columns); end
-  def extract_attribute(node); end
-  def extract_attributes; end
-  def extract_node_value(node); end
-  def initialize(predicates); end
-  def invert; end
-  def invert_predicate(node); end
-  def merge(other, rewhere = nil); end
-  def non_empty_predicates; end
-  def or(other); end
-  def predicates; end
-  def predicates_unreferenced_by(other); end
-  def predicates_with_wrapped_sql_literals; end
-  def referenced_columns; end
-  def self.empty; end
-  def to_h(table_name = nil, equality_only: nil); end
-  def wrap_sql_literal(node); end
-  def |(other); end
-end
-module ActiveRecord::QueryMethods
-  def _select!(*fields); end
-  def and!(other); end
-  def and(other); end
-  def annotate!(*args); end
-  def annotate(*args); end
-  def annotate_values; end
-  def annotate_values=(value); end
-  def arel(aliases = nil); end
-  def arel_column(field); end
-  def arel_columns(columns); end
-  def assert_mutability!; end
-  def build_arel(aliases); end
-  def build_cast_value(name, value); end
-  def build_from; end
-  def build_having_clause(opts, rest = nil); end
-  def build_join_buckets; end
-  def build_join_dependencies; end
-  def build_joins(join_sources, aliases = nil); end
-  def build_order(arel); end
-  def build_select(arel); end
-  def build_subquery(subquery_alias, select_value); end
-  def build_where_clause(opts, rest = nil); end
-  def check_if_method_has_arguments!(method_name, args, message = nil); end
-  def column_references(order_args); end
-  def construct_join_dependency(associations, join_type); end
-  def create_with!(value); end
-  def create_with(value); end
-  def create_with_value; end
-  def create_with_value=(value); end
-  def distinct!(value = nil); end
-  def distinct(value = nil); end
-  def distinct_value; end
-  def distinct_value=(value); end
-  def does_not_support_reverse?(order); end
-  def each_join_dependencies(join_dependencies = nil); end
-  def eager_load!(*args); end
-  def eager_load(*args); end
-  def eager_load_values; end
-  def eager_load_values=(value); end
-  def extending!(*modules, &block); end
-  def extending(*modules, &block); end
-  def extending_values; end
-  def extending_values=(value); end
-  def extensions; end
-  def extract_associated(association); end
-  def from!(value, subquery_name = nil); end
-  def from(value, subquery_name = nil); end
-  def from_clause; end
-  def from_clause=(value); end
-  def group!(*args); end
-  def group(*args); end
-  def group_values; end
-  def group_values=(value); end
-  def having!(opts, *rest); end
-  def having(opts, *rest); end
-  def having_clause; end
-  def having_clause=(value); end
-  def includes!(*args); end
-  def includes(*args); end
-  def includes_values; end
-  def includes_values=(value); end
-  def joins!(*args); end
-  def joins(*args); end
-  def joins_values; end
-  def joins_values=(value); end
-  def left_joins(*args); end
-  def left_outer_joins!(*args); end
-  def left_outer_joins(*args); end
-  def left_outer_joins_values; end
-  def left_outer_joins_values=(value); end
-  def limit!(value); end
-  def limit(value); end
-  def limit_value; end
-  def limit_value=(value); end
-  def lock!(locks = nil); end
-  def lock(locks = nil); end
-  def lock_value; end
-  def lock_value=(value); end
-  def lookup_table_klass_from_join_dependencies(table_name); end
-  def none!; end
-  def none; end
-  def offset!(value); end
-  def offset(value); end
-  def offset_value; end
-  def offset_value=(value); end
-  def optimizer_hints!(*args); end
-  def optimizer_hints(*args); end
-  def optimizer_hints_values; end
-  def optimizer_hints_values=(value); end
-  def or!(other); end
-  def or(other); end
-  def order!(*args); end
-  def order(*args); end
-  def order_column(field); end
-  def order_values; end
-  def order_values=(value); end
-  def preload!(*args); end
-  def preload(*args); end
-  def preload_values; end
-  def preload_values=(value); end
-  def preprocess_order_args(order_args); end
-  def readonly!(value = nil); end
-  def readonly(value = nil); end
-  def readonly_value; end
-  def readonly_value=(value); end
-  def references!(*table_names); end
-  def references(*table_names); end
-  def references_values; end
-  def references_values=(value); end
-  def reorder!(*args); end
-  def reorder(*args); end
-  def reordering_value; end
-  def reordering_value=(value); end
-  def reselect!(*args); end
-  def reselect(*args); end
-  def resolve_arel_attributes(attrs); end
-  def reverse_order!; end
-  def reverse_order; end
-  def reverse_order_value; end
-  def reverse_order_value=(value); end
-  def reverse_sql_order(order_query); end
-  def rewhere(conditions); end
-  def sanitize_order_arguments(order_args); end
-  def select(*fields); end
-  def select_association_list(associations, stashed_joins = nil); end
-  def select_values; end
-  def select_values=(value); end
-  def skip_preloading!; end
-  def skip_query_cache!(value = nil); end
-  def skip_query_cache_value; end
-  def skip_query_cache_value=(value); end
-  def strict_loading!(value = nil); end
-  def strict_loading(value = nil); end
-  def strict_loading_value; end
-  def strict_loading_value=(value); end
-  def structurally_incompatible_values_for(other); end
-  def table_name_matches?(from); end
-  def uniq!(name); end
-  def unscope!(*args); end
-  def unscope(*args); end
-  def unscope_values; end
-  def unscope_values=(value); end
-  def validate_order_args(args); end
-  def where!(opts, *rest); end
-  def where(*args); end
-  def where_clause; end
-  def where_clause=(value); end
-  extend ActiveSupport::Concern
-  include ActiveModel::ForbiddenAttributesProtection
-end
-class ActiveRecord::QueryMethods::WhereChain
-  def initialize(scope); end
-  def missing(*args); end
-  def not(opts, *rest); end
-end
-class Arel::Nodes::LeadingJoin < Arel::Nodes::InnerJoin
-end
-class ActiveRecord::Relation::WhereClauseFactory
-end
-module ActiveRecord::Batches
-  def act_on_ignored_order(error_on_ignore); end
-  def apply_finish_limit(relation, finish, order); end
-  def apply_limits(relation, start, finish, order); end
-  def apply_start_limit(relation, start, order); end
-  def batch_order(order); end
-  def find_each(start: nil, finish: nil, batch_size: nil, error_on_ignore: nil, order: nil); end
-  def find_in_batches(start: nil, finish: nil, batch_size: nil, error_on_ignore: nil, order: nil); end
-  def in_batches(of: nil, start: nil, finish: nil, load: nil, error_on_ignore: nil, order: nil); end
-end
-class ActiveRecord::Batches::BatchEnumerator
-  def delete_all; end
-  def destroy_all; end
-  def each; end
-  def each_record; end
-  def initialize(relation:, of: nil, start: nil, finish: nil); end
-  def update_all(updates); end
-  include Enumerable
-end
-class ActiveRecord::Relation::StrictLoadingScope
-  def self.empty_scope?; end
-  def self.strict_loading_value; end
+  def purge(configuration); end
+  def purge_all; end
+  def purge_current(environment = nil); end
+  def raise_for_multi_db(environment = nil, command:); end
+  def reconstruct_from_schema(db_config, format = nil, file = nil); end
+  def register_task(pattern, task); end
+  def resolve_configuration(configuration); end
+  def root; end
+  def root=(arg0); end
+  def schema_file(format = nil); end
+  def schema_file_type(format = nil); end
+  def schema_sha1(file); end
+  def schema_up_to_date?(configuration, format = nil, file = nil, environment = nil, name = nil); end
+  def seed_loader; end
+  def seed_loader=(arg0); end
+  def self.structure_dump_flags; end
+  def self.structure_dump_flags=(val); end
+  def self.structure_load_flags; end
+  def self.structure_load_flags=(val); end
+  def setup_initial_database_yaml; end
+  def spec(*args, &block); end
+  def structure_dump(configuration, *arguments); end
+  def structure_load(configuration, *arguments); end
+  def target_version; end
+  def truncate_all(environment = nil); end
+  def truncate_tables(db_config); end
+  def verbose?; end
+  extend ActiveRecord::Tasks::DatabaseTasks
 end
 class ActiveRecord::Associations::CollectionProxy < ActiveRecord::Relation
   def <<(*records); end

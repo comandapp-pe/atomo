@@ -1410,14 +1410,15 @@ class ActionView::TestCase::TestController < ActionController::Base
   def self.middleware_stack; end
   include ActionDispatch::Routing::UrlFor
   include ActionDispatch::TestProcess
-  include Anonymous_Module_22
+  include GeneratedUrlHelpers
 end
 module ActionView::TestCase::TestController::HelperMethods
   include ActionController::Base::HelperMethods
   include ApplicationHelper
+  include CheckoutLinksHelper
   include OrdersHelper
   include ProductsHelper
-  include WelcomeHelper
+  include RootHelper
 end
 module ActionView::TestCase::Behavior
   def _routes; end

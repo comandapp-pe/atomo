@@ -2,10 +2,15 @@
 #   srb rbi todo
 
 # typed: strong
-module ::Anonymous_Delegator_28; end
+module ::Anonymous_Delegator_27; end
 module ::Anonymous_Delegator_8; end
 module ::Spring; end
 module ActionDispatch::Response::ContentTypeHeader; end
+module ActiveRecord::Delegation::DelegateCache; end
+module GeneratedUrlHelpers::Anonymous_Module_43; end
+module GeneratedUrlHelpers::Anonymous_Module_44; end
 module Rails::Engine::Configuration; end
+module T::InterfaceWrapper::Helpers; end
+module T::Private::Abstract::Hooks; end
 module T::Private::Methods::MethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
