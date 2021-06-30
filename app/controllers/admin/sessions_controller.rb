@@ -21,7 +21,9 @@ class Admin::SessionsController < ApplicationController
 
   # POST /admin/sessions or /admin/sessions.json
   def create
-    @admin_session = Admin::Session.new(admin_session_params)
+    @admin_user = Admin::User.find_by(tag: admin_session_params[:tag], password: admin_session_params[:password])
+
+    @admin_session = Admin::Session.new(admin_user_id: @admin_user.id)
 
     respond_to do |format|
       if @admin_session.save
@@ -64,6 +66,6 @@ class Admin::SessionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_session_params
-      params.fetch(:admin_session, {})
+      params.require(:admin_session).permit(:tag, :password)
     end
 end
