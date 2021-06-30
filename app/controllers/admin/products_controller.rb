@@ -1,8 +1,17 @@
 class Admin::ProductsController < ApplicationController
   before_action :set_admin_product, only: %i[ show edit update destroy ]
+  before_action :set_admin_product, only: %i[ show edit update destroy ]
 
   # GET /admin/products or /admin/products.json
   def index
+    @admin_user = Admin::User.find(session[:current_admin_user_id])
+
+    if !@admin_user
+      respond_to do |format|
+        format.html { redirect_to 'https://google.com' }
+      end
+    end
+
     @products = Product.all
   end
 
