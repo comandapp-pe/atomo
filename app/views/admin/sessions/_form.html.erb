@@ -1,4 +1,4 @@
-<%= form_with(model: admin_session) do |form| %>
+<%= form_with(model: admin_session, class: 'w-100 text-center', html: { style: 'max-width: 330px;' }) do |form| %>
   <% if admin_session.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(admin_session.errors.count, "error") %> prohibited this admin_session from being saved:</h2>
@@ -11,7 +11,21 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <%= image_tag 'logo.svg', class: 'mb-4', alt: "Atomo's logo", width: '72', height: '57' %>
+
+  <h1 class="h3 mb-3 fw-normal">Inicia sesión</h1>
+
+  <div class="form-floating">
+    <%= form.text_field :tag, class: 'form-control', placeholder: 'Tag' %>
+    <%= form.label :tag, 'Tag' %>
   </div>
+
+  <div class="form-floating">
+    <%= form.text_field :password, class: 'form-control', placeholder: 'Password' %>
+    <%= form.label :tag, 'Password' %>
+  </div>
+
+  <%= form.submit 'Login', class: 'w-100 btn btn-lg btn-primary mt-3'%>
+
+  <p class="mt-5 mb-3 text-muted">© Átomo 2021</p>
 <% end %>
