@@ -1,4 +1,3 @@
-# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_033813) do
+ActiveRecord::Schema.define(version: 2021_06_30_120626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_sessions", force: :cascade do |t|
+    t.bigint "admin_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_user_id"], name: "index_admin_sessions_on_admin_user_id"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "tag", null: false
+    t.string "password", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "checkout_links", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -44,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_06_27_033813) do
     t.string "code", null: false
   end
 
+  add_foreign_key "admin_sessions", "admin_users"
   add_foreign_key "checkout_links", "products"
   add_foreign_key "orders", "products"
 end

@@ -1,1 +1,0 @@
-- put a play button on top of the vimeo thumbnail

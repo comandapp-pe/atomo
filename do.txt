@@ -1,0 +1,8 @@
+- Create a back office under /admin:
+    - Login
+    - Product CRUD via 2Checkout's API
+- Finish the new payment request layout
+- Put a play button on top of the Vimeo thumbnails
+- Ask for the Vimeo template previews along with their names
+- Ask for the order confirmation email template
+- Ask for the categories layout

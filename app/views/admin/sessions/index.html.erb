@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Admin Sessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_sessions.each do |admin_session| %>
+      <tr>
+        <td><%= link_to 'Show', admin_session %></td>
+        <td><%= link_to 'Edit', edit_admin_session_path(admin_session) %></td>
+        <td><%= link_to 'Destroy', admin_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin Session', new_admin_session_path %>
