@@ -23,7 +23,7 @@ class Admin::SessionsController < ApplicationController
   def create
     @admin_user = Admin::User.find_by(tag: admin_session_params[:tag], password: admin_session_params[:password])
 
-    @admin_session = Admin::Session.new(admin_user_id: @admin_user.id)
+    @admin_session = Admin::Session.new(admin_user: @admin_user)
 
     respond_to do |format|
       if @admin_session.save
