@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products or /admin/products.json
   def index
-    @admin_products = Admin::Product.all
+    @products = Product.all
   end
 
   # GET /admin/products/1 or /admin/products/1.json
@@ -12,7 +12,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/new
   def new
-    @admin_product = Admin::Product.new
+    @product = Product.new
   end
 
   # GET /admin/products/1/edit
@@ -21,7 +21,7 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products or /admin/products.json
   def create
-    @admin_product = Admin::Product.new(admin_product_params)
+    @admin_product = Product.new(admin_product_params)
 
     respond_to do |format|
       if @admin_product.save

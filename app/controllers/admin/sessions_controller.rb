@@ -27,7 +27,7 @@ class Admin::SessionsController < ApplicationController
 
     respond_to do |format|
       if @admin_session.save
-        format.html { redirect_to @admin_session, notice: "Session was successfully created." }
+        format.html { redirect_to admin_products_url, notice: "Session was successfully created." }
         format.json { render :show, status: :created, location: @admin_session }
       else
         format.html { render :new, status: :unprocessable_entity }
