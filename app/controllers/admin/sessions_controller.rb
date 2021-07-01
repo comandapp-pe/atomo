@@ -21,13 +21,13 @@ class Admin::SessionsController < ApplicationController
 
   # POST /admin/sessions or /admin/sessions.json
   def create
-    @admin_user = Admin::User.find_by(tag: admin_session_params[:tag], password: admin_session_params[:password])
+    @admin_user = Admin::User.find_by(admin_session_params)
 
     @admin_session = Admin::Session.new(admin_user: @admin_user)
 
     respond_to do |format|
       if @admin_session.save
-        session[:current_admin_user_id] = @admin_session.admin_user.id
+        session[:current_admin_session_id] = @admin_session.id
 
         format.html { redirect_to admin_products_url }
         format.json { render :show, status: :created, location: @admin_session }

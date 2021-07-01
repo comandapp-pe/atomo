@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root to: 'root#index'
 
   namespace :admin do
-    resources :sessions
+    resource :session
     resources :products
   end
 

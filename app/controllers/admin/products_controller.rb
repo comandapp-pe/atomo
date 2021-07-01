@@ -70,11 +70,11 @@ class Admin::ProductsController < ApplicationController
   end
 
   def authenticate_user!
-    admin_user_id = session[:current_admin_user_id]
+    admin_session_id = session[:current_admin_session_id]
 
-    admin_user = Admin::User.find_by(id: admin_user_id)
+    admin_session = Admin::Session.find_by(id: admin_session_id)
 
-    return if admin_user
+    return if admin_session
 
     respond_to do |format|
       format.html { redirect_to new_admin_session_url, notice: 'You must authenticate before accessing this page.' }
