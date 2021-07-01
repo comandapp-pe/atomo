@@ -1,4 +1,4 @@
-<%= form_with(model: admin_session, class: 'w-100 text-center', html: { style: 'max-width: 330px;' }) do |form| %>
+<%= form_with(model: admin_session, url: admin_session_path, class: 'w-100 text-center', html: { style: 'max-width: 330px;' }) do |form| %>
   <% if admin_session.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(admin_session.errors.count, "error") %> prohibited this admin_session from being saved:</h2>

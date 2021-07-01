@@ -18,7 +18,7 @@
       <li><%= link_to 'Products', admin_products_path, class: 'nav-link link-dark' %></li>
     </ul>
     <ul class="nav nav-pills flex-column pb-3 mb-3 mb-auto border-bottom">
-      <li><a href="#" class="nav-link link-dark">Logout</a></li>
+      <li><%= button_to 'Logout', admin_session_path, method: :delete, class: 'nav-link link-dark' %></li>
     </ul>
   </div>
 
