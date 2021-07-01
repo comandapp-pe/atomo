@@ -1,11 +1,5 @@
-<!--<h1>New Admin Product</h1>-->
-
-<%#= render 'form', admin_product: @admin_product %>
-
-<%#= link_to 'Back', admin_products_path %>
-
-<div class="d-flex">
-  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 256px;">
+<main class="d-flex">
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="height: 100vh; width: 256px;">
     <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24">
         <use xlink:href="#bootstrap">
@@ -17,19 +11,22 @@
       <span class="fs-5 fw-semibold">Átomo</span>
     </a>
     <ul class="nav nav-pills flex-column pb-3 mb-3 border-bottom">
-      <li><%= link_to 'Products', products_url, class: 'nav-link link-dark' %></li>
+      <li><%= link_to 'Products', admin_products_path, class: 'nav-link link-dark' %></li>
     </ul>
     <ul class="nav nav-pills flex-column pb-3 mb-3 mb-auto border-bottom">
-      <li><a href="#" class="nav-link link-dark">Logout</a></li>
+      <li><%= button_to 'Logout', admin_session_path, method: :delete, class: 'nav-link link-dark' %></li>
     </ul>
   </div>
 
-  <div class="container p-4">
+  <div class="container p-4" style="max-height: 100vh; overflow: scroll;">
+    <% if notice %>
+      <p id="notice"><%= notice %></p>
+    <% end %>
+
     <%= link_to '< Back', admin_products_path, class: 'text-decoration-none' %>
 
     <h1>New Product</h1>
 
     <%= render 'products/form', product: @product %>
   </div>
-</div>
-
+</main>
