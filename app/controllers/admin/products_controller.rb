@@ -1,17 +1,9 @@
 class Admin::ProductsController < ApplicationController
   before_action :set_admin_product, only: %i[ show edit update destroy ]
-  before_action :set_admin_product, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /admin/products or /admin/products.json
   def index
-    @admin_user = Admin::User.find(session[:current_admin_user_id])
-
-    if !@admin_user
-      respond_to do |format|
-        format.html { redirect_to 'https://google.com' }
-      end
-    end
-
     @products = Product.all
   end
 
@@ -66,13 +58,26 @@ class Admin::ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_product
-      @admin_product = Admin::Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def admin_product_params
-      params.fetch(:admin_product, {})
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_product
+    @admin_product = Admin::Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def admin_product_params
+    params.fetch(:admin_product, {})
+  end
+
+  def authenticate_user!
+    admin_user_id = session[:current_admin_user_id]
+
+    admin_user = Admin::User.find_by(id: admin_user_id)
+
+    return if admin_user
+
+    respond_to do |format|
+      format.html { redirect_to new_admin_session_url, notice: 'You must authenticate before accessing this page.' }
     end
+  end
 end

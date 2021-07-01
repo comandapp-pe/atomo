@@ -29,7 +29,7 @@ class Admin::SessionsController < ApplicationController
       if @admin_session.save
         session[:current_admin_user_id] = @admin_session.admin_user.id
 
-        format.html { redirect_to admin_products_url, notice: "Session was successfully created." }
+        format.html { redirect_to admin_products_url }
         format.json { render :show, status: :created, location: @admin_session }
       else
         format.html { render :new, status: :unprocessable_entity }

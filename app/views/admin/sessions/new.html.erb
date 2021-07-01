@@ -1,4 +1,8 @@
 <main class="min-vw-100 min-vh-100 bg-light d-flex flex-column justify-content-center align-items-center p-4">
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+
   <%= render 'form', admin_session: @admin_session %>
 
   <%= link_to 'Back', root_path, class: 'link-primary' %>
