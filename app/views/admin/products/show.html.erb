@@ -20,7 +20,11 @@
 
   <section class="container-fluid p-4" style="max-height: 100vh; overflow: scroll;">
     <% if notice %>
-      <p id="notice"><%= notice %></p>
+      <div id="notice" class="alert alert-success alert-dismissible fade show">
+        <%= notice %>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <% end %>
 
     <div class="mb-2">
@@ -62,6 +66,8 @@
 
     <h2>Prevista</h2>
 
-    <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+    <div class="mt-3">
+      <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+    </div>
   </section>
 </main>
