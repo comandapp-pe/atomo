@@ -11,25 +11,27 @@
       <span class="fs-5 fw-semibold">Átomo</span>
     </a>
     <ul class="nav nav-pills flex-column pb-3 mb-3 border-bottom">
-      <li><%= link_to 'Products', admin_products_path, class: 'nav-link link-dark' %></li>
+      <li><%= link_to 'Productos', admin_products_path, class: 'nav-link link-dark' %></li>
     </ul>
     <ul class="nav nav-pills flex-column pb-3 mb-3 mb-auto border-bottom">
-      <li><%= button_to 'Logout', admin_session_path, method: :delete, class: 'nav-link link-dark' %></li>
+      <li><%= button_to 'Cerrar sesión', admin_session_path, method: :delete, class: 'nav-link link-dark' %></li>
     </ul>
   </div>
 
-  <div class="container p-4" style="max-height: 100vh; overflow: scroll;">
+  <section class="w-100 p-4" style="max-height: 100vh; overflow: scroll;">
     <% if notice %>
       <p id="notice"><%= notice %></p>
     <% end %>
 
-    <h1><%= @product.name %></h1>
+    <div class="mb-2">
+      <%= link_to '< Regresar', admin_products_path, class: 'text-decoration-none' %>
+    </div>
 
-    <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+    <h1><%= @product.name %></h1>
+    <h2 class="h5 text-muted"><%= @product.code %></h2>
 
     <br>
 
-    <%= link_to 'Edit', edit_admin_product_path(@product) %> |
-    <%= link_to 'Back', admin_products_path %>
-  </div>
+    <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+  </section>
 </main>
