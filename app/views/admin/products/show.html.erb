@@ -28,9 +28,39 @@
     </div>
 
     <h1><%= @product.name %></h1>
-    <h2 class="h5 text-muted"><%= @product.code %></h2>
 
-    <br>
+    <%= form_with model: @product, url: admin_product_url(@product), class: 'my-3' do |form| %>
+      <% if @product.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+          <ul>
+            <% @product.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-floating mb-2">
+        <%= form.text_field :name, class: 'form-control', placeholder: 'Nombre' %>
+        <%= form.label :name, 'Nombre', class: 'form-label' %>
+      </div>
+
+      <div class="form-floating mb-2">
+        <%= form.text_field :code, class: 'form-control', placeholder: 'Código de 2Checkout', disabled: true %>
+        <%= form.label :code, 'Código de 2Checkout', class: 'form-label' %>
+      </div>
+
+      <div class="form-floating mb-2">
+        <%= form.text_field :preview_url, class: 'form-control', placeholder: 'URL de prevista' %>
+        <%= form.label :preview_url, 'URL de prevista', class: 'form-label' %>
+      </div>
+
+      <%= form.submit class: 'btn btn-primary mt-3' %>
+    <% end %>
+
+    <h2>Prevista</h2>
 
     <iframe title="vimeo-player" src="<%= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>
   </section>

@@ -21,5 +21,10 @@
     <%= form.label :code, 'Código', class: 'form-label' %>
   </div>
 
+  <div class="form-floating mb-2">
+    <%= form.text_field :preview_url, class: 'form-control', placeholder: 'URL de prevista' %>
+    <%= form.label :preview_url, 'URL de prevista', class: 'form-label' %>
+  </div>
+
   <%= form.submit class: 'btn btn-primary mt-3' %>
 <% end %>

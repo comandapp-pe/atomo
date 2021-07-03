@@ -26,7 +26,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to admin_products_url, notice: "Creaste un producto exitosamente." }
+        format.html { redirect_to admin_products_url, notice: "Creaste un product exitosamente." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class Admin::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(admin_product_params)
-        format.html { redirect_to @product, notice: "Product was successfully updated." }
+        format.html { redirect_to admin_product_url(@product), notice: "Actualizaste el producto exitosamente." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to admin_products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to admin_products_url, notice: "Borraste un producto exitosamente." }
       format.json { head :no_content }
     end
   end
@@ -66,7 +66,7 @@ class Admin::ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_product_params
-    params.require(:product).permit(:name, :code)
+    params.require(:product).permit(:name, :code, :preview_url)
   end
 
   def authenticate_user!
@@ -77,7 +77,7 @@ class Admin::ProductsController < ApplicationController
     return if @admin_session
 
     respond_to do |format|
-      format.html { redirect_to new_admin_session_url, notice: 'You must authenticate before accessing this page.' }
+      format.html { redirect_to new_admin_session_url, notice: 'Debes iniciar sesión antes de ingresar a esta página.' }
     end
   end
 end
