@@ -49,7 +49,7 @@ class Admin::SessionsController < ApplicationController
 
         @admin_session.destroy
 
-        format.html { redirect_to new_admin_session_url, notice: "You sucessfully logged out." }
+        format.html { redirect_to new_admin_session_url, notice: "Cerraste sesión exitosamente." }
         format.json { head :no_content }
       else
         format.html { redirect_to new_admin_session_url }
