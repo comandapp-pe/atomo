@@ -41,9 +41,9 @@
       <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to product.name, product, class: 'text-decoration-none' %></td>
+          <td><%= link_to product.name, admin_product_path(product), class: 'text-decoration-none' %></td>
           <td><%= product.code %></td>
-          <td><%= link_to 'Borrar', product, method: :delete, data: { confirm: "¿Estás seguro de borrar '#{product.name}'?" }, class: 'text-decoration-none' %></td>
+          <td><%= link_to 'Borrar', admin_product_path(product), method: :delete, data: { confirm: "¿Estás seguro de borrar '#{product.name}'?" }, class: 'text-decoration-none' %></td>
         </tr>
       <% end %>
       </tbody>
