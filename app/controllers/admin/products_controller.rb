@@ -25,8 +25,8 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new(admin_product_params)
 
     respond_to do |format|
-      if @product
-        format.html { redirect_to @product, notice: "Product was successfully created." }
+      if @product.save
+        format.html { redirect_to admin_product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,7 +66,7 @@ class Admin::ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_product_params
-    params.fetch(:admin_product, {})
+    params.require(:product).permit(:name, :code)
   end
 
   def authenticate_user!

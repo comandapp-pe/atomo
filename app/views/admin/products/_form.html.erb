@@ -1,17 +1,25 @@
-<%= form_with(model: admin_product) do |form| %>
+<%= form_with model: admin_product, url: admin_products_url, class: 'mt-3' do |form| %>
   <% if admin_product.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(admin_product.errors.count, "error") %> prohibited this admin_product from being saved:</h2>
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
-        <% admin_product.errors.each do |error| %>
+        <% product.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-floating mb-2">
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Nombre' %>
+    <%= form.label :name, 'Nombre', class: 'form-label' %>
   </div>
+
+  <div class="form-floating mb-2">
+    <%= form.text_field :code, class: 'form-control', placeholder: 'Código' %>
+    <%= form.label :code, 'Código', class: 'form-label' %>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary mt-3' %>
 <% end %>
