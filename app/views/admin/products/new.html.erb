@@ -1,5 +1,5 @@
 <main class="d-flex">
-  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="height: 100vh; width: 256px;">
+  <div class="d-none d-md-block p-3 bg-light" style="height: 100vh; width: 256px;">
     <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
       <svg class="bi me-2" width="30" height="24">
         <use xlink:href="#bootstrap">
@@ -10,10 +10,10 @@
       </svg>
       <span class="fs-5 fw-semibold">Átomo</span>
     </a>
-    <ul class="nav nav-pills flex-column pb-3 mb-3 border-bottom">
+    <ul class="nav nav-pills pb-3 mb-3 border-bottom">
       <li><%= link_to 'Productos', admin_products_path, class: 'nav-link link-dark' %></li>
     </ul>
-    <ul class="nav nav-pills flex-column pb-3 mb-3 mb-auto border-bottom">
+    <ul class="nav nav-pills pb-3 mb-3 border-bottom">
       <li><%= button_to 'Cerrar sesión', admin_session_path, method: :delete, class: 'nav-link link-dark' %></li>
     </ul>
   </div>
