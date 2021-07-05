@@ -56,3 +56,5 @@ gem 'rubocop', require: false
 gem "jquery-rails", "~> 4.4"
 
 gem "turbolinks", "~> 5.2"
+
+gem "validate_url", "~> 1.0"
