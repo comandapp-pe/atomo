@@ -64,10 +64,12 @@
       <%= form.submit class: 'btn btn-primary mt-3' %>
     <% end %>
 
-<!--    <h2>Prevista</h2>-->
+    <h2>Prevista</h2>
 
 <!--    <div class="mt-3">-->
 <!--      <iframe title="vimeo-player" src="<%#= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>-->
 <!--    </div>-->
+
+    <%= "<iframe src=\"https:\/\/player.vimeo.com\/video\/518420404?app_id=122963\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"RPTSA - Institucional\"><\/iframe>".html_safe %>
   </section>
 </main>

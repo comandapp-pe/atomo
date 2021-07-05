@@ -4,13 +4,16 @@ class Product < ApplicationRecord
   validates :external_reference, presence: true
   validates :preview_url, presence: true
 
-  # validate :preview_url_must_be_a_vimeo_video
-  #
-  # def preview_url_must_be_a_vimeo_video
-  #   response = Faraday.head("https://vimeo.com/api/oembed.json?url=#{preview_url}")
-  #
-  #   puts response.status == 404
-  #
-  #   errors.add(:preview_url, 'must be a Vimeo URL')
-  # end
+  def preview_html
+    response = Faraday.get("https://vimeo.com/api/oembed.json?url=#{preview_url}", {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    })
+
+    if response.status == 404
+      return nil
+    end
+
+    return JSON.parse response.body
+  end
 end
