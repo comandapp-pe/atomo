@@ -47,29 +47,32 @@
       <% end %>
 
       <div class="mb-2">
+        <%= form.label :vimeo_url, 'URL de Vimeo', class: 'form-label' %>
+        <%= form.text_field :vimeo_url, class: 'form-control', disabled: true %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :checkout_code, 'Código de 2Checkout', class: 'form-label' %>
+        <%= form.text_field :checkout_code, class: 'form-control', disabled: true %>
+      </div>
+
+      <div class="mb-2">
         <%= form.label :name, 'Nombre', class: 'form-label' %>
-        <%= form.text_field :name, class: 'form-control', placeholder: 'Nombre' %>
+        <%= form.text_field :name, class: 'form-control', disabled: true %>
       </div>
 
       <div class="mb-2">
-        <%= form.label :external_reference, 'Código de 2Checkout', class: 'form-label' %>
-        <%= form.text_field :external_reference, class: 'form-control', placeholder: 'Código de 2Checkout' %>
+        <%= form.label :description, 'Descripción', class: 'form-label' %>
+        <%= form.text_field :description, class: 'form-control', disabled: true %>
       </div>
 
-      <div class="mb-2">
-        <%= form.label :preview_url, 'URL de prevista', class: 'form-label' %>
-        <%= form.text_field :preview_url, class: 'form-control', placeholder: 'URL de prevista' %>
-      </div>
-
-      <%= form.submit class: 'btn btn-primary mt-3' %>
+      <%#= form.submit class: 'btn btn-primary mt-3' %>
     <% end %>
 
     <h2>Prevista</h2>
 
-<!--    <div class="mt-3">-->
-<!--      <iframe title="vimeo-player" src="<%#= @product.preview_url %>" width="640" height="360" frameborder="0" allowfullscreen></iframe>-->
-<!--    </div>-->
-
-    <%= "<iframe src=\"https:\/\/player.vimeo.com\/video\/518420404?app_id=122963\" width=\"640\" height=\"360\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen title=\"RPTSA - Institucional\"><\/iframe>".html_safe %>
+    <div class="mt-3">
+      <%= @product.preview_html.html_safe %>
+    </div>
   </section>
 </main>

@@ -26,7 +26,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to admin_products_url, notice: "Creaste un product exitosamente." }
+        format.html { redirect_to [:admin, @product], notice: "Creaste un producto exitosamente." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,7 +66,7 @@ class Admin::ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_product_params
-    params.require(:product).permit(:name, :external_reference, :preview_url)
+    params.require(:product).permit(:vimeo_url)
   end
 
   def authenticate_user!
