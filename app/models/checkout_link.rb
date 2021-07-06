@@ -20,7 +20,7 @@ class CheckoutLink < ApplicationRecord
     signable = {
       currency: 'USD',
       price: "USD:#{price}",
-      prod: self.product.code,
+      prod: self.product.checkout_code,
       qty: '1',
       'return-type': 'redirect',
       'return-url': 'https://serene-woodland-34280.herokuapp.com',

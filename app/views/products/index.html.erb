@@ -15,26 +15,26 @@
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card ">
               <img
-                src="https://vumbnail.com/<%= product.preview_url.split('/').last %>.jpg"
+                src="<%= product.thumbnail_url_with_play_button %>"
                 role="button"
                 data-bs-toggle="modal"
-                data-bs-target="#modal-<%= product.code %>"
+                data-bs-target="#modal-<%= product.checkout_code %>"
               >
               <div class="card-body">
                 <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-outline-primary w-100' %>
               </div>
             </div>
 
-            <div class="modal fade" id="modal-<%= product.code %>" data-product="<%= product.code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+            <div class="modal fade" id="modal-<%= product.checkout_code %>" data-product="<%= product.checkout_code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title"><%= product.code %></h5>
+                    <h5 class="modal-title"><%= product.checkout_code %></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <div class="ratio ratio-16x9">
-                      <iframe id="video-<%= product.code %>" src="<%= product.preview_url %>"></iframe>
+                      <%= product.preview_html.html_safe %>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -45,10 +45,10 @@
               </div>
             </div>
             <script>
-              document.getElementById('modal-<%= product.code %>').addEventListener('hidden.bs.modal', (event) => {
+              document.getElementById('modal-<%= product.checkout_code %>').addEventListener('hidden.bs.modal', (event) => {
                   const { product } = event.target.dataset
 
-                  const iframe = document.getElementById('video-' + product)
+                  const iframe = document.getElementsByTagName('iframe')[0]
 
                   iframe.src = iframe.src
                 }
