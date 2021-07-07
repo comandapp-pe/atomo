@@ -2,7 +2,6 @@
 class Order < ApplicationRecord
   belongs_to :product
 
-  def self.function
-    1
-  end
+  alias_attribute :CUSTOMEREMAIL, :customer_email
+
 end

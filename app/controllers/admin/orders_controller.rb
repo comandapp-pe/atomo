@@ -12,7 +12,7 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/new
   def new
-    @admin_order = Admin::Order.new
+    @order = Order.new
   end
 
   # GET /admin/orders/1/edit
@@ -49,9 +49,9 @@ class Admin::OrdersController < ApplicationController
 
   # DELETE /admin/orders/1 or /admin/orders/1.json
   def destroy
-    @admin_order.destroy
+    @order.destroy
     respond_to do |format|
-      format.html { redirect_to admin_orders_url, notice: "Order was successfully destroyed." }
+      format.html { redirect_to admin_orders_url, notice: "La orden fue borrada exitosamente." }
       format.json { head :no_content }
     end
   end
@@ -59,7 +59,7 @@ class Admin::OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @admin_order = Admin::Order.find(params[:id])
+      @order = Order.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

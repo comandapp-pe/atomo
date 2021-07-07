@@ -35,16 +35,20 @@
     <table class="table">
       <thead>
       <tr>
+        <th>ID de 2Checkout</th>
+        <th>Cliente</th>
         <th>Producto</th>
         <th>Formato</th>
         <th>Longitud</th>
-        <th colspan="1"></th>
+        <th colspan="2"></th>
       </tr>
       </thead>
 
       <tbody>
       <% @orders.each do |order| %>
         <tr>
+          <td><%= order.checkout_id %></td>
+          <td><%= order.customer_email %></td>
           <td><%= order.product.name %></td>
           <td><%= order.format %></td>
           <td><%= order.length %></td>
