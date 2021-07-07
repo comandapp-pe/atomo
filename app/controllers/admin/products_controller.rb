@@ -22,7 +22,7 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products or /admin/products.json
   def create
-    @product = Product.new(admin_product_params)
+    @product = Product.new(admin_product_create_params)
 
     respond_to do |format|
       if @product.save
@@ -37,8 +37,10 @@ class Admin::ProductsController < ApplicationController
 
   # PATCH/PUT /admin/products/1 or /admin/products/1.json
   def update
+    puts admin_product_update_params
+
     respond_to do |format|
-      if @product.update(admin_product_params)
+      if @product.update(admin_product_update_params)
         format.html { redirect_to [:admin, @product], notice: "Actualizaste el producto exitosamente." }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -64,9 +66,12 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def admin_product_params
+  def admin_product_create_params
     params.require(:product).permit(:vimeo_url)
+  end
+
+  def admin_product_update_params
+    params.require(:product).permit(:name, :description)
   end
 
   def authenticate_user!

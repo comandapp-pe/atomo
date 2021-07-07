@@ -1,31 +1,43 @@
 # typed: strict
 class Product < ApplicationRecord
-  before_validation :sync
+  # TODO: Validate the uniqueness of the Vimeo URL without creating a 2Checkout Product
+  # validate vimeo_url's presence
+  # validate vimeo_url's uniqueness
+  # validate vimeo_url's validity (whether it is an actual Vimeo URL)
+  # assign name, preview_html, description and thumbnails from Vimeo
+  # validate the presence of those aforementioned
 
-  # an unique check should be added for the vimeo url
+  # validates :name, presence: true, uniqueness: true
+  # validates :description, presence: true
+  # validates :preview_html, presence: true
+  # validates :thumbnail_url_with_play_button, presence: true
+
+  before_validation :sync, on: :create
 
   def sync
+    return errors.add(:vimeo_url, 'no puede estar en blanco') if vimeo_url.blank?
+
+    return errors.add(:vimeo_url, "ya existe en otro producto") if Product.exists?(vimeo_url: vimeo_url)
+
     sync_vimeo
+
+    return if errors.any?
+
     sync_checkout
   end
 
   def sync_vimeo
-    response = Faraday.get(
-      "https://vimeo.com/api/oembed.json?url=#{self.vimeo_url}",
-      { 'Accept': 'application/json' }
-    )
+    response = Faraday.get("https://vimeo.com/api/oembed.json?url=#{self.vimeo_url}")
 
-    if response.status == 404
-      errors.add(:vimeo_url, 'no es una URL válida de Vimeo')
+    return errors.add(:vimeo_url, 'no es una url válida') if response.status != 200
 
-      return
-    end
+    body = JSON.parse(response.body).transform_keys(&:to_sym)
 
-    body = JSON.parse(response.body).transform_keys { |key| key.to_sym }
+    # TODO: Add a failsafe in case Vimeo's API doesn't return what's expected
 
     self.name = body[:title]
     self.preview_html = body[:html]
-    self.description = body[:description]
+    self.description = body[:description].blank? ? 'Descripción por defecto.' : body[:description]
     self.thumbnail_url_with_play_button = body[:thumbnail_url_with_play_button]
   end
 
@@ -91,8 +103,7 @@ class Product < ApplicationRecord
                                   "Required": true,
                                 }
                               ],
-                            }
-                              .to_json, {
+                            }.to_json, {
                               'Content-Type': 'application/json',
                               'Accept': 'application/json',
                               'X-Avangate-Authentication': "code=\"#{vendor_code}\" date=\"#{date}\" hash=\"#{hash}\""
