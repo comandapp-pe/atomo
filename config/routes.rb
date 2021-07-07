@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :products
+    resources :orders
     resource :session, only: [:new, :create, :destroy]
   end
 

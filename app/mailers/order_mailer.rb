@@ -1,28 +1,12 @@
 # typed: true
 class OrderMailer < ApplicationMailer
-  default from: 'waterquarks@gmail.com'
+  default from: 'joaquin.meza.prueba@gmail.com'
 
   def confirmation_email
-    @customer_email = params[:customer_email]
+    @order = params[:order]
 
-    @first_name = params[:first_name]
+    @url = 'http://example.com'
 
-    @last_name = params[:last_name]
-
-    @order_id = params[:order_id]
-
-    @sale_date = params[:sale_date]
-
-    @payment_method = params[:payment_method]
-
-    @currency = params[:currency]
-
-    @products = params[:products]
-
-    @total = params[:total]
-
-    @url  = 'http://example.com'
-
-    mail to: @customer_email, subject: "Your order ##{@order_id} has been confirmed"
+    mail to: @order.customer_email, subject: "Tu orden ##{@order.checkout_id} fue confirmada"
   end
 end

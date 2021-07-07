@@ -1,7 +1,7 @@
 <%= form_with(model: admin_session, url: admin_session_path, class: 'w-100 text-center', html: { style: 'max-width: 330px;' }) do |form| %>
   <% if admin_session.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(admin_session.errors.count, "error") %> prohibited this admin_session from being saved:</h2>
+      <h2><%= pluralize(admin_session.errors.count, "error") %> evitó iniciar sesión:</h2>
 
       <ul>
         <% admin_session.errors.each do |error| %>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="form-floating">
-    <%= form.text_field :password, class: 'form-control', placeholder: 'Password' %>
+    <%= form.password_field :password, class: 'form-control', placeholder: 'Password' %>
     <%= form.label :password, 'Contraseña' %>
   </div>
 

@@ -29,30 +29,30 @@
     <% end %>
 
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h1>Productos</h1>
-
-      <%= link_to 'Nuevo Producto', new_admin_product_path, class: 'btn btn-primary' %>
+      <h1>Órdenes</h1>
     </div>
 
-    <table class="table table">
+    <table class="table">
       <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Código de 2Checkout</th>
-        <th colspan="3"></th>
+        <th>Producto</th>
+        <th>Formato</th>
+        <th>Longitud</th>
+        <th colspan="1"></th>
       </tr>
       </thead>
 
       <tbody>
-      <% @products.each do |product| %>
+      <% @orders.each do |order| %>
         <tr>
-          <td><%= link_to product.name, [:admin, product], class: 'text-decoration-none' %></td>
-          <td><%= product.checkout_code %></td>
-          <td><%= link_to 'Borrar', admin_product_path(product), method: :delete, data: { confirm: "¿Estás seguro de borrar '#{product.name}'?" }, class: 'text-decoration-none' %></td>
+          <td><%= order.product.name %></td>
+          <td><%= order.format %></td>
+          <td><%= order.length %></td>
+          <td><%= link_to 'Ver detalle', [:admin, order], class: 'text-decoration-none' %></td>
+          <td><%= link_to 'Borrar', [:admin, order], method: :delete, data: { confirm: "¿Estás seguro de borrar esta orden?" }, class: 'text-decoration-none' %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
-
   </section>
 </main>

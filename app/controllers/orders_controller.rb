@@ -24,24 +24,57 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    products = params['IPN_PID'].zip(params['IPN_PCODE'], params['IPN_PNAME'], params['IPN_QTY'], params['IPN_PRICE'])
+    # params = {"SALEDATE"=>"2021-07-06 04:11:04", "REFNO"=>"156597478", "REFNOEXT"=>"", "ORDERNO"=>"77", "ORDERSTATUS"=>"PAYMENT_AUTHORIZED", "PAYMETHOD"=>"Visa/MasterCard", "FIRSTNAME"=>"John", "LASTNAME"=>"Doe", "COMPANY"=>"", "REGISTRATIONNUMBER"=>"", "FISCALCODE"=>"", "CBANKNAME"=>"", "CBANKACCOUNT"=>"", "ADDRESS1"=>"-", "ADDRESS2"=>"", "CITY"=>"-", "STATE"=>"-", "ZIPCODE"=>"-", "COUNTRY"=>"Peru", "PHONE"=>"", "FAX"=>"", "CUSTOMEREMAIL"=>"joaquin.meza@riqra.com", "FIRSTNAME_D"=>"John", "LASTNAME_D"=>"Doe", "COMPANY_D"=>"", "ADDRESS1_D"=>"-", "ADDRESS2_D"=>"", "CITY_D"=>"-", "STATE_D"=>"-", "ZIPCODE_D"=>"-", "COUNTRY_D"=>"Peru", "PHONE_D"=>"", "IPADDRESS"=>"179.6.215.254", "CURRENCY"=>"USD", "IPN_PID"=>["36497829"], "IPN_PNAME"=>["1.Conociéndonos"], "IPN_PCODE"=>["D0SgWGeXNE"], "IPN_INFO"=>[""], "IPN_QTY"=>["1"], "IPN_PRICE"=>["20.00"], "IPN_VAT"=>["0.00"], "IPN_VER"=>["1.0"], "IPN_DISCOUNT"=>["0.00"], "IPN_PROMONAME"=>[""], "IPN_DELIVEREDCODES"=>[""], "IPN_TOTAL"=>["20.00"], "IPN_TOTALGENERAL"=>"20.00", "IPN_SHIPPING"=>"0.00", "IPN_SHIPPING_TAX"=>"0.00", "IPN_COMMISSION"=>"1.80", "IPN_CUSTOM_36497829_TEXT"=>["Format", "Length"], "IPN_CUSTOM_36497829_VALUE"=>["vertical", "15"], "IPN_DATE"=>"20210706041120", "HASH"=>"6f288d7b6136ff2a178e39b85c98548b"}
 
-    products = products.map { |array| %i[id code name quantity price].zip(array) }.map(&:to_h)
+    product = Product.find_by(checkout_code: params['IPN_PCODE'].first)
 
-    products = products.map do |product|
-      text = params["IPN_CUSTOM_#{product[:id]}_TEXT"].map(&:downcase).map(&:to_sym)
-      value = params["IPN_CUSTOM_#{product[:id]}_VALUE"].map(&:downcase)
+    product_checkout_id = params['IPN_PID'].first
 
-      meta = text.zip(value).to_h
+    product_checkout_additional_fields_text = params["IPN_CUSTOM_#{product_checkout_id}_TEXT"]
 
-      { **product, **meta }
-    end
+    product_checkout_additional_fields_value = params["IPN_CUSTOM_#{product_checkout_id}_VALUE"]
 
-    pid = request.request_parameters["IPN_PID"].first
+    product_checkout_additional_fields = product_checkout_additional_fields_text.zip(product_checkout_additional_fields_value).to_h
 
-    pname = request.request_parameters["IPN_PNAME"].first
+    product_checkout_format = product_checkout_additional_fields['Format']
 
-    ipn_date = request.request_parameters["IPN_DATE"]
+    product_checkout_length = product_checkout_additional_fields['Length']
+
+    customer_email = params["CUSTOMEREMAIL"]
+
+    customer_first_name = params["FIRSTNAME"]
+
+    customer_last_name = params["LASTNAME"]
+
+    checkout_id = params["ORDERNO"]
+
+    payment_method = params["PAYMETHOD"]
+
+    currency = params["CURRENCY"]
+
+    sold_at = params["SALEDATE"]
+
+    total = params["IPN_TOTAL"][0]
+
+    @order = Order.new(
+      checkout_id: checkout_id,
+      customer_email: customer_email,
+      customer_first_name: customer_first_name,
+      customer_last_name: customer_last_name,
+      product: product,
+      format: product_checkout_format,
+      length: product_checkout_length,
+      payment_method: payment_method,
+      currency: currency,
+      sold_at: sold_at,
+      total: total
+    )
+
+    pid = params["IPN_PID"].first
+
+    pname = params["IPN_PNAME"].first
+
+    ipn_date = params["IPN_DATE"]
 
     key = 'm&fsBk(ZxhMe)D%!|WqJ'
 
@@ -51,19 +84,15 @@ class OrdersController < ApplicationController
 
     tag = "<EPAYMENT>#{ipn_date}|#{result}</EPAYMENT>"
 
-    OrderMailer.with(
-      order_id: params["ORDERNO"],
-      customer_email: params["CUSTOMEREMAIL"],
-      first_name: params["FIRSTNAME"],
-      last_name: params["LASTNAME"],
-      sale_date: params["SALEDATE"],
-      products: products,
-      payment_method: params["PAYMETHOD"],
-      currency: params["CURRENCY"],
-      total: params["IPN_TOTAL"],
-    ).confirmation_email.deliver_later
+    respond_to do |format|
+      if @order.save
+        OrderMailer.with(order: @order).confirmation_email.deliver_later
 
-    render html: tag.html_safe, layout: 'application'
+        format.html { render html: tag.html_safe, layout: 'application' }
+      else
+        format.html { head :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /orders/1 or /orders/1.json
