@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_025549) do
+ActiveRecord::Schema.define(version: 2021_07_07_235218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2021_07_07_025549) do
     t.string "checkout_code", null: false
     t.string "thumbnail_url_with_play_button"
     t.string "vimeo_url", null: false
+    t.boolean "enabled"
+    t.string "thumbnail_url"
   end
 
   add_foreign_key "admin_sessions", "admin_users"

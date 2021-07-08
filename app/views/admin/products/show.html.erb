@@ -65,6 +65,12 @@
         <%= form.text_field :description, class: 'form-control' %>
       </div>
 
+      <div class="mb-2">
+        <%= form.label :enabled, 'Activado', class: 'form-label' %>
+
+        <%= form.select :enabled, [['Sí', true], ['No', false]], {}, class: 'form-select' %>
+      </div>
+
       <%= form.submit class: 'btn btn-primary mt-3' %>
     <% end %>
 

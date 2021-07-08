@@ -7,10 +7,9 @@ class Product < ApplicationRecord
   # assign name, preview_html, description and thumbnails from Vimeo
   # validate the presence of those aforementioned
 
-  # validates :name, presence: true, uniqueness: true
-  # validates :description, presence: true
-  # validates :preview_html, presence: true
-  # validates :thumbnail_url_with_play_button, presence: true
+  validates :name, presence: true, uniqueness: true, if: :persisted?
+  validates :description, presence: true, if: :persisted?
+  validates :enabled, presence: true, if: :persisted?
 
   before_validation :sync, on: :create
 
@@ -38,7 +37,9 @@ class Product < ApplicationRecord
     self.name = body[:title]
     self.preview_html = body[:html]
     self.description = body[:description].blank? ? 'Descripción por defecto.' : body[:description]
+    self.thumbnail_url = body[:thumbnail_url]
     self.thumbnail_url_with_play_button = body[:thumbnail_url_with_play_button]
+    self.enabled = false
   end
 
   def sync_checkout
