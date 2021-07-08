@@ -6,11 +6,12 @@
 
       <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">15 segundos</h4>
+          <h2 class="my-0 fw-normal text-center">15 segundos</h2>
         </div>
         <%= form.hidden_field :product_id, value: params[:product_id] %>
         <%= form.hidden_field :length, value: 15 %>
         <div class="card-body">
+          <h3 class="card-title text-center my-4">USD $20</h3>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="15s-horizontal" required>
             <label class="form-check-label" for="15s-horizontal">Horizontal</label>
@@ -31,11 +32,12 @@
     <div class="col">
       <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">30 segundos</h4>
+          <h2 class="my-0 fw-normal text-center">30 segundos</h2>
         </div>
         <%= form.hidden_field :product_id, value: params[:product_id] %>
         <%= form.hidden_field :length, value: 30 %>
         <div class="card-body">
+          <h3 class="card-title text-center my-4">USD $30</h3>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="30s-horizontal" required>
             <label class="form-check-label" for="30s-horizontal">Horizontal</label>
@@ -56,11 +58,12 @@
     <div class="col">
       <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
         <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">60 segundos</h4>
+          <h2 class="my-0 fw-normal text-center">60 segundos</h2>
         </div>
         <%= form.hidden_field :product_id, value: params[:product_id] %>
         <%= form.hidden_field :length, value: 60 %>
         <div class="card-body">
+          <h3 class="card-title text-center my-4">USD $40</h3>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="60s-horizontal" required>
             <label class="form-check-label" for="60s-horizontal">Horizontal</label>
