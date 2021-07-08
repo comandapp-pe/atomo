@@ -44,8 +44,7 @@
                     <p><%= product.description %></p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-primary' %>
+                    <%= link_to 'Customizar', new_order_path(params: { product_id: product.id }), class: 'btn btn-primary w-100' %>
                   </div>
                 </div>
               </div>
