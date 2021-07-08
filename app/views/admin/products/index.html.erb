@@ -38,21 +38,22 @@
         <th>Nombre</th>
         <th>Código de 2Checkout</th>
         <th>Publicado</th>
-        <th colspan="1"></th>
+        <th colspan="2"></th>
       </tr>
       </thead>
 
       <tbody>
       <% if @products.empty? %>
         <tr>
-          <td colspan="3" class="text-center">No hay datos disponibles.</td>
+          <td colspan="5" class="text-center">No hay datos disponibles.</td>
         </tr>
       <% else %>
         <% @products.each do |product| %>
           <tr>
-            <td><%= link_to product.name, [:admin, product], class: 'text-decoration-none' %></td>
+            <td><%= product.name %></td>
             <td><%= product.checkout_code %></td>
             <td><%= product.published ? 'Sí' : 'No' %></td>
+            <td><%= link_to 'Ver detalle', [:admin, product], class: 'text-decoration-none' %></td>
             <td><%= link_to 'Borrar', admin_product_path(product), method: :delete, data: { confirm: "¿Estás seguro de borrar '#{product.name}'?" }, class: 'text-decoration-none' %></td>
           </tr>
         <% end %>
