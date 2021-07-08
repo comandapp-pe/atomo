@@ -36,7 +36,7 @@ class Product < ApplicationRecord
 
     self.name = body[:title]
     self.preview_html = body[:html]
-    self.description = body[:description].blank? ? 'Descripción por defecto.' : body[:description]
+    self.description = body[:description].blank? ? 'Descripción por defecto' : body[:description]
     self.thumbnail_url = body[:thumbnail_url]
     self.thumbnail_url_with_play_button = body[:thumbnail_url_with_play_button]
     self.enabled = false
@@ -110,10 +110,6 @@ class Product < ApplicationRecord
                               'X-Avangate-Authentication': "code=\"#{vendor_code}\" date=\"#{date}\" hash=\"#{hash}\""
                             })
 
-    if response.status != 201
-      errors.add(:base, 'Ocurrió un error sincronizando con 2Checkout')
-
-      return
-    end
+    return errors.add(:base, 'Ocurrió un error sincronizando con 2Checkout') if response.status != 201
   end
 end
