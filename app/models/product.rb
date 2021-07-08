@@ -35,7 +35,13 @@ class Product < ApplicationRecord
     # TODO: Add a failsafe in case Vimeo's API doesn't return what's expected
 
     self.name = body[:title]
-    self.preview_html = body[:html]
+    self.checkout_code = SecureRandom.alphanumeric(10)
+
+    html = Nokogiri::HTML(body[:html])
+    iframe = html.at('iframe')
+    iframe['id'] = "preview-#{self.checkout_code}"
+    self.preview_html = iframe.to_s
+
     self.description = body[:description].blank? ? 'Descripción por defecto' : body[:description]
     self.thumbnail_url = body[:thumbnail_url]
     self.thumbnail_url_with_play_button = body[:thumbnail_url_with_play_button]
@@ -52,8 +58,6 @@ class Product < ApplicationRecord
     data = vendor_code.length.to_s + vendor_code + date.length.to_s + date
 
     hash = OpenSSL::HMAC.hexdigest("md5", key, data)
-
-    self.checkout_code = SecureRandom.alphanumeric(10)
 
     response = Faraday.post('https://api.2checkout.com/rest/6.0/products',
                             {
