@@ -37,6 +37,7 @@
       <tr>
         <th>Nombre</th>
         <th>Código de 2Checkout</th>
+        <th>Publicado</th>
         <th colspan="1"></th>
       </tr>
       </thead>
@@ -51,6 +52,7 @@
           <tr>
             <td><%= link_to product.name, [:admin, product], class: 'text-decoration-none' %></td>
             <td><%= product.checkout_code %></td>
+            <td><%= product.published ? 'Sí' : 'No' %></td>
             <td><%= link_to 'Borrar', admin_product_path(product), method: :delete, data: { confirm: "¿Estás seguro de borrar '#{product.name}'?" }, class: 'text-decoration-none' %></td>
           </tr>
         <% end %>

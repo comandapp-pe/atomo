@@ -37,8 +37,6 @@ class Admin::ProductsController < ApplicationController
 
   # PATCH/PUT /admin/products/1 or /admin/products/1.json
   def update
-    puts admin_product_update_params
-
     respond_to do |format|
       if @product.update(admin_product_update_params)
         format.html { redirect_to [:admin, @product], notice: "Actualizaste el producto exitosamente." }
@@ -71,7 +69,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def admin_product_update_params
-    params.require(:product).permit(:name, :description, :enabled)
+    params.require(:product).permit(:name, :description, :published)
   end
 
   def authenticate_user!

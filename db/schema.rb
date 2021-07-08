@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_235218) do
+ActiveRecord::Schema.define(version: 2021_07_08_003802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_07_07_235218) do
     t.string "checkout_code", null: false
     t.string "thumbnail_url_with_play_button"
     t.string "vimeo_url", null: false
-    t.boolean "enabled"
+    t.boolean "published"
     t.string "thumbnail_url"
   end
 

@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, if: :persisted?
   validates :description, presence: true, if: :persisted?
-  validates :enabled, presence: true, if: :persisted?
+  validates :published, inclusion: [true, false]
 
   before_validation :sync, on: :create
 
@@ -39,7 +39,7 @@ class Product < ApplicationRecord
     self.description = body[:description].blank? ? 'Descripción por defecto' : body[:description]
     self.thumbnail_url = body[:thumbnail_url]
     self.thumbnail_url_with_play_button = body[:thumbnail_url_with_play_button]
-    self.enabled = false
+    self.published = false
   end
 
   def sync_checkout
