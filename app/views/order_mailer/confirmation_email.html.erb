@@ -655,7 +655,7 @@
                                   <h1 style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 36px; line-height: 43.2px;" align="left">
                                     ¡Hola, <%= @order.customer_first_name %> <%= @order.customer_last_name %>!</h1>
                                   <h5 class="text-muted " style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px; color: #636c72;" align="left">
-                                    Tu orden #<%= @order.checkout_id %> fue confirmada a las <%= @order.sold_at %>.
+                                    Tu orden #<%= @order.checkout_id %> fue confirmada a las <%= @order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %>.
                                   </h5>
                                   <table class="s-2 w-100" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                                     <tbody>
@@ -668,8 +668,8 @@
                                   </table>
 
 
-                                  <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px;" align="left">Detalles de la orden</h5>
-                                  <%= @order.inspect %>
+                                  <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px;" align="left">Detalles de tu plantilla</h5>
+                                  <%= @order.preview_html.html_safe %>
 <!--                                  <ul>-->
 <!--                                    <li>Detalles</li>-->
 <!--                                  </ul>-->
