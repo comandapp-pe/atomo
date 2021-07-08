@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.where(published: true)
   end
 
   # GET /product/1 or /product/1.json

@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, if: :persisted?
   validates :description, presence: true, if: :persisted?
-  validates :published, inclusion: [true, false]
+  validates :published, inclusion: [true, false], if: :persisted?
 
   before_validation :sync, on: :create
 
