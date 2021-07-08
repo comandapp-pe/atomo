@@ -669,12 +669,13 @@
 
 
                                   <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px;" align="left">Detalles de tu plantilla</h5>
-                                  <%= @order.preview_html.html_safe %>
-<!--                                  <ul>-->
-<!--                                    <li>Detalles</li>-->
-<!--                                  </ul>-->
+
+                                  <p><strong>Nombre:</strong> <%= @order.product.name %></p>
+                                  <p><strong>Formato:</strong> <%= @order.format %></p>
+                                  <p><strong>Metraje:</strong> <%= @order.length %> segundos</p>
+
                                   <h5 style="margin-top: 0; margin-bottom: 0; font-weight: 500; vertical-align: baseline; font-size: 20px; line-height: 24px;" align="left">Instrucciones</h5>
-                                  <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">Envia tus assets a <a href="/">link</a></p>
+                                  <p style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;" align="left">Envia tus assets a <a href="/">atomo@digital.pe</a></p>
                                   <table class="btn btn-primary" border="0" cellpadding="0" cellspacing="0" style="font-family: Helvetica, Arial, sans-serif; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0px; border-collapse: separate !important; border-radius: 4px;">
                                     <tbody>
                                     <tr>
