@@ -3,7 +3,7 @@
   <main>
     <!--    <p id="notice"><%#= notice %></p>-->
 
-    <h1>Productos</h1>
+    <h1>Plantillas</h1>
 
     <!--    <div class="container mt-3 mb-3">-->
     <%#= link_to 'New Template', new_product_path, class: 'btn btn-primary' %>
@@ -13,15 +13,17 @@
       <div class="row g-2">
         <% @products.each do |product| %>
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="card ">
-              <img
-                src="<%= product.thumbnail_url_with_play_button %>"
-                role="button"
-                data-bs-toggle="modal"
-                data-bs-target="#modal-<%= product.checkout_code %>"
-              >
+            <div
+              class="card"
+              role="button"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-<%= product.checkout_code %>"
+            >
+              <img src="<%= product.thumbnail_url_with_play_button %>">
               <div class="card-body">
-                <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-outline-primary w-100' %>
+                <h5
+                  class="card-title text-center"
+                ><%= product.name %></h5>
               </div>
             </div>
 
@@ -42,7 +44,7 @@
                     <p><%= product.description %></p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <%= link_to 'Comprar', new_order_path(params: { product_id: product.id }), class: 'btn btn-primary' %>
                   </div>
                 </div>
