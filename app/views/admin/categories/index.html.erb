@@ -25,10 +25,34 @@
       <p id="notice"><%= notice %></p>
     <% end %>
 
-    <%= link_to '< Regresar', admin_products_path, class: 'text-decoration-none' %>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h1>Categorías</h1>
 
-    <h1>Nuevo Producto</h1>
+      <%= link_to 'Nueva Categoría', new_admin_category_path, class: 'btn btn-primary' %>
+    </div>
 
-    <%= render 'form', product: @product %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th colspan="2"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @categories.empty? %>
+        <tr>
+          <td colspan="7" class="text-center">No hay datos disponibles.</td>
+        </tr>
+      <% else %>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= link_to 'Ver detalle', [:admin, category], class: 'text-decoration-none' %></td>
+            <td><%= link_to 'Borrar', [:admin, category], method: :delete, data: { confirm: "¿Estás seguro de borrar esta categoría?" }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </main>

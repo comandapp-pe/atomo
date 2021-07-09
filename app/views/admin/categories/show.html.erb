@@ -22,13 +22,17 @@
 
   <div class="container-fluid p-4" style="max-height: 100vh; overflow: scroll;">
     <% if notice %>
-      <p id="notice"><%= notice %></p>
+      <div id="notice" class="alert alert-success alert-dismissible fade show">
+        <%= notice %>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <% end %>
 
-    <%= link_to '< Regresar', admin_products_path, class: 'text-decoration-none' %>
+    <%= link_to '< Regresar', admin_categories_path, class: 'text-decoration-none' %>
 
-    <h1>Nuevo Producto</h1>
+    <h1><%= @category.name %></h1>
 
-    <%= render 'form', product: @product %>
+    <%= render 'form', category: @category %>
   </div>
 </main>

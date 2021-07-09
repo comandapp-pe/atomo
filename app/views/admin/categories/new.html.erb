@@ -25,10 +25,10 @@
       <p id="notice"><%= notice %></p>
     <% end %>
 
-    <%= link_to '< Regresar', admin_products_path, class: 'text-decoration-none' %>
+    <%= link_to '< Regresar', admin_categories_path, class: 'text-decoration-none' %>
 
-    <h1>Nuevo Producto</h1>
+    <h1>Nueva Categoría</h1>
 
-    <%= render 'form', product: @product %>
+    <%= render 'form', category: @category %>
   </div>
 </main>

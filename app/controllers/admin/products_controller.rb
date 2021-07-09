@@ -69,7 +69,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def admin_product_update_params
-    params.require(:product).permit(:name, :description, :published)
+    params.require(:product).permit(:name, :description, :category_id, :published)
   end
 
   def authenticate_user!

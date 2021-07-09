@@ -12,6 +12,7 @@
     </a>
     <ul class="nav nav-pills flex-column pb-3 mb-3 border-bottom">
       <li><%= link_to 'Órdenes', admin_orders_path, class: 'nav-link link-dark' %></li>
+      <li><%= link_to 'Categorías', admin_categories_path, class: 'nav-link link-dark' %></li>
       <li><%= link_to 'Productos', admin_products_path, class: 'nav-link link-dark' %></li>
     </ul>
     <ul class="nav nav-pills flex-column pb-3 mb-3 mb-auto border-bottom">
@@ -63,6 +64,11 @@
       <div class="mb-2">
         <%= form.label :description, 'Descripción', class: 'form-label' %>
         <%= form.text_field :description, class: 'form-control' %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :category_id, 'Categoría', class: 'form-label' %>
+        <%= form.select :category_id, Category.all.map { |category| [category.name, category.id] }, { prompt: 'Selecciona una categoría' }, class: 'form-select' %>
       </div>
 
       <div class="mb-2">
