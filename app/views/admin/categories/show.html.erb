@@ -20,19 +20,24 @@
     </ul>
   </div>
 
-  <div class="container-fluid p-4" style="max-height: 100vh; overflow: scroll;">
+  <div class="container-fluid px-4 py-3" style="max-height: 100vh; overflow: scroll;">
     <% if notice %>
       <div id="notice" class="alert alert-success alert-dismissible fade show">
-        <%= notice %>
-
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <%= notice %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% end %>
 
-    <%= link_to '< Regresar', admin_categories_path, class: 'text-decoration-none' %>
+    <div class="mb-3">
+      <%= link_to '< Regresar', admin_categories_path, class: 'text-decoration-none' %>
+    </div>
 
-    <h1><%= @category.name %></h1>
-
-    <%= render 'form', category: @category %>
+    <div class="card">
+      <div class="card-header">
+        <h1 class="h3"><%= @category.name_in_database %></h1>
+      </div>
+      <div class="card-body">
+        <%= render 'form', category: @category %>
+      </div>
+    </div>
   </div>
 </main>
