@@ -14,7 +14,7 @@
       </div>
 
       <ul class="nav">
-        <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-primary' : 'link-info'}" %></li>
+        <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-info' : 'link-secondary'}" %></li>
         <li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-info' : 'link-secondary'}" %></li>
         <li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-info' : 'link-secondary'}" %></li>
       </ul>

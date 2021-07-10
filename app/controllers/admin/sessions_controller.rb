@@ -9,7 +9,7 @@ class Admin::SessionsController < ApplicationController
 
     respond_to do |format|
       if @admin_session
-        format.html { redirect_to admin_orders_url, notice: 'Ya tenías una sesión activa, así que fuiste redireccionado.' }
+        format.html { redirect_to admin_orders_url, notice: 'Ya tenías una sesión activa, así que fuiste redireccionado automáticamente.' }
       else
         @admin_session = Admin::Session.new
 
