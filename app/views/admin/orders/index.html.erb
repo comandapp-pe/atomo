@@ -17,18 +17,22 @@
           Las órdenes son creadas automáticamente cuando un cliente realiza un pago.
         </div>
       <% else %>
-        <% @orders.each do |order| %>
-          <div class="card">
-            <%= link_to [:admin, order], class: 'card-body text-decoration-none' do %>
-              <div class="card-title d-flex align-items-center">
-                #<%= order.checkout_code %> <span class="d-inline-block mx-2 badge rounded-pill bg-primary">Confirmada</span>
-              </div>
-              <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %></div>
-              <div class="card-text text-muted"><i class="fas fa-box"></i> <%= order.product.name %></div>
-              <div class="card-text text-muted"><i class="fas fa-info-circle"></i> <%= order.format.titlecase %> / <%= order.length %> segundos</div>
-            <% end %>
-          </div>
-        <% end %>
+        <div class="row gy-2">
+          <% @orders.each do |order| %>
+            <div class="col-12">
+              <div class="card">
+              <%= link_to [:admin, order], class: 'card-body text-decoration-none' do %>
+                <div class="card-title d-flex align-items-center">
+                  #<%= order.checkout_code %> <span class="d-inline-block mx-2 badge rounded-pill bg-primary">Confirmada</span>
+                </div>
+                <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %></div>
+                <div class="card-text text-muted"><i class="fas fa-box"></i> <%= order.product.name %></div>
+                <div class="card-text text-muted"><i class="fas fa-info-circle"></i> <%= order.format.titlecase %> / <%= order.length %> segundos</div>
+              <% end %>
+            </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

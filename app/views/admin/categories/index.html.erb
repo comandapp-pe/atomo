@@ -23,13 +23,17 @@
             Crea una categoría.
           </div>
         <% else %>
-          <% @categories.each do |category| %>
-            <%= link_to [:admin, category], class: 'card text-decoration-none' do %>
-              <div class="card-body">
-                <%= category.name %>
+          <div class="row gy-2">
+            <% @categories.each do |category| %>
+              <div class="col-12">
+                <%= link_to [:admin, category], class: 'card text-decoration-none' do %>
+                  <div class="card-body">
+                    <%= category.name %>
+                  </div>
+                <% end %>
               </div>
             <% end %>
-          <% end %>
+          </div>
         <% end %>
       </div>
   </div>
