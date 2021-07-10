@@ -19,7 +19,7 @@
       <%= render 'form', category: @category %>
     </div>
     <div class="card-footer">
-      <%= link_to 'Borrar categoría', [:admin, @category], method: :delete, data: { confirm: '¿Estás seguro de borrar esta categoría?' }, class: 'text-decoration-none link-danger' %>
+      <%= link_to 'Borrar categoría', [:admin, @category], method: :delete, data: { confirm: "¿Estás seguro de borrar esta categoría? Los productos pertenecientes a ella serían despublicados." }, class: 'text-decoration-none link-danger' %>
     </div>
   </div>
 </main>

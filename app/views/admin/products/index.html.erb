@@ -27,7 +27,14 @@
         <% @products.each do |product| %>
           <%= link_to [:admin, product], class: 'card text-decoration-none' do %>
             <div class="card-body">
-              <div class="card-title"><%= product.category_id? ? product.category.name : 'Sin categoría' %> | <%= product.name %></div>
+              <div class="card-title">
+                <% if product.category_id? %>
+                  <span><%= product.category.name %></span>
+                <% else %>
+                  <span class="text-danger">Sin categoría</span>
+                <% end %>
+                <span class="text-dark">|</span> <%= product.name %>
+              </div>
               <div class="card-subtitle text-muted"><%= product.published ? 'Publicado' : 'No Publicado' %></div>
             </div>
           <% end %>
