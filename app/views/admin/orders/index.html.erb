@@ -26,8 +26,7 @@
                   #<%= order.checkout_code %> <span class="d-inline-block mx-2 badge rounded-pill bg-primary">Confirmada</span>
                 </div>
                 <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %></div>
-                <div class="card-text text-muted"><i class="fas fa-box"></i> <%= order.product.name %></div>
-                <div class="card-text text-muted"><i class="fas fa-info-circle"></i> <%= order.format.titlecase %> / <%= order.length %> segundos</div>
+                <div class="card-text text-muted"><i class="fas fa-calendar"></i> <%= order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %></div>
               <% end %>
             </div>
             </div>
