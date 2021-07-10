@@ -16,8 +16,8 @@
   <div class="card">
     <h2 class="card-header h5">Cliente</h2>
     <div class="card-body">
-      <p><strong>Nombres y Apellidos:</strong> <%= @order.customer_first_name %> <%= @order.customer_last_name %></p>
-      <p><strong>Correo:</strong> <%= @order.customer_email %></p>
+      <p class="card-text"><strong>Nombres y Apellidos:</strong> <%= @order.customer_first_name %> <%= @order.customer_last_name %></p>
+      <p class="card-text"><strong>Correo:</strong> <%= @order.customer_email %></p>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
   <div class="card">
     <h2 class="card-header h5">Producto</h2>
     <div class="card-body">
-      <p><%= link_to @order.product.name, [:admin, @order.product], class: 'text-decoration-none' %></p>
+      <p class="card-text"><%= link_to @order.product.name, [:admin, @order.product], class: 'text-decoration-none' %></p>
       <div class="ratio ratio-16x9">
         <%= @order.product.preview_html.html_safe %>
       </div>
@@ -38,7 +38,7 @@
   <div class="card">
     <h2 class="card-header h5">Formato</h2>
     <div class="card-body">
-       <%= @order.format.titlecase %>
+      <p class="card-text"><%= @order.format.titlecase %></p>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
   <div class="card">
     <h2 class="card-header h5">Metraje</h2>
     <div class="card-body">
-       <%= @order.length %> segundos
+      <p class="card-text"><%= @order.length %> segundos</p>
     </div>
   </div>
 
@@ -56,9 +56,9 @@
   <div class="card">
     <h2 class="card-header h5">Pago</h2>
     <div class="card-body">
-      <p><strong>Método:</strong> <%= @order.payment_method %></p>
-      <p><strong>Comisión de 2Checkout:</strong> <%= number_to_currency @order.checkout_commission %></p>
-      <p><strong>Total:</strong> <%= number_to_currency @order.total %></p>
+      <p class="card-text"><strong>Método:</strong> <%= @order.payment_method %></p>
+      <p class="card-text"><strong>Comisión de 2Checkout:</strong> <%= number_to_currency @order.checkout_commission %></p>
+      <p class="card-text"><strong>Total:</strong> <%= number_to_currency @order.total %></p>
     </div>
   </div>
 </main>
