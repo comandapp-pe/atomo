@@ -29,15 +29,16 @@
             <div class="col-12">
               <%= link_to [:admin, product], class: 'card text-decoration-none col-12' do %>
                 <div class="card-body">
-                  <div class="card-title">
+                  <div class="card-title"><%= product.name %></div>
+                  <div class="card-subtitle text-muted">
                     <% if product.category_id? %>
                       <span><%= product.category.name %></span>
                     <% else %>
                       <span class="text-danger">Sin categoría</span>
                     <% end %>
-                    <span class="text-dark">|</span> <%= product.name %>
+                    <span class="text-dark">|</span>
+                    <%= product.published ? 'Publicado' : 'No publicado' %>
                   </div>
-                  <div class="card-subtitle text-muted"><%= product.published ? 'Publicado' : 'No publicado' %></div>
                 </div>
               <% end %>
             </div>
