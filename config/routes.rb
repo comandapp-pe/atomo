@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :checkout_links, only: [:create]
 
+  get '/admin', to: redirect('/admin/orders')
+
   namespace :admin do
     resources :categories
     resources :products

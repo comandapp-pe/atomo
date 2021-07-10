@@ -1,5 +1,6 @@
 class Admin::OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /admin/orders or /admin/orders.json
   def index
@@ -66,4 +67,16 @@ class Admin::OrdersController < ApplicationController
     def admin_order_params
       params.fetch(:admin_order, {})
     end
+
+  def authenticate_user!
+    admin_session_id = session[:current_admin_session_id]
+
+    @admin_session = Admin::Session.find_by(id: admin_session_id)
+
+    return if @admin_session
+
+    respond_to do |format|
+      format.html { redirect_to new_admin_session_url, notice: 'Debes iniciar sesión antes de ingresar a esta página.' }
+    end
+  end
 end

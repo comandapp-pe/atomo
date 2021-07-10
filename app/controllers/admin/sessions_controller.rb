@@ -28,7 +28,7 @@ class Admin::SessionsController < ApplicationController
       if @admin_session.save
         session[:current_admin_session_id] = @admin_session.id
 
-        format.html { redirect_to admin_orders_url }
+        format.html { redirect_to admin_orders_url, notice: 'Iniciaste sesión exitosamente.' }
         format.json { render :show, status: :created, location: @admin_session }
       else
         format.html { render :new, status: :unprocessable_entity }
