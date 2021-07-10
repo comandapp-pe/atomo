@@ -15,15 +15,22 @@
 
   <div class="card">
     <h1 class="card-header h3">Categorías</h1>
-
-    <div class="card-body">
-      <% @categories.each do |category| %>
-        <%= link_to [:admin, category], class: 'card text-decoration-none' do %>
-          <div class="card-body">
-            <%= category.name %>
+      <div class="card-body">
+        <% if @categories.empty? %>
+          <div class="alert alert-primary mb-0">
+            No hay datos disponibles.
+            <hr>
+            Crea una categoría.
           </div>
+        <% else %>
+          <% @categories.each do |category| %>
+            <%= link_to [:admin, category], class: 'card text-decoration-none' do %>
+              <div class="card-body">
+                <%= category.name %>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
   </div>
 </main>

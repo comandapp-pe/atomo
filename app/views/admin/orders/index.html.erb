@@ -43,28 +43,39 @@
       </div>
     <% end %>
 
-    <h1>Órdenes</h1>
-
-    <% if @orders.empty? %>
-      <div class="alert alert-primary mt-4">
-        No hay datos disponibles.
-        <hr>
-        Las órdenes son creadas automáticamente cuando un cliente realiza un pago.
-      </div>
-    <% else %>
-      <% @orders.each do |order| %>
-        <div class="card">
-          <%= link_to [:admin, order], class: 'card-body link-dark text-decoration-none' do %>
-            <div class="card-title d-flex justify-content-between align-items-center">
-              #<%= order.checkout_code %> <span class="badge rounded-pill bg-primary">Confirmada</span>
+    <div class="card">
+      <h1 class="card-header h3">Órdenes</h1>
+      <div class="card-body">
+        <% if @orders.empty? %>
+          <div class="alert alert-primary mb-0">
+            No hay datos disponibles.
+            <hr>
+            Las órdenes son creadas automáticamente cuando un cliente realiza un pago.
+          </div>
+        <% else %>
+          <% @orders.each do |order| %>
+            <div class="card">
+              <%= link_to [:admin, order], class: 'card-body text-decoration-none' do %>
+                <div class="card-title d-flex justify-content-between align-items-center">
+                  #<%= order.checkout_code %> <span class="badge rounded-pill bg-primary">Confirmada</span>
+                </div>
+                <p class="card-text"><i class="fas fa-user-alt"></i> <%= order.customer_email %></p>
+                <p class="card-text"><i class="fas fa-box"></i> <%= order.product.name %></p>
+                <p class="card-text"><i class="fas fa-info-circle"></i> <%= order.format.titlecase %> / <%= order.length %> segundos</p>
+              <% end %>
             </div>
-            <p class="card-text"><i class="fas fa-user-alt"></i> <%= order.customer_email %></p>
-            <p class="card-text"><i class="fas fa-box"></i> <%= order.product.name %></p>
-            <p class="card-text"><i class="fas fa-info-circle"></i> <%= order.format.titlecase %> / <%= order.length %> segundos</p>
+            <br>
           <% end %>
-        </div>
-        <br>
-      <% end %>
-    <% end %>
+
+          <%# @categories.each do |category| %>
+            <%#= link_to [:admin, category], class: 'card text-decoration-none' do %>
+<!--              <div class="card-body">-->
+                <%#= category.name %>
+<!--              </div>-->
+            <%# end %>
+          <%# end %>
+        <% end %>
+      </div>
+    </div>
   </section>
 </main>

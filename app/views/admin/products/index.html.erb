@@ -17,12 +17,20 @@
     <h1 class="card-header h3">Productos</h1>
 
     <div class="card-body">
-      <% @products.each do |product| %>
-        <%= link_to [:admin, product], class: 'card text-decoration-none' do %>
-          <div class="card-body">
-            <div class="card-title"><%= product.category_id? ? product.category.name : 'Sin categoría' %> | <%= product.name %></div>
-            <div class="card-subtitle text-muted"><%= product.published ? 'Publicado' : 'No Publicado' %></div>
-          </div>
+      <% if @products.empty? %>
+        <div class="alert alert-primary mb-0">
+          No hay datos disponibles.
+          <hr>
+          Crea un producto.
+        </div>
+      <% else %>
+        <% @products.each do |product| %>
+          <%= link_to [:admin, product], class: 'card text-decoration-none' do %>
+            <div class="card-body">
+              <div class="card-title"><%= product.category_id? ? product.category.name : 'Sin categoría' %> | <%= product.name %></div>
+              <div class="card-subtitle text-muted"><%= product.published ? 'Publicado' : 'No Publicado' %></div>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
