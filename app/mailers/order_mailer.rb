@@ -7,6 +7,6 @@ class OrderMailer < ApplicationMailer
 
     @url = 'http://example.com'
 
-    mail to: @order.customer_email, subject: "Tu orden ##{@order.checkout_code} en Átomo Digital fue confirmada"
+    mail to: @order.customer_email, subject: "Tu orden en Átomo Digital fue confirmada"
   end
 end

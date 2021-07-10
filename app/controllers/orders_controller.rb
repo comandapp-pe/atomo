@@ -2,7 +2,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
 
-  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   # GET /orders or /orders.json
   def index
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    # params = {"SALEDATE"=>"2021-07-06 04:11:04", "REFNO"=>"156597478", "REFNOEXT"=>"", "ORDERNO"=>"77", "ORDERSTATUS"=>"PAYMENT_AUTHORIZED", "PAYMETHOD"=>"Visa/MasterCard", "FIRSTNAME"=>"John", "LASTNAME"=>"Doe", "COMPANY"=>"", "REGISTRATIONNUMBER"=>"", "FISCALCODE"=>"", "CBANKNAME"=>"", "CBANKACCOUNT"=>"", "ADDRESS1"=>"-", "ADDRESS2"=>"", "CITY"=>"-", "STATE"=>"-", "ZIPCODE"=>"-", "COUNTRY"=>"Peru", "PHONE"=>"", "FAX"=>"", "CUSTOMEREMAIL"=>"joaquin.meza@riqra.com", "FIRSTNAME_D"=>"John", "LASTNAME_D"=>"Doe", "COMPANY_D"=>"", "ADDRESS1_D"=>"-", "ADDRESS2_D"=>"", "CITY_D"=>"-", "STATE_D"=>"-", "ZIPCODE_D"=>"-", "COUNTRY_D"=>"Peru", "PHONE_D"=>"", "IPADDRESS"=>"179.6.215.254", "CURRENCY"=>"USD", "IPN_PID"=>["36497829"], "IPN_PNAME"=>["1.Conociéndonos"], "IPN_PCODE"=>["D0SgWGeXNE"], "IPN_INFO"=>[""], "IPN_QTY"=>["1"], "IPN_PRICE"=>["20.00"], "IPN_VAT"=>["0.00"], "IPN_VER"=>["1.0"], "IPN_DISCOUNT"=>["0.00"], "IPN_PROMONAME"=>[""], "IPN_DELIVEREDCODES"=>[""], "IPN_TOTAL"=>["20.00"], "IPN_TOTALGENERAL"=>"20.00", "IPN_SHIPPING"=>"0.00", "IPN_SHIPPING_TAX"=>"0.00", "IPN_COMMISSION"=>"1.80", "IPN_CUSTOM_36497829_TEXT"=>["Format", "Length"], "IPN_CUSTOM_36497829_VALUE"=>["vertical", "15"], "IPN_DATE"=>"20210706041120", "HASH"=>"6f288d7b6136ff2a178e39b85c98548b"}
+    params = {"SALEDATE"=>"2021-07-06 04:11:04", "REFNO"=>"156597478", "REFNOEXT"=>"", "ORDERNO"=>"77", "ORDERSTATUS"=>"PAYMENT_AUTHORIZED", "PAYMETHOD"=>"Visa/MasterCard", "FIRSTNAME"=>"John", "LASTNAME"=>"Doe", "COMPANY"=>"", "REGISTRATIONNUMBER"=>"", "FISCALCODE"=>"", "CBANKNAME"=>"", "CBANKACCOUNT"=>"", "ADDRESS1"=>"-", "ADDRESS2"=>"", "CITY"=>"-", "STATE"=>"-", "ZIPCODE"=>"-", "COUNTRY"=>"Peru", "PHONE"=>"", "FAX"=>"", "CUSTOMEREMAIL"=>"joaquin.meza@riqra.com", "FIRSTNAME_D"=>"John", "LASTNAME_D"=>"Doe", "COMPANY_D"=>"", "ADDRESS1_D"=>"-", "ADDRESS2_D"=>"", "CITY_D"=>"-", "STATE_D"=>"-", "ZIPCODE_D"=>"-", "COUNTRY_D"=>"Peru", "PHONE_D"=>"", "IPADDRESS"=>"179.6.215.254", "CURRENCY"=>"USD", "IPN_PID"=>["36497829"], "IPN_PNAME"=>["1.Conociéndonos"], "IPN_PCODE"=>["D0SgWGeXNE"], "IPN_INFO"=>[""], "IPN_QTY"=>["1"], "IPN_PRICE"=>["20.00"], "IPN_VAT"=>["0.00"], "IPN_VER"=>["1.0"], "IPN_DISCOUNT"=>["0.00"], "IPN_PROMONAME"=>[""], "IPN_DELIVEREDCODES"=>[""], "IPN_TOTAL"=>["20.00"], "IPN_TOTALGENERAL"=>"20.00", "IPN_SHIPPING"=>"0.00", "IPN_SHIPPING_TAX"=>"0.00", "IPN_COMMISSION"=>"1.80", "IPN_CUSTOM_36497829_TEXT"=>["Format", "Length"], "IPN_CUSTOM_36497829_VALUE"=>["vertical", "15"], "IPN_DATE"=>"20210706041120", "HASH"=>"6f288d7b6136ff2a178e39b85c98548b"}
 
     product = Product.find_by(checkout_code: params['IPN_PCODE'].first)
 
@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
 
     sold_at = params["SALEDATE"]
 
-    checkout_comission = params["IPN_COMISSION"]
+    checkout_commission = params["IPN_COMISSION"]
 
     total = params["IPN_TOTAL"][0]
 
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
       payment_method: payment_method,
       currency: currency,
       sold_at: sold_at,
-      checkout_comission: checkout_comission,
+      checkout_commission: checkout_commission,
       total: total
     )
 
