@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
 
     sold_at = params["SALEDATE"]
 
-    checkout_commission = params["IPN_COMISSION"]
+    checkout_commission = params["IPN_COMMISSION"]
 
     total = params["IPN_TOTAL"][0]
 
