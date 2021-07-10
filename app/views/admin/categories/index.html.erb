@@ -28,8 +28,8 @@
               <div class="col-12">
                 <%= link_to [:admin, category], class: 'card text-decoration-none' do %>
                   <div class="card-body">
-                    <%= category.name %>
-                    <div class="text-muted"><%= category.description %></div>
+                    <div class="card-title"><%= category.name %></div>
+                    <div class="card-subtitle text-muted"><%= category.description %></div>
                   </div>
                 <% end %>
               </div>
