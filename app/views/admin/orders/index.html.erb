@@ -27,7 +27,7 @@
 </div>
 
 <main>
-  <section class="container-fluid p-4">
+  <section class="container p-4">
     <% if notice %>
       <div id="notice" class="alert alert-success alert-dismissible fade show">
         <%= notice %>
@@ -55,43 +55,5 @@
         <br>
       <% end %>
     <% end %>
-
-<!--    <div class="table-responsive">-->
-<!--      <table class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Código de 2Checkout</th>-->
-<!--          <th>Cliente</th>-->
-<!--          <th>Producto</th>-->
-<!--          <th colspan="2"></th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-
-<!--        <tbody>-->
-        <%# if @orders.empty? %>
-<!--          <tr>-->
-<!--            <td colspan="7" class="text-center">No hay datos disponibles.</td>-->
-<!--          </tr>-->
-        <%# else %>
-          <%# @orders.each do |order| %>
-<!--            <div class="card">-->
-<!--              <div class="card-body">-->
-<!--                <p><%#= order.checkout_code %></p>-->
-<!--                <p><%#= order.customer_email %></p>-->
-<!--                <p><%#= order.product.name %></p>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <tr>-->
-<!--              <td><%#= order.checkout_code %></td>-->
-<!--              <td><%#= order.customer_email %></td>-->
-<!--              <td><%#= order.product.name %></td>-->
-<!--              <td><%#= link_to 'Ver detalle', [:admin, order], class: 'text-decoration-none' %></td>-->
-<!--              <td><%#= link_to 'Borrar', [:admin, order], method: :delete, data: { confirm: "¿Estás seguro de borrar esta orden?" }, class: 'text-decoration-none' %></td>-->
-<!--            </tr>-->
-          <%# end %>
-        <%# end %>
-<!--        </tbody>-->
-<!--      </table>-->
-    </div>
   </section>
 </main>
