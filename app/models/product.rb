@@ -1,17 +1,12 @@
-# typed: strict
 class Product < ApplicationRecord
-  # TODO: Validate the uniqueness of the Vimeo URL without creating a 2Checkout Product
-  # validate vimeo_url's presence
-  # validate vimeo_url's uniqueness
-  # validate vimeo_url's validity (whether it is an actual Vimeo URL)
-  # assign name, preview_html, description and thumbnails from Vimeo
-  # validate the presence of those aforementioned
-
   validates :name, presence: true, uniqueness: true, if: :persisted?
   validates :description, presence: true, if: :persisted?
   validates :published, inclusion: [true, false], if: :persisted?
+  validates :category_id, presence: { message: 'Para publicar un producto, debes asignarle una categoría.' }, if: :published?
 
   before_validation :sync, on: :create
+
+  belongs_to :category, optional: true
 
   def sync
     return errors.add(:vimeo_url, 'no puede estar en blanco') if vimeo_url.blank?

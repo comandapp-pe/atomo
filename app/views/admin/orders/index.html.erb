@@ -34,7 +34,7 @@
     <table class="table">
       <thead>
       <tr>
-        <th>ID de 2Checkout</th>
+        <th>Código de 2Checkout</th>
         <th>Cliente</th>
         <th>Producto</th>
         <th colspan="2"></th>
@@ -49,7 +49,7 @@
       <% else %>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= order.checkout_id %></td>
+            <td><%= order.checkout_code %></td>
             <td><%= order.customer_email %></td>
             <td><%= order.product.name %></td>
             <td><%= link_to 'Ver detalle', [:admin, order], class: 'text-decoration-none' %></td>

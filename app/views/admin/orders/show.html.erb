@@ -31,7 +31,7 @@
 
     <%= link_to '< Regresar', admin_orders_path, class: 'text-decoration-none' %>
 
-    <h1>Orden #<%= @order.checkout_id %></h1>
+    <h1>Orden #<%= @order.checkout_code %></h1>
 
     <p>A las <strong><%= @order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
 

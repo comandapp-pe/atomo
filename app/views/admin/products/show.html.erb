@@ -21,23 +21,23 @@
   </div>
 
   <section class="container-fluid p-4" style="max-height: 100vh; overflow: scroll;">
-    <% if notice %>
-      <div id="notice" class="alert alert-success alert-dismissible fade show">
-        <%= notice %> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
     <div class="mb-2">
       <%= link_to '< Regresar', admin_products_path, class: 'text-decoration-none' %>
     </div>
 
-    <h1><%= @product.name %></h1>
+    <% if notice %>
+      <div id="notice" class="alert alert-success alert-dismissible">
+        <%= notice %> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <h1><%= @product.name_in_database %></h1>
 
     <%= form_with model: @product, url: [:admin, @product], class: 'my-3' do |form| %>
       <% if @product.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@product.errors.count, "error") %> evitó guardar este producto:</h2>
-
+        <div class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@product.errors.count, "error") %> evitaron guardar este producto:</h2>
+          <hr>
           <ul>
             <% @product.errors.each do |error| %>
               <li><%= error.full_message %></li>

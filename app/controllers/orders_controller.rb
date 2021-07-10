@@ -28,11 +28,11 @@ class OrdersController < ApplicationController
 
     product = Product.find_by(checkout_code: params['IPN_PCODE'].first)
 
-    product_checkout_id = params['IPN_PID'].first
+    product_checkout_code = params['IPN_PID'].first
 
-    product_checkout_additional_fields_text = params["IPN_CUSTOM_#{product_checkout_id}_TEXT"]
+    product_checkout_additional_fields_text = params["IPN_CUSTOM_#{product_checkout_code}_TEXT"]
 
-    product_checkout_additional_fields_value = params["IPN_CUSTOM_#{product_checkout_id}_VALUE"]
+    product_checkout_additional_fields_value = params["IPN_CUSTOM_#{product_checkout_code}_VALUE"]
 
     product_checkout_additional_fields = product_checkout_additional_fields_text.zip(product_checkout_additional_fields_value).to_h
 
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
     customer_last_name = params["LASTNAME"]
 
-    checkout_id = params["ORDERNO"]
+    checkout_code = params["ORDERNO"]
 
     payment_method = params["PAYMETHOD"]
 
@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
     total = params["IPN_TOTAL"][0]
 
     @order = Order.new(
-      checkout_id: checkout_id,
+      checkout_code: checkout_code,
       customer_email: customer_email,
       customer_first_name: customer_first_name,
       customer_last_name: customer_last_name,
