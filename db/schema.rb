@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_09_214607) do
+ActiveRecord::Schema.define(version: 2021_07_10_002640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,11 +54,12 @@ ActiveRecord::Schema.define(version: 2021_07_09_214607) do
     t.string "customer_email"
     t.string "customer_first_name"
     t.string "customer_last_name"
-    t.integer "checkout_id"
+    t.integer "checkout_code"
     t.string "payment_method"
     t.string "currency"
     t.datetime "sold_at"
     t.decimal "total"
+    t.decimal "checkout_comission"
     t.index ["product_id"], name: "index_orders_on_product_id"
   end
 

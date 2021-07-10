@@ -49,6 +49,7 @@
     <p><strong>Formato:</strong> <%= @order.format.titlecase %></p>
     <p><strong>Longitud:</strong> <%= @order.length %> segundos</p>
     <p><strong>Método de pago:</strong> <%= @order.payment_method %></p>
+    <p><strong>Comisión de 2Checkout:</strong> <%= number_to_currency @order.checkout_comission %></p>
     <p><strong>Total:</strong> <%= number_to_currency @order.total %></p>
   </section>
 </main>

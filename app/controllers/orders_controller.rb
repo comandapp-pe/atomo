@@ -46,13 +46,15 @@ class OrdersController < ApplicationController
 
     customer_last_name = params["LASTNAME"]
 
-    checkout_code = params["ORDERNO"]
+    checkout_code = params["REFNO"]
 
     payment_method = params["PAYMETHOD"]
 
     currency = params["CURRENCY"]
 
     sold_at = params["SALEDATE"]
+
+    checkout_comission = params["IPN_COMISSION"]
 
     total = params["IPN_TOTAL"][0]
 
@@ -67,6 +69,7 @@ class OrdersController < ApplicationController
       payment_method: payment_method,
       currency: currency,
       sold_at: sold_at,
+      checkout_comission: checkout_comission,
       total: total
     )
 
