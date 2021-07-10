@@ -15,9 +15,9 @@
       <% end %>
 
       <ul class="nav">
-        <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-info' : 'link-secondary'}" %></li>
-        <li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-info' : 'link-secondary'}" %></li>
-        <li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-info' : 'link-secondary'}" %></li>
+        <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-primary' : 'link-secondary'}" %></li>
+        <li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-primary' : 'link-secondary'}" %></li>
+        <li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-primary' : 'link-secondary'}" %></li>
       </ul>
 
       <%= link_to 'Cerrar sesión', admin_session_path, method: :delete, class: 'link-danger text-decoration-none' %>
@@ -60,9 +60,9 @@
   </div>
   <div class="offcanvas-body border-top">
     <ul class="nav flex-column pb-3 mb-3 border-bottom">
-      <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-info' : 'link-secondary'}" %></li>
-      <li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-info' : 'link-secondary'}" %></li>
-      <li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-info' : 'link-secondary'}" %></li>
+      <li class="nav-item"><%= link_to 'Órdenes', admin_orders_path, class: "nav-link #{params[:controller] == 'admin/orders' ? 'link-primary' : 'link-secondary'}" %></li>
+      <li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-primary' : 'link-secondary'}" %></li>
+      <li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-primary' : 'link-secondary'}" %></li>
     </ul>
     <ul class="nav flex-column pb-3 mb-3">
       <li><%= link_to 'Cerrar sesión', admin_session_path, method: :delete, class: 'nav-link link-danger' %></li>

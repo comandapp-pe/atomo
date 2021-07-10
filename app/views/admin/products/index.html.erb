@@ -24,27 +24,51 @@
           Crea un producto.
         </div>
       <% else %>
-        <div class="row gy-3">
+        <div class="row g-2" data-masonry='{"percentPosition": true}'>
           <% @products.each do |product| %>
-            <div class="col-12">
-              <%= link_to [:admin, product], class: 'card text-decoration-none col-12' do %>
-                <div class="card-body">
-                  <div class="card-title"><%= product.name %></div>
+            <%= link_to [:admin, product], class: 'col-12 col-sm-6 col-md-4 col-lg-3 text-decoration-none wrap' do %>
+              <div class="card" role="button">
+                <img class="img-fluid" src="https://vumbnail.com/<%= product.vimeo_url.split('/').last %>.jpg">
+                <div class="card-body text-center">
+                  <h5 class="card-title"><%= product.name %></h5>
                   <div class="card-subtitle text-muted">
                     <% if product.category_id? %>
                       <span><%= product.category.name %></span>
                     <% else %>
-                      <span class="text-danger">Sin categoría</span>
+                      <span>Sin categoría</span>
                     <% end %>
-                    <span class="text-dark">|</span>
+                  </div>
+                  <div class="card-text text-muted">
                     <%= product.published ? 'Publicado' : 'No publicado' %>
                   </div>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
 </main>
+
+<script>
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 100);
+
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 300);
+
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 1000);
+
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 5000);
+</script>

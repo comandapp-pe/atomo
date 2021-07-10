@@ -2,11 +2,10 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true, if: :persisted?
   validates :description, presence: true, if: :persisted?
   validates :published, inclusion: [true, false], if: :persisted?
-  validates :category_id, presence: { message: 'Para publicar un producto, debes asignarle una categoría.' }, if: :published?
-
-  before_validation :sync, on: :create
 
   belongs_to :category, optional: true
+
+  before_validation :sync, on: :create
 
   def sync
     return errors.add(:vimeo_url, 'no puede estar en blanco') if vimeo_url.blank?
