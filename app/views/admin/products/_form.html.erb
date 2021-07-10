@@ -14,6 +14,9 @@
   <div class="mb-2">
     <%= form.label :vimeo_url, 'URL de Vimeo', class: 'form-label' %>
     <%= form.text_field :vimeo_url, class: 'form-control' %>
+    <div class="form-text">
+      Las URL de Vimeo tienen una estructura como <span class="fw-bolder">https://vimeo.com/video/XXXXXXXXX</span>.
+    </div>
   </div>
 
   <%= form.submit class: 'btn btn-primary mt-3' %>
