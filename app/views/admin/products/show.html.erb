@@ -12,9 +12,7 @@
   <% end %>
 
   <div class="card">
-    <div class="card-header">
-      <h1><%= @product.name_in_database %></h1>
-    </div>
+    <h1 class="card-header h3"><%= @product.name_in_database %></h1>
     <div class="card-body">
       <%= form_with model: @product, url: [:admin, @product] do |form| %>
         <% if @product.errors.any? %>
@@ -62,14 +60,15 @@
         <%= form.submit class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
+    <div class="card-footer">
+      <%= link_to 'Borrar producto', [:admin, @product], method: :delete, data: { confirm: '¿Estás seguro de borrar este producto?' }, class: 'text-decoration-none link-danger' %>
+    </div>
   </div>
 
   <br>
 
   <div class="card">
-    <div class="card-header">
-      <h2>Prevista</h2>
-    </div>
+    <h2 class="card-header h3">Prevista</h2>
     <div class="card-body">
       <div class="ratio ratio-16x9">
         <%= @product.preview_html.html_safe %>
