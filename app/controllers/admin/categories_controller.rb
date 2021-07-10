@@ -25,7 +25,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to [:admin, @category], notice: "Creaste una categoría exitosamente" }
+        format.html { redirect_to [:admin, @category], notice: "Creaste una categoría exitosamente." }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
