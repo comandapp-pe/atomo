@@ -1,7 +1,8 @@
 <div class="container">
   <%= render 'application/header' %>
   <main>
-    <h1>Plantillas</h1>
+    <h1 class="text-center mb-2">Todas las plantillas</h1>
+    <p class="text-center text-muted mb-4">Hazles click para una vista previa</p>
 
     <div class="container">
       <div class="grid row g-2" data-masonry='{"percentPosition": true}'>
@@ -15,9 +16,7 @@
             >
               <img class="img-fluid" src="https://vumbnail.com/<%= product.vimeo_url.split('/').last %>.jpg">
               <div class="card-body">
-                <h5
-                  class="card-title text-center"
-                ><%= product.name %></h5>
+                <h5 class="card-title text-center mb-0"><%= product.name %></h5>
               </div>
             </div>
 
@@ -60,23 +59,23 @@
 </div>
 
 <script>
-  setTimeout(function () {
-      var msnry = new Masonry('.grid');
-      msnry.layout();
-  }, 100);
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 100);
 
-  setTimeout(function () {
-      var msnry = new Masonry('.grid');
-      msnry.layout();
-  }, 300);
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 300);
 
-  setTimeout(function () {
-      var msnry = new Masonry('.grid');
-      msnry.layout();
-  }, 1000);
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 1000);
 
-  setTimeout(function () {
-      var msnry = new Masonry('.grid');
-      msnry.layout();
-  }, 5000);
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 5000);
 </script>
