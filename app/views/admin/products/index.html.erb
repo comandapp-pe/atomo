@@ -38,9 +38,12 @@
                       <span>Sin categoría</span>
                     <% end %>
                   </div>
-                  <div class="card-text text-muted">
-                    <%= product.published ? 'Publicado' : 'No publicado' %>
-                  </div>
+
+                  <% if product.published %>
+                    <div class="card-text text-success">Publicado</div>
+                  <% else %>
+                    <div class="card-text text-danger">No publicado</div>
+                  <% end %>
                 </div>
               </div>
             <% end %>
