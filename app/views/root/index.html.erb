@@ -1,14 +1,24 @@
 <div class="min-vh-100 d-flex flex-column">
   <%= render 'application/header' %>
 
-  <main class="container p-4 flex-grow-1 text-center">
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-2">Somos una casa realizadora que desarrolla estrategias multimedia de producción, realización y post producción de videos institucionales, corporativos, contenidos de capacitación, making off, animaciones entre otros contenidos de entretenimiento.</p>
-      <div class="ratio ratio-16x9 my-4">
-        <iframe src="https://player.vimeo.com/video/518420404" allowfullscreen></iframe>
+  <main class="container d-flex flex-grow-1 p-4 ">
+    <div class="flex-grow-1 row g-md-5 align-items-center text-center">
+      <div class="col-lg-6 mx-auto">
+        <h1 class="display-4 fw-bold lh-1">La mejor forma de hacerte presente en las redes sociales.</h1>
+        <p class="fs-4">
+          Somos una casa realizadora que desarrolla estrategias multimedia de producción,
+          realización y post producción de videos institucionales, corporativos, contenidos
+          de capacitación, making off, animaciones entre otros contenidos de entretenimiento.
+        </p>
+        <div class="mt-4">
+          <%= link_to 'Ver plantillas', products_path, class: 'btn btn-outline-primary btn-lg px-4' %>
+        </div>
       </div>
-      <div>
-        <%= link_to 'Continuar', products_path, class: 'btn btn-primary btn-lg px-4' %>
+
+      <div class="col-lg-6">
+        <div class="ratio ratio-16x9 my-4">
+          <iframe src="https://player.vimeo.com/video/518420404" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </main>
