@@ -70,7 +70,12 @@
   <div class="card">
     <h2 class="card-header h3">Prevista</h2>
     <div class="card-body">
-      <div class="ratio ratio-16x9">
+      <% video = Nokogiri::HTML @product.preview_html.html_safe %>
+      <% width = video.at('iframe')['width'] %>
+      <% height = video.at('iframe')['height'] %>
+      <% ratio = width == height ? '1x1' : '16x9' %>
+
+      <div class="ratio ratio-<%= ratio %>">
         <%= @product.preview_html.html_safe %>
       </div>
     </div>
