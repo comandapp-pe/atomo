@@ -4,7 +4,17 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.where(published: true)
+    query = { published: true }
+
+    if params[:category_id]
+      return redirect_to root_path unless Category.exists?(params[:category_id])
+
+      @category = Category.find(params[:category_id])
+
+      query = query.merge({ category: @category })
+    end
+
+    @products = Product.where(query)
   end
 
   # GET /product/1 or /product/1.json
@@ -58,13 +68,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:external_reference, :preview_url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:external_reference, :preview_url)
+  end
 end

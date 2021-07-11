@@ -1,10 +1,26 @@
-<div class="container">
+<div class="min-vh-100 d-flex flex-column">
   <%= render 'application/header' %>
-  <main>
-    <h1 class="text-center mb-2">Todas las plantillas</h1>
-    <p class="text-center text-muted mb-4">Hazles click para una vista previa</p>
 
-    <div class="container">
+  <main class="container p-4 flex-grow-1">
+    <% if @category %>
+      <h1 class="text-center mb-2"><%= @category.name %></h1>
+    <% else %>
+      <h1 class="text-center mb-2">Todas las plantillas</h1>
+    <% end %>
+
+    <nav class="nav d-flex justify-content-center py-2 mb-2">
+      <%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2' %>
+
+      <% Category.all.each do |category| %>
+        <%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2' %>
+      <% end %>
+    </nav>
+
+    <% if @products.empty? %>
+      <div class="alert alert-primary mb-0">
+        No hay plantillas disponibles.
+      </div>
+    <% else %>
       <div class="grid row g-2" data-masonry='{"percentPosition": true}'>
         <% @products.each do |product| %>
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -58,8 +74,9 @@
           </div>
         <% end %>
       </div>
-    </div>
+    <% end %>
   </main>
+
   <%= render 'application/footer' %>
 </div>
 
@@ -78,6 +95,11 @@
         var msnry = new Masonry('.grid');
         msnry.layout();
     }, 1000);
+
+    setTimeout(function () {
+        var msnry = new Masonry('.grid');
+        msnry.layout();
+    }, 2500);
 
     setTimeout(function () {
         var msnry = new Masonry('.grid');
