@@ -1,6 +1,6 @@
 <%= render 'admin/header' %>
 
-<main class="container p-4">
+<main class="container px-4">
   <% if notice %>
     <p id="notice"><%= notice %></p>
   <% end %>
@@ -11,3 +11,5 @@
 
   <%= render 'form', product: @product %>
 </main>
+
+<%= render 'admin/footer' %>

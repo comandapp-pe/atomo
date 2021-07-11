@@ -1,9 +1,10 @@
 <%= render 'admin/header' %>
 
-<main class="container p-4">
+<main class="container px-4">
   <% if notice %>
     <div id="notice" class="alert alert-success alert-dismissible fade show">
-      <%= notice %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% end %>
 
@@ -21,14 +22,18 @@
           <% @orders.each do |order| %>
             <div class="col-12">
               <div class="card">
-              <%= link_to [:admin, order], class: 'card-body text-decoration-none' do %>
-                <div class="card-title d-flex align-items-center">
-                  #<%= order.checkout_code %> <span class="d-inline-block mx-2 badge rounded-pill bg-primary">Confirmada</span>
-                </div>
-                <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %></div>
-                <div class="card-text text-muted"><i class="fas fa-calendar"></i> <%= order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %></div>
-              <% end %>
-            </div>
+                <%= link_to [:admin, order], class: 'card-body text-decoration-none' do %>
+                  <div class="card-title d-flex align-items-center">
+                    #<%= order.checkout_code %>
+                    <span class="d-inline-block mx-2 badge rounded-pill bg-primary">Confirmada</span>
+                  </div>
+                  <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %>
+                  </div>
+                  <div class="card-text text-muted">
+                    <i class="fas fa-calendar"></i> <%= order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>
@@ -36,3 +41,5 @@
     </div>
   </div>
 </main>
+
+<%= render 'admin/footer' %>

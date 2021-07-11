@@ -1,86 +1,89 @@
 <div class="container min-vh-100 d-md-flex flex-md-column">
   <%= render 'application/header' %>
 
-  <div class="row row-cols-1 row-cols-md-3 flex-md-grow-1">
-    <div class="col">
+  <div class="flex-md-grow-1 p-4">
+    <h1>Customizando <%= @product.name %></h1>
 
-      <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
-        <div class="card-header py-3">
-          <h2 class="my-0 fw-normal text-center">15 segundos</h2>
-        </div>
-        <%= form.hidden_field :product_id, value: params[:product_id] %>
-        <%= form.hidden_field :length, value: 15 %>
-        <div class="card-body">
-          <h3 class="card-title text-center my-4">USD $20</h3>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="15s-horizontal" required>
-            <label class="form-check-label" for="15s-horizontal">Horizontal</label>
+    <div class="row row-cols-1 row-cols-md-3 flex-md-grow-1 mt-3">
+      <div class="col">
+        <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
+          <div class="card-header py-3">
+            <h2 class="my-0 fw-normal text-center">15 segundos</h2>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="15s-vertical" required>
-            <label class="form-check-label" for="15s-vertical">Vertical</label>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: 15 %>
+          <div class="card-body">
+            <h3 class="card-title text-center my-4">USD $20</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="15s-horizontal" required>
+              <label class="form-check-label" for="15s-horizontal">Horizontal</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="15s-vertical" required>
+              <label class="form-check-label" for="15s-vertical">Vertical</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="15s-square" required>
+              <label class="form-check-label" for="15s-square">Cuadrado</label>
+            </div>
+            <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="15s-square" required>
-            <label class="form-check-label" for="15s-square">Cuadrado</label>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
+          <div class="card-header py-3">
+            <h2 class="my-0 fw-normal text-center">30 segundos</h2>
           </div>
-          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
-        </div>
-      <% end %>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: 30 %>
+          <div class="card-body">
+            <h3 class="card-title text-center my-4">USD $30</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="30s-horizontal" required>
+              <label class="form-check-label" for="30s-horizontal">Horizontal</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="30s-vertical" required>
+              <label class="form-check-label" for="30s-vertical">Vertical</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="30s-square" required>
+              <label class="form-check-label" for="30s-square">Cuadrado</label>
+            </div>
+            <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
+          <div class="card-header py-3">
+            <h2 class="my-0 fw-normal text-center">60 segundos</h2>
+          </div>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: 60 %>
+          <div class="card-body">
+            <h3 class="card-title text-center my-4">USD $40</h3>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="60s-horizontal" required>
+              <label class="form-check-label" for="60s-horizontal">Horizontal</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="60s-vertical" required>
+              <label class="form-check-label" for="60s-vertical">Vertical</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="60s-square" required>
+              <label class="form-check-label" for="60s-square">Cuadrado</label>
+            </div>
+            <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
+          </div>
+        <% end %>
+      </div>
+
     </div>
-
-    <div class="col">
-      <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
-        <div class="card-header py-3">
-          <h2 class="my-0 fw-normal text-center">30 segundos</h2>
-        </div>
-        <%= form.hidden_field :product_id, value: params[:product_id] %>
-        <%= form.hidden_field :length, value: 30 %>
-        <div class="card-body">
-          <h3 class="card-title text-center my-4">USD $30</h3>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="30s-horizontal" required>
-            <label class="form-check-label" for="30s-horizontal">Horizontal</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="30s-vertical" required>
-            <label class="form-check-label" for="30s-vertical">Vertical</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="30s-square" required>
-            <label class="form-check-label" for="30s-square">Cuadrado</label>
-          </div>
-          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="col">
-      <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
-        <div class="card-header py-3">
-          <h2 class="my-0 fw-normal text-center">60 segundos</h2>
-        </div>
-        <%= form.hidden_field :product_id, value: params[:product_id] %>
-        <%= form.hidden_field :length, value: 60 %>
-        <div class="card-body">
-          <h3 class="card-title text-center my-4">USD $40</h3>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="horizontal" id="60s-horizontal" required>
-            <label class="form-check-label" for="60s-horizontal">Horizontal</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="vertical" id="60s-vertical" required>
-            <label class="form-check-label" for="60s-vertical">Vertical</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="checkout_link[format]" value="square" id="60s-square" required>
-            <label class="form-check-label" for="60s-square">Cuadrado</label>
-          </div>
-          <%= form.submit 'Comprar', class: 'mt-3 btn btn-lg btn-outline-primary w-100' %>
-        </div>
-      <% end %>
-    </div>
-
   </div>
 
   <%= render 'application/footer' %>
