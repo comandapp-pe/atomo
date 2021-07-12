@@ -56,34 +56,12 @@
 
 <%= render 'admin/footer' %>
 
+
 <script>
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 100);
+    const grid = $('.grid').masonry()
 
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 300);
-
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 1000);
-
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 1500);
-
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 2000);
-
-    setTimeout(function () {
-        var msnry = new Masonry('.grid');
-        msnry.layout();
-    }, 2500);
+    grid.imagesLoaded().progress(() => {
+        grid.masonry('layout')
+    })
 </script>
+
