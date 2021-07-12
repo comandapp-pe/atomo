@@ -51,3 +51,5 @@ gem 'jquery-rails', '~> 4.4'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'faraday'
+
+gem "uglifier", "~> 4.2"
