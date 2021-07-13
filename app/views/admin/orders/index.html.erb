@@ -30,7 +30,7 @@
                   <div class="card-subtitle text-muted"><i class="fas fa-user-alt"></i> <%= order.customer_email %>
                   </div>
                   <div class="card-text text-muted">
-                    <i class="fas fa-calendar"></i> <%= order.sold_at.change(zone: 'America/Lima').strftime('%Y/%m/%d - %H:%M') %>
+                    <i class="fas fa-calendar"></i> Hace <%= distance_of_time_in_words(Time.now, order.sold_at.change(zone: 'America/Lima')) %>
                   </div>
                 <% end %>
               </div>
