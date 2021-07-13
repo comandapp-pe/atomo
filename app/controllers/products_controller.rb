@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       query = query.merge({ category: @category })
     end
 
-    @products = Product.where(query)
+    @products = Product.where(query).order(id: :desc)
   end
 
   # GET /product/1 or /product/1.json
