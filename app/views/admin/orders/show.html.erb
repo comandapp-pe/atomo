@@ -17,7 +17,7 @@
     <h2 class="card-header h5">Cliente</h2>
     <div class="card-body">
       <p class="card-text"><strong>Nombres y Apellidos:</strong> <%= @order.customer_first_name %> <%= @order.customer_last_name %></p>
-      <p class="card-text"><strong>Correo:</strong> <%= @order.customer_email %></p>
+      <p class="card-text"><strong>Correo:</strong> <%= mail_to @order.customer_email %></p>
     </div>
   </div>
 

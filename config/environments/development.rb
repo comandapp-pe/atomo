@@ -80,6 +80,10 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  config.i18n.available_locales = [:es, :en]
+  config.i18n.default_locale = :es
+  config.i18n.fallbacks = [:en]
+
   config.after_initialize do
     ActiveRecord::Base.logger.level = 1 # Doesn't log database queries
   end
