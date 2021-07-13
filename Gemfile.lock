@@ -69,7 +69,6 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     erubi (1.10.0)
-    execjs (2.8.1)
     faraday (1.5.1)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -186,8 +185,6 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (2.0.0)
     web-console (4.1.0)
       actionview (>= 6.0.0)
@@ -218,7 +215,6 @@ DEPENDENCIES
   spring
   sprockets-rails
   tzinfo-data
-  uglifier (~> 4.2)
   web-console (>= 4.1.0)
 
 RUBY VERSION
