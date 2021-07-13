@@ -31,7 +31,7 @@
                     <i class="far fa-user"></i> <%= order.customer_email %>
                   </div>
                   <div class="card-text text-muted">
-                    <i class="far fa-calendar-alt"></i> Hace <%= distance_of_time_in_words(Time.now, order.sold_at.change(zone: 'America/Lima')) %>
+                    <i class="far fa-calendar-alt"></i> Hace <%= distance_of_time_in_words(Time.now, order.created_at.in_time_zone('America/Lima')) %>
                   </div>
                 <% end %>
               </div>
