@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 2021_07_10_003425) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "preview_html"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "preview_html"
     t.string "checkout_code", null: false
     t.string "thumbnail_url_with_play_button"
-    t.string "vimeo_url", null: false
+    t.string "vimeo_url"
     t.boolean "published"
     t.string "thumbnail_url"
     t.bigint "category_id"
