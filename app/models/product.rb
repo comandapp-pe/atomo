@@ -90,15 +90,15 @@ class Product < ApplicationRecord
                               ],
                               "AdditionalFields": [
                                 {
-                                  "Code": "Format",
+                                  "Code": "format",
                                   "Enabled": true,
-                                  "Label": "Format",
+                                  "Label": "format",
                                   "Required": true,
                                 },
                                 {
-                                  "Code": "Length",
+                                  "Code": "length",
                                   "Enabled": true,
-                                  "Label": "Length",
+                                  "Label": "length",
                                   "Required": true,
                                 }
                               ],
