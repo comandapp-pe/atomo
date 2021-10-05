@@ -1,7 +1,4 @@
-# typed: false
-
 class CheckoutLink < ApplicationRecord
-
   belongs_to :product
 
   validates :format, presence: true
