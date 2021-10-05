@@ -1,12 +1,12 @@
-<div class="container min-vh-100 d-md-flex flex-md-column">
+<div class="min-vh-100 d-flex flex-column">
   <%= render 'application/header' %>
 
-  <div class="flex-md-grow-1 p-4">
+  <main class="container d-flex flex-column flex-md-grow-1 p-4">
     <h1>Customizando <%= @product.name %></h1>
 
     <div class="row row-cols-1 row-cols-md-3 flex-md-grow-1 mt-3">
-      <div class="col">
-        <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm' do |form| %>
+      <div class="col flex-grow">
+        <%= form_with model: CheckoutLink.new, method: :post, class: 'card mb-4 rounded-3 shadow-sm h-100' do |form| %>
           <div class="card-header py-3">
             <h2 class="my-0 fw-normal text-center">15 segundos</h2>
           </div>
@@ -82,9 +82,8 @@
           </div>
         <% end %>
       </div>
-
     </div>
-  </div>
+  </main>
 
   <%= render 'application/footer' %>
 </div>
