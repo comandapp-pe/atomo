@@ -1,5 +1,13 @@
-<footer class="py-4 border-top">
-  <div class="col-lg-6 mx-auto text-center">
-    <%= link_to 'Panel de administrador', admin_root_path, class: 'link-secondary text-decoration-none' %>
-  </div>
+<footer class="d-flex justify-content-center py-4 border-top text-center">
+  <ul class="list-unstyled ps-4">
+    <li><%= link_to 'Guía del usuario', image_path('user-guide.pdf'), class: 'link-secondary text-decoration-none' %></li>
+    <li><%= link_to 'FAQ', image_path('faq.pdf'), class: 'link-secondary text-decoration-none' %></li>
+  </ul>
+  <ul class="list-unstyled ps-4">
+    <li><%= link_to 'Política de privacidad', image_path('privacy-policy.pdf'), class: 'link-secondary text-decoration-none' %></li>
+    <li><%= link_to 'Términos de servicio', image_path('terms-of-service.pdf'), class: 'link-secondary text-decoration-none' %></li>
+  </ul>
+  <ul class="list-unstyled ps-4">
+    <li><%= link_to 'Administrador', admin_root_path, class: 'link-secondary text-decoration-none' %></li>
+  </ul>
 </footer>
