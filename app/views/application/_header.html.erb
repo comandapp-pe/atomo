@@ -17,7 +17,7 @@
 
       <ul class="nav">
         <li class="nav-item"><%= link_to 'Nosotros', root_path, class: "nav-link #{params[:controller] == 'root' ? 'link-primary' : 'link-secondary'}" %></li>
-        <li class="nav-item"><%= link_to 'Plantillas', products_path, class: "nav-link #{params[:controller] == 'products' ? 'link-primary' : 'link-secondary'}" %></li>
+        <li class="nav-item"><%= link_to 'Plantillas', products_path, class: "nav-link #{['products', 'orders'].include?(params[:controller]) ? 'link-primary' : 'link-secondary'}" %></li>
       </ul>
 
       <span class="d-flex">

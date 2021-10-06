@@ -9,6 +9,8 @@
     </div>
   <% end %>
 
+  <%= link_to '< Regresar', admin_orders_path, class: 'text-decoration-none' %>
+
   <h1>Orden #<%= @order.checkout_code %></h1>
 
   <p>A las <strong><%= @order.created_at.in_time_zone('America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
