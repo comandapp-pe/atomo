@@ -70,14 +70,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.gmail.com',
-    :domain         => 'mail.google.com',
-    :port           => 587,
-    :user_name      => 'joaquin.meza.prueba@gmail.com',
-    :password       => 'foobarbaz123',
-    :authentication => :plain,
-    :enable_starttls_auto => true
+  config.action_mailer.smtp_settings = {
+    address: 'box.comandapp.xyz',
+    domain: 'comandapp.pe',
+    port: 587,
+    user_name: 'noresponder@comandapp.pe',
+    password: 'patchypatches',
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
 
   config.i18n.available_locales = [:es, :en]
