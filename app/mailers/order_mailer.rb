@@ -5,8 +5,6 @@ class OrderMailer < ApplicationMailer
   def confirmation_email
     @order = params[:order]
 
-    @url = 'http://example.com'
-
-    mail to: @order.customer_email, subject: "Tu orden en Átomo Digital fue confirmada"
+    mail to: @order.customer_email, subject: "Tu orden en Social Spots fue confirmada"
   end
 end
