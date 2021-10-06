@@ -1,6 +1,6 @@
 # typed: true
 class OrderMailer < ApplicationMailer
-  default from: 'joaquin.meza.prueba@gmail.com'
+  default from: 'noresponder@comandapp.pe'
 
   def confirmation_email
     @order = params[:order]
