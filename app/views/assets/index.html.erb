@@ -14,13 +14,9 @@
 <% end %>
 
 <% @assets.each do |asset| %>
-  <% if asset.representable? %>
-    <video controls preload="auto">
-      <source src=<%= rails_blob_path asset %> type="video/mp4">
-    </video>
-  <% else %>
-    <p><%= asset.to_json %> Not representable.</p>
-  <% end %>
+  <video controls preload="auto">
+    <source src=<%= rails_blob_path asset %> type="video/mp4">
+  </video>
 <% end %>
 
 <%#= link_to 'New Asset', new_asset_path %>
