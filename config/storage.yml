@@ -8,11 +8,11 @@ local:
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
  amazon:
-   service: S3
-   access_key_id: AKIATKKAWJ6UZHJLOOET
-   secret_access_key: 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
-   region: sa-east-1
-   bucket: socialspots
+   service: 'S3'
+   access_key_id: 'AKIATKKAWJ6UZHJLOOET'
+   secret_access_key: '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'
+   region: 'sa-east-1'
+   bucket: 'socialspots'
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
