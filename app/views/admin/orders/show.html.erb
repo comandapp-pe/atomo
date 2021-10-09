@@ -120,7 +120,6 @@
             <script>
                 document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
                         const video = document.getElementById('playback-<%= asset.id %>')
-
                         setTimeout(() => video.pause(), 250)
                     }
                 )
