@@ -66,33 +66,34 @@
 
   <br>
 
-  <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
-    <% if @order.errors.any? %>
-      <div class="alert alert-danger" role="alert">
-        <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
-        <hr>
-        <ul>
-          <% @order.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="form-group">
-      <%= form.label :assets %>
-      <%= form.file_field :assets, class: 'form-control-file', required: true, accept: 'video/mp4' %>
-    </div>
-
-    <div>
-      <%= form.submit class: 'btn btn-primary mt-3' %>
-    </div>
-  <% end %>
-
-  <br>
-
   <div class="card">
     <h2 class="card-header h5">Assets</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
+          <% if @order.errors.any? %>
+            <div class="alert alert-danger" role="alert">
+              <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+              <hr>
+              <ul>
+                <% @order.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= form.label :assets %>
+            <%= form.file_field :assets, class: 'form-control-file', required: true, accept: 'video/mp4' %>
+          </div>
+
+          <div>
+            <%= form.submit 'Añadir', class: 'btn btn-primary mt-3' %>
+          </div>
+        <% end %>
+      </li>
+    </ul>
     <div class="card-body">
       <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
         <% @order.assets.filter(&:persisted?).each do |asset| %>

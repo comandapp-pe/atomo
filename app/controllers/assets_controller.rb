@@ -29,6 +29,8 @@ class AssetsController < ApplicationController
       content_type: @file.content_type
     )
 
+    @blob.analyze
+
     @order.assets.attach(@blob)
 
     respond_to do |format|

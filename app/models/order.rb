@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   validate :assets_mime_types
   validate :assets_file_sizes
   validate :assets_dimensions
+  validate :assets_lengths
 
   private
 
@@ -26,12 +27,12 @@ class Order < ApplicationRecord
   def assets_file_sizes
     return unless assets.attached?
 
-    valid, invalid = assets.partition { |asset| asset.blob.byte_size <= 50.megabytes }
+    valid, invalid = assets.partition { |asset| asset.blob.byte_size.between?(10.megabytes, 50.megabytes) }
 
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:assets, "#{asset.filename} no puede superar los 50 MB")
+      errors.add(:assets, "#{asset.filename} debe pesar entre 10 MB a 50 MB")
     end
   end
 
@@ -44,6 +45,18 @@ class Order < ApplicationRecord
 
     invalid.each do |asset|
       errors.add(:assets, "#{asset.filename} debe tener dimensiones de 1920x1080")
+    end
+  end
+
+  def assets_lengths
+    return unless assets.attached?
+
+    valid, invalid = assets.partition { |asset| asset.metadata["duration"] <= 10.seconds }
+
+    return if invalid.empty?
+
+    invalid.each do |asset|
+      errors.add(:assets, "#{asset.filename} debe durar 10 segundos como máximo")
     end
   end
 end
