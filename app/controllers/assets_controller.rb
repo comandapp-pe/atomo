@@ -31,10 +31,6 @@ class AssetsController < ApplicationController
 
     @order.assets.attach(@blob)
 
-    puts(@file, 'file')
-
-    puts(@blob, 'blob')
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
