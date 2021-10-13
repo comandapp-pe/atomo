@@ -66,7 +66,19 @@
 
   <br>
 
-  <%= form_with url: "/orders/#{@order.id}/assets", method: :post do |form| %>
+  <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
+    <% if @order.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+        <hr>
+        <ul>
+          <% @order.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <%= form.label :assets %>
       <%= form.file_field :assets, class: 'form-control-file' %>
@@ -83,7 +95,7 @@
     <h2 class="card-header h5">Assets</h2>
     <div class="card-body">
       <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
-        <% @order.assets.each do |asset| %>
+        <% @order.assets.filter(&:persisted?).each do |asset| %>
           <div
             class="col-12 col-sm-6 col-md-4 col-lg-3"
           >
@@ -106,10 +118,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                    <div class="mb-3">
+                      <%= link_to 'Borrar asset', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este asset?' }, class: 'text-decoration-none link-danger' %>
+                    </div>
                     <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
                       <source src=<%= rails_blob_path asset %> type="video/mp4">
                     </video>
-
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>

@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  before_action :set_order
+  before_action :set_order, only: [:index, :new, :create]
 
   # GET /assets or /assets.json
   def index
@@ -21,16 +21,26 @@ class AssetsController < ApplicationController
 
   # POST /assets or /assets.json
   def create
-    @asset = params[:assets]
+    @file = params[:assets]
 
-    @order.assets.attach(@asset)
+    @blob = ActiveStorage::Blob.create_and_upload!(
+      io: @file,
+      filename: @file.original_filename,
+      content_type: @file.content_type
+    )
+
+    @order.assets.attach(@blob)
+
+    puts(@file, 'file')
+
+    puts(@blob, 'blob')
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: "Asset was successfully created." }
+        format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @asset.errors, status: :unprocessable_entity }
       end
     end
@@ -51,9 +61,14 @@ class AssetsController < ApplicationController
 
   # DELETE /assets/1 or /assets/1.json
   def destroy
-    @asset.destroy
+    @asset = ActiveStorage::Attachment.find(params[:id])
+
+    @order = Order.find(@asset.record_id)
+
+    @asset.purge
+
     respond_to do |format|
-      format.html { redirect_to assets_url, notice: "Asset was successfully destroyed." }
+      format.html { redirect_to [:admin, @order], notice: "Asset was successfully destroyed." }
       format.json { head :no_content }
     end
   end

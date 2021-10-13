@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :orders do
-    resources :assets
+    resources :assets, shallow: true, path: 'attachments', as: 'attachments'
   end
+
   resources :checkout_links, only: [:create]
 
   get '/admin', to: redirect('/admin/session/new'), as: 'admin_root'
