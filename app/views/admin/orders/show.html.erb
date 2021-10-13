@@ -67,7 +67,7 @@
   <br>
 
   <div class="card">
-    <h2 class="card-header h5">Assets</h2>
+    <h2 class="card-header h5">Videos</h2>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
@@ -84,62 +84,66 @@
           <% end %>
 
           <div class="form-group">
-            <%= form.label :assets %>
-            <%= form.file_field :assets, class: 'form-control-file', required: true, accept: 'video/mp4' %>
+            <%#= form.label :assets, 'Video', class: 'form-label' %>
+            <%= form.file_field :assets, class: 'form-control', required: true, accept: 'video/mp4' %>
           </div>
 
           <div>
-            <%= form.submit 'Añadir', class: 'btn btn-primary mt-3' %>
+            <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2' %>
           </div>
         <% end %>
       </li>
     </ul>
     <div class="card-body">
       <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
-        <% @order.assets.filter(&:persisted?).each do |asset| %>
-          <div
-            class="col-12 col-sm-6 col-md-4 col-lg-3"
-          >
+        <% if @order.assets.filter(&:persisted?).empty? %>
+        <div>La orden no tiene videos adjuntados.</div>
+        <% else %>
+          <% @order.assets.filter(&:persisted?).each do |asset| %>
             <div
-              class="p-0"
-              role="button"
-              data-bs-toggle="modal"
-              data-bs-target="#modal-<%= asset.id %>"
+              class="col-12 col-sm-6 col-md-4 col-lg-3"
             >
-              <%= image_tag polymorphic_url(asset.preview(resize: [100, 100]).processed.image, { only_path: true }), class: 'img-thumbnail img-fluid' %>
-              <div class="text-center"><strong><%= asset.filename.base %></strong></div>
-              <div class="text-center text-secondary"><%= distance_of_time_in_words(Time.now, asset.created_at.in_time_zone('America/Lima')) %></div>
-            </div>
+              <div
+                class="p-0"
+                role="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modal-<%= asset.id %>"
+              >
+                <%= image_tag polymorphic_url(asset.preview(resize: [100, 100]).processed.image, { only_path: true }), class: 'img-thumbnail img-fluid' %>
+                <div class="text-center"><strong><%= asset.filename.base %></strong></div>
+                <div class="text-center text-secondary"><%= distance_of_time_in_words(Time.now, asset.created_at.in_time_zone('America/Lima')) %></div>
+              </div>
 
-            <div class="modal fade" id="modal-<%= asset.id %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title"><%= asset.filename.base %></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="mb-3">
-                      <%= link_to 'Borrar asset', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este asset?' }, class: 'text-decoration-none link-danger' %>
+              <div class="modal fade" id="modal-<%= asset.id %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><%= asset.filename.base %></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
-                      <source src=<%= rails_blob_path asset %> type="video/mp4">
-                    </video>
-                  </div>
-                  <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <%= link_to 'Borrar asset', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este asset?' }, class: 'text-decoration-none link-danger' %>
+                      </div>
+                      <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
+                        <source src=<%= rails_blob_path asset %> type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+                    </div>
                   </div>
                 </div>
               </div>
+              <script>
+                  document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
+                          const video = document.getElementById('playback-<%= asset.id %>')
+                          setTimeout(() => video.pause(), 250)
+                      }
+                  )
+              </script>
             </div>
-            <script>
-                document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
-                        const video = document.getElementById('playback-<%= asset.id %>')
-                        setTimeout(() => video.pause(), 250)
-                    }
-                )
-            </script>
-          </div>
+          <% end %>
         <% end %>
       </div>
     </div>
