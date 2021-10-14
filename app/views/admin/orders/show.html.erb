@@ -117,7 +117,7 @@
                     <div class="modal-body">
                       <div class="d-flex justify-content-end mb-3">
                         <%= link_to 'Borrar', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este video?' }, class: 'text-decoration-none link-danger me-3' %>
-                        <%= link_to 'Descargar', rails_blob_path(asset, disposition: 'attachment'), method: :get, class: 'text-decoration-none link-primary' %>
+                        <%= link_to 'Descargar', rails_blob_path(asset, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
                       </div>
 
                       <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
@@ -198,7 +198,7 @@
                     <div class="modal-body">
                       <div class="d-flex justify-content-end mb-3">
                         <%= link_to 'Borrar', photo_path(photo.id), method: :delete, data: { confirm: '¿Estás seguro de borrar esta foto?' }, class: 'text-decoration-none link-danger me-3' %>
-                        <%= link_to 'Descargar', rails_blob_path(photo, disposition: 'attachment'), method: :get, class: 'text-decoration-none link-primary' %>
+                        <%= link_to 'Descargar', rails_blob_path(photo, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
                       </div>
                       <%= image_tag photo, class: 'img-thumbnail img-fluid' %>
                     </div>
