@@ -68,47 +68,40 @@
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
-          <% if @order.errors.any? %>
-            <div class="alert alert-danger" role="alert">
-              <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
-              <hr>
-              <ul>
-                <% @order.errors.each do |error| %>
-                  <li><%= error.full_message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
 
-          <div class="form-group">
-            <%#= form.label :assets, 'Video', class: 'form-label' %>
-            <%= form.file_field :assets, class: 'form-control', required: true, accept: 'video/mp4' %>
-          </div>
-
-          <div>
-            <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2' %>
+    <div class="card-body border-bottom">
+      <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
+        <% if @order.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+            <hr>
+            <ul>
+              <% @order.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
           </div>
         <% end %>
-      </li>
-    </ul>
+
+        <div class="form-group">
+          <%= form.file_field :assets, class: 'form-control', required: true, accept: 'video/mp4' %>
+          <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
+        </div>
+
+        <div>
+          <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2' %>
+        </div>
+      <% end %>
+    </div>
+
     <div class="card-body">
       <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
         <% if @order.assets.filter(&:persisted?).empty? %>
         <div>La orden no tiene videos adjuntados.</div>
         <% else %>
           <% @order.assets.filter(&:persisted?).each do |asset| %>
-            <div
-              class="col-12 col-sm-6 col-md-4 col-lg-3"
-            >
-              <div
-                class="p-0"
-                role="button"
-                data-bs-toggle="modal"
-                data-bs-target="#modal-<%= asset.id %>"
-              >
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= asset.id %>">
                 <%= image_tag polymorphic_url(asset.preview(resize: [100, 100]).processed.image, { only_path: true }), class: 'img-thumbnail img-fluid' %>
                 <div class="text-center"><strong><%= asset.filename.base %></strong></div>
                 <div class="text-center text-secondary"><%= distance_of_time_in_words(Time.now, asset.created_at.in_time_zone('America/Lima')) %></div>
@@ -138,6 +131,7 @@
               <script>
                   document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
                           const video = document.getElementById('playback-<%= asset.id %>')
+
                           setTimeout(() => video.pause(), 250)
                       }
                   )
@@ -146,6 +140,77 @@
           <% end %>
         <% end %>
       </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-header h5">Fotos</div>
+
+    <div class="card-body border-bottom">
+      <%= form_with url: order_photos_path(@order.id), method: :post do |form| %>
+        <% if @order.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+            <hr>
+            <ul>
+              <% @order.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.file_field :photos, class: 'form-control', required: true, accept: 'image/jpeg,image/png' %>
+          <div class="form-text">Cada foto debe tener dimensiones de 1920x1080 como mínimo y pesar como máximo 5 MB.</div>
+        </div>
+
+        <div>
+          <%= form.submit 'Añadir imagen', class: 'btn btn-primary mt-2' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-body">
+      <% if @order.photos.filter(&:persisted?).empty? %>
+      <div>La orden no tiene fotos disponibles.</div>
+      <% else %>
+        <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
+          <% @order.photos.filter(&:persisted?).each do |photo| %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= photo.id %>">
+                <%= image_tag photo, class: 'img-thumbnail img-fluid' %>
+                <div class="text-center"><strong><%= photo.filename.base %></strong></div>
+                <div class="text-center text-secondary"><%= distance_of_time_in_words(Time.now, photo.created_at.in_time_zone('America/Lima')) %></div>
+              </div>
+
+              <div class="modal fade" id="modal-<%= photo.id %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><%= photo.filename.base %></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="d-flex justify-content-end mb-3">
+                        <%= link_to 'Borrar', photo_path(photo.id), method: :delete, data: { confirm: '¿Estás seguro de borrar esta foto?' }, class: 'text-decoration-none link-danger me-3' %>
+                        <%= link_to 'Descargar', rails_blob_path(photo, disposition: 'attachment'), method: :get, class: 'text-decoration-none link-primary' %>
+                      </div>
+                      <%= image_tag photo, class: 'img-thumbnail img-fluid' %>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      <% end %>
     </div>
   </div>
 </main>

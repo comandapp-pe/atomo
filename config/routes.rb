@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :orders do
     resources :assets, shallow: true, path: 'attachments', as: 'attachments'
+    resources :photos, shallow: true
   end
 
   resources :checkout_links, only: [:create]
