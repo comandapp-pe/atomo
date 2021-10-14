@@ -71,13 +71,13 @@
 
     <div class="card-body border-bottom">
       <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
-        <% if @order.errors.any? %>
+        <% if @order.errors[:assets].any? %>
           <div class="alert alert-danger" role="alert">
             <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
             <hr>
             <ul>
-              <% @order.errors.each do |error| %>
-                <li><%= error.full_message %></li>
+              <% @order.errors[:assets].each do |error| %>
+                <li><%= error %></li>
               <% end %>
             </ul>
           </div>
@@ -150,13 +150,13 @@
 
     <div class="card-body border-bottom">
       <%= form_with url: order_photos_path(@order.id), method: :post do |form| %>
-        <% if @order.errors.any? %>
+        <% if @order.errors[:photos].any? %>
           <div class="alert alert-danger" role="alert">
             <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
             <hr>
             <ul>
-              <% @order.errors.each do |error| %>
-                <li><%= error.full_message %></li>
+              <% @order.errors[:photos].each do |error| %>
+                <li><%= error %></li>
               <% end %>
             </ul>
           </div>
