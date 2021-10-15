@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_many_attached :assets
   has_many_attached :photos
   has_many_attached :fonts
+  has_many_attached :locutions
   has_many :ideas
   has_many :phrases
 

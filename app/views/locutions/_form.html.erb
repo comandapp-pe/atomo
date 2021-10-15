@@ -1,0 +1,17 @@
+<%= form_with(model: locution) do |form| %>
+  <% if locution.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(locution.errors.count, "error") %> prohibited this locution from being saved:</h2>
+
+      <ul>
+        <% locution.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

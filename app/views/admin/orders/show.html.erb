@@ -361,6 +361,61 @@
       </ul>
     <% end %>
   </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-header h5">Locuciones</div>
+
+    <div class="card-body">
+      <%= form_with url: order_locutions_path(@order.id), method: :post do |form| %>
+        <% if @order.errors[:locutions].any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+            <hr>
+            <ul>
+              <% @order.errors[:locutions].each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.file_field :locutions, class: 'form-control', required: true, accept: 'audio/mpeg' %>
+          <div class="form-text">Cada locución debe estar en formato MP3 y puede durar 10 segundos como máximo.</div>
+        </div>
+
+        <div>
+          <%= form.submit 'Añadir locución', class: 'btn btn-primary mt-2' %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @order.locutions.filter(&:persisted?).empty? %>
+      <div class="card-body border-top">La orden no tiene locuciones disponibles.</div>
+    <% else %>
+      <div class="card-body border-top">
+        <div class="row g-3">
+          <% @order.locutions.filter(&:persisted?).each do |locution| %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div>
+                <audio controls style="max-width: 100%;">
+                  <source src="<%= rails_blob_path locution %>">
+                </audio>
+                <div class="text-center"><strong><%= locution.filename %></strong></div>
+                <div class="text-center text-secondary"><%= number_to_human_size locution.blob.byte_size %></div>
+                <div class="text-center">
+                  <%= link_to 'Borrar', locution_path(locution.id), method: :delete, data: { confirm: '¿Estás seguro de borrar esta locución?' }, class: 'text-decoration-none link-danger me-3' %>
+                  <%= link_to 'Descargar', rails_blob_path(locution, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </main>
 
 <%= render 'admin/footer' %>
