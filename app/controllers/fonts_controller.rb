@@ -1,5 +1,5 @@
 class FontsController < ApplicationController
-  before_action :set_font, only: %i[ show edit update destroy ]
+  before_action :set_order, only: [:index, :new, :create]
 
   # GET /fonts or /fonts.json
   def index
@@ -21,11 +21,21 @@ class FontsController < ApplicationController
 
   # POST /fonts or /fonts.json
   def create
-    @font = Font.new(font_params)
+    @file = params[:fonts]
+
+    @blob = ActiveStorage::Blob.create_and_upload!(
+      io: @file,
+      filename: @file.original_filename,
+      content_type: @file.content_type
+    )
+
+    @blob.analyze
+
+    @order.fonts.attach(@blob)
 
     respond_to do |format|
-      if @font.save
-        format.html { redirect_to @font, notice: "Font was successfully created." }
+      if @order.save
+        format.html { redirect_to [:admin, @order], notice: "Font was successfully created." }
         format.json { render :show, status: :created, location: @font }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -57,13 +67,14 @@ class FontsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_font
-      @font = Font.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def font_params
-      params.fetch(:font, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:order_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def font_params
+    params.fetch(:font, {})
+  end
 end
