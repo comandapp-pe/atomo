@@ -10,6 +10,8 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/1 or /admin/orders/1.json
   def show
     @idea = @order.ideas.new
+
+    @phrase = @order.phrases.new
   end
 
   # GET /admin/orders/new

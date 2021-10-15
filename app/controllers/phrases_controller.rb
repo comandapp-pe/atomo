@@ -1,4 +1,5 @@
 class PhrasesController < ApplicationController
+  before_action :set_order, only: [:index, :new, :create]
   before_action :set_phrase, only: %i[ show edit update destroy ]
 
   # GET /phrases or /phrases.json
@@ -21,14 +22,14 @@ class PhrasesController < ApplicationController
 
   # POST /phrases or /phrases.json
   def create
-    @phrase = Phrase.new(phrase_params)
+    @phrase = @order.phrases.new(phrase_params)
 
     respond_to do |format|
       if @phrase.save
-        format.html { redirect_to @phrase, notice: "Phrase was successfully created." }
+        format.html { redirect_to [:admin, @order], notice: "Phrase was successfully created." }
         format.json { render :show, status: :created, location: @phrase }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @phrase.errors, status: :unprocessable_entity }
       end
     end
@@ -59,12 +60,16 @@ class PhrasesController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:order_id])
+  end
+
   def set_phrase
     @phrase = Phrase.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def phrase_params
-    params.fetch(:phrase, {})
+    params.require(:phrase).permit(:content)
   end
 end

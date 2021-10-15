@@ -270,6 +270,7 @@
 
   <div class="card">
     <div class="card-header h5">Ideas fuerza</div>
+
     <div class="card-body">
       <%= form_with model: [@order, @idea], method: :post do |form| %>
         <% if @idea.errors.any? %>
@@ -317,6 +318,31 @@
 
   <div class="card">
     <div class="card-header h5">Frases comerciales</div>
+
+    <div class="card-body">
+      <%= form_with model: [@order, @phrase], method: :post do |form| %>
+        <% if @phrase.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@phrase.errors[:content].count, "error") %> evitaron guardar esta orden:</h2>
+            <hr>
+            <ul>
+              <% @phrase.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.text_field :content, class: 'form-control', required: true %>
+          <div class="form-text">Frase corta que demuestra la competencia, característicicas, virtudes, fortalezas, objetivos o promociones que desean presentarse en el video. Esta frase se puede dividir a lo largo del video. Máximo 80 caracteres.</div>
+        </div>
+
+        <div>
+          <%= form.submit 'Añadir frase comercial', class: 'btn btn-primary mt-2' %>
+        </div>
+      <% end %>
+    </div>
 
     <% if @order.phrases.filter(&:persisted?).empty? %>
       <div class="card-body border-top">La orden no tiene frases comerciales disponibles.</div>
