@@ -57,13 +57,14 @@ class PhrasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_phrase
-      @phrase = Phrase.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def phrase_params
-      params.fetch(:phrase, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_phrase
+    @phrase = Phrase.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def phrase_params
+    params.fetch(:phrase, {})
+  end
 end
