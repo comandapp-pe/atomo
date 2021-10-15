@@ -51,7 +51,7 @@ class PhrasesController < ApplicationController
   def destroy
     @phrase.destroy
     respond_to do |format|
-      format.html { redirect_to phrases_url, notice: "Phrase was successfully destroyed." }
+      format.html { redirect_to [:admin, @phrase.order], notice: "Phrase was successfully destroyed." }
       format.json { head :no_content }
     end
   end
