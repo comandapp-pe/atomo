@@ -22,7 +22,7 @@ class IdeasController < ApplicationController
 
   # POST /ideas or /ideas.json
   def create
-    @idea = @order.ideas.build(idea_params)
+    @idea = @order.ideas.new(idea_params)
 
     respond_to do |format|
       if @idea.save
