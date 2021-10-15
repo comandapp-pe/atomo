@@ -38,7 +38,7 @@ class LocutionsController < ApplicationController
         format.html { redirect_to [:admin, @order], notice: "Locution was successfully created." }
         format.json { render :show, status: :created, location: @locution }
       else
-        format.html { render 'admin/order/show', status: :unprocessable_entity }
+        format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @locution.errors, status: :unprocessable_entity }
       end
     end

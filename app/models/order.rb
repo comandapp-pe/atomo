@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   validate :photos_file_sizes
   validate :fonts_mime_types
   validate :fonts_file_sizes
+  validate :locutions_mime_types
 
   private
 
@@ -127,6 +128,18 @@ class Order < ApplicationRecord
 
     invalid.each do |asset|
       errors.add(:fonts, "#{asset.filename} debe pesar como máximo 10 MB")
+    end
+  end
+
+  def locutions_mime_types
+    return unless locutions.attached?
+
+    valid, invalid = locutions.partition { |asset| ['audio/mpeg'].include?(asset.blob.content_type) }
+
+    return if invalid.empty?
+
+    invalid.each do |asset|
+      errors.add(:locutions, "#{asset.filename} debe estar en formato MP3.")
     end
   end
 end
