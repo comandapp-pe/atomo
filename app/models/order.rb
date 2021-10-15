@@ -62,7 +62,7 @@ class Order < ApplicationRecord
   def videos_durations
     return unless assets.attached?
 
-    valid, invalid = assets.partition { |asset| asset.metadata["duration"] <= 10.seconds }
+    valid, invalid = assets.partition { |asset| asset.metadata["duration"] <= 11.seconds }
 
     return if invalid.empty?
 
