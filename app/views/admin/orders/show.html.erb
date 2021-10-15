@@ -303,10 +303,9 @@
           <li class="list-group-item">
             <div class="d-flex flex-column flex-md-row justify-content-md-between">
               <div class="overflow-hidden" style="white-space: nowrap; text-overflow: ellipsis;"><%= idea.content %></div>
-<!--              <div>-->
-                <%#= link_to 'Borrar', font_path(font.id), method: :delete, data: { confirm: '¿Estás seguro de borrar esta fuente?' }, class: 'text-decoration-none link-danger me-3' %>
-                <%#= link_to 'Descargar', rails_blob_path(font, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
-<!--              </div>-->
+              <div>
+                <%= link_to 'Borrar', idea, method: :delete, data: { confirm: '¿Estás seguro de borrar esta fuente?' }, class: 'text-decoration-none link-danger me-3' %>
+              </div>
             </div>
           </li>
         <% end %>

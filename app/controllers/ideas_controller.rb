@@ -52,23 +52,24 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     respond_to do |format|
-      format.html { redirect_to ideas_url, notice: "Idea was successfully destroyed." }
+      format.html { redirect_to [:admin, @idea.order], notice: "Idea was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:order_id])
-    end
 
-    def set_idea
-      @idea = Idea.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:order_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def idea_params
-      params.require(:idea).permit(:content)
-    end
+  def set_idea
+    @idea = Idea.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def idea_params
+    params.require(:idea).permit(:content)
+  end
 end
