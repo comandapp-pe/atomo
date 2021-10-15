@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_164431) do
+ActiveRecord::Schema.define(version: 2021_10_15_181756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,14 @@ ActiveRecord::Schema.define(version: 2021_10_15_164431) do
     t.index ["product_id"], name: "index_orders_on_product_id"
   end
 
+  create_table "phrases", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_phrases_on_order_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -120,5 +128,6 @@ ActiveRecord::Schema.define(version: 2021_10_15_164431) do
   add_foreign_key "checkout_links", "products"
   add_foreign_key "ideas", "orders"
   add_foreign_key "orders", "products"
+  add_foreign_key "phrases", "orders"
   add_foreign_key "products", "categories"
 end

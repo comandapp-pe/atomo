@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many_attached :photos
   has_many_attached :fonts
   has_many :ideas
+  has_many :phrases
 
   alias_attribute :CUSTOMEREMAIL, :customer_email
 
