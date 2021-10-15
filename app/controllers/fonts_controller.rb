@@ -38,7 +38,7 @@ class FontsController < ApplicationController
         format.html { redirect_to [:admin, @order], notice: "Font was successfully created." }
         format.json { render :show, status: :created, location: @font }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @font.errors, status: :unprocessable_entity }
       end
     end

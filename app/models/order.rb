@@ -14,6 +14,7 @@ class Order < ApplicationRecord
   validate :photos_mime_types
   validate :photos_dimensions
   validate :photos_file_sizes
+  validate :fonts_mime_types
 
   private
 
@@ -98,6 +99,18 @@ class Order < ApplicationRecord
 
     invalid.each do |asset|
       errors.add(:photos, "#{asset.filename} debe pesar como máximo 10 MB")
+    end
+  end
+
+  def fonts_mime_types
+    return unless fonts.attached?
+
+    valid, invalid = fonts.partition { |asset| ['application/zip'].include?(asset.blob.content_type) }
+
+    return if invalid.empty?
+
+    invalid.each do |asset|
+      errors.add(:fonts, "#{asset.filename} debe estar en formato ZIP.")
     end
   end
 end
