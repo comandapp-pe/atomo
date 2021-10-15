@@ -22,7 +22,7 @@ class IdeasController < ApplicationController
 
   # POST /ideas or /ideas.json
   def create
-    @idea = @order.ideas.build(content: params[:content])
+    @idea = @order.ideas.build(idea_params)
 
     respond_to do |format|
       if @idea.save
@@ -69,6 +69,6 @@ class IdeasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def idea_params
-      params.require(:idea).permit(:order_id, :content)
+      params.require(:idea).permit(:content)
     end
 end
