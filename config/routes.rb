@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :photos, shallow: true
     resources :fonts, shallow: true
     resources :ideas, shallow: true
+    resources :phrases, shallow: true
   end
 
   resources :checkout_links, only: [:create]
