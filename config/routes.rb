@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :assets, shallow: true, path: 'attachments', as: 'attachments'
     resources :photos, shallow: true
     resources :fonts, shallow: true
+    resources :ideas, shallow: true
   end
 
   resources :checkout_links, only: [:create]
