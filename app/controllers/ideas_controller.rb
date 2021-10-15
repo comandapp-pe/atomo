@@ -1,4 +1,5 @@
 class IdeasController < ApplicationController
+  before_action :set_order, only: [:index, :new, :create]
   before_action :set_idea, only: %i[ show edit update destroy ]
 
   # GET /ideas or /ideas.json
@@ -21,14 +22,14 @@ class IdeasController < ApplicationController
 
   # POST /ideas or /ideas.json
   def create
-    @idea = Idea.new(idea_params)
+    @idea = @order.ideas.build(content: params[:content])
 
     respond_to do |format|
       if @idea.save
-        format.html { redirect_to @idea, notice: "Idea was successfully created." }
+        format.html { redirect_to [:admin, @order], notice: "Idea was successfully created." }
         format.json { render :show, status: :created, location: @idea }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
@@ -58,6 +59,10 @@ class IdeasController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_order
+      @order = Order.find(params[:order_id])
+    end
+
     def set_idea
       @idea = Idea.find(params[:id])
     end
