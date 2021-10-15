@@ -1,5 +1,8 @@
 <%= render 'admin/header' %>
 
+<% @idea = @order.ideas.new unless @idea.present? %>
+<% @phrase = @order.phrases.new unless @phrase.present? %>
+
 <main class="container px-4">
   <% if notice %>
     <div id="notice" class="alert alert-success alert-dismissible fade show">
@@ -383,7 +386,7 @@
 
         <div class="form-group">
           <%= form.file_field :locutions, class: 'form-control', required: true, accept: 'audio/mpeg' %>
-          <div class="form-text">Cada locución debe estar en formato MP3 y puede durar 10 segundos como máximo.</div>
+          <div class="form-text">Cada locución debe estar en formato MP3.</div>
         </div>
 
         <div>
