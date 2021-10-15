@@ -103,7 +103,7 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= asset.id %>">
                 <%= image_tag polymorphic_url(asset.preview(resize: [100, 100]).processed.image, { only_path: true }), class: 'img-thumbnail img-fluid' %>
-                <div class="text-center"><strong><%= asset.filename.base %></strong></div>
+                <div class="text-center"><strong><%= asset.filename %></strong></div>
                 <div class="text-center text-secondary"><%= asset.metadata[:width].round %>x<%= asset.metadata[:height].round %> • <%= number_to_human_size asset.blob.byte_size %> | <%= ActiveSupport::Duration.build(asset.metadata[:duration].round).inspect %></div>
               </div>
 
@@ -111,7 +111,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title"><%= asset.filename.base %></h5>
+                      <h5 class="modal-title"><%= asset.filename %></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -186,7 +186,7 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= photo.id %>">
                 <%= image_tag photo, class: 'img-thumbnail img-fluid' %>
-                <div class="text-center"><strong><%= photo.filename.base %></strong></div>
+                <div class="text-center"><strong><%= photo.filename %></strong></div>
                 <div class="text-center text-secondary"><%= photo.metadata[:width].round %>x<%= photo.metadata[:height].round %> • <%= number_to_human_size photo.blob.byte_size %></div>
               </div>
 
@@ -194,7 +194,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title"><%= photo.filename.base %></h5>
+                      <h5 class="modal-title"><%= photo.filename %></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
