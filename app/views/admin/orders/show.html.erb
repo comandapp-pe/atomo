@@ -114,6 +114,7 @@
                       <h5 class="modal-title"><%= asset.filename.base %></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
                       <div class="d-flex justify-content-end mb-3">
                         <%= link_to 'Borrar', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este video?' }, class: 'text-decoration-none link-danger me-3' %>
@@ -124,6 +125,7 @@
                         <source src=<%= rails_blob_path asset %> type="video/mp4">
                       </video>
                     </div>
+
                     <div class="modal-footer">
                       <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
                     </div>
