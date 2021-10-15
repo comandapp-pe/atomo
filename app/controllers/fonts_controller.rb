@@ -59,9 +59,13 @@ class FontsController < ApplicationController
 
   # DELETE /fonts/1 or /fonts/1.json
   def destroy
-    @font.destroy
+    @font = ActiveStorage::Attachment.find(params[:id])
+
+    @order = Order.find(@font.record_id)
+
+    @font.purge
     respond_to do |format|
-      format.html { redirect_to fonts_url, notice: "Font was successfully destroyed." }
+      format.html { redirect_to [:admin, @order], notice: "Font was successfully destroyed." }
       format.json { head :no_content }
     end
   end
