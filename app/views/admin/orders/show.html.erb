@@ -222,6 +222,31 @@
 
   <div class="card">
     <div class="card-header h5">Fuentes</div>
+    <div class="card-body border-bottom">
+      <%= form_with url: order_fonts_path(@order.id), method: :post do |form| %>
+        <% if @order.errors[:fonts].any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
+            <hr>
+            <ul>
+              <% @order.errors[:fonts].each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.file_field :fonts, class: 'form-control', required: true, accept: 'application/zip' %>
+          <div class="form-text">Cada fuente debe estar en formato ZIP y pesar 10 MB como máximo.</div>
+        </div>
+
+        <div>
+          <%= form.submit 'Añadir fuente', class: 'btn btn-primary mt-2' %>
+        </div>
+      <% end %>
+    </div>
+
     <div class="card-body">
       <% if @order.fonts.filter(&:persisted?).empty? %>
         <div>La orden no tiene fuentes disponibles.</div>
