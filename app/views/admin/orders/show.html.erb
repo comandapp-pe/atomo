@@ -269,7 +269,7 @@
   <br>
 
   <div class="card">
-    <div class="card-header h5">Ideas Fuerza</div>
+    <div class="card-header h5">Ideas fuerza</div>
     <div class="card-body">
       <%= form_with model: [@order, @order.ideas.new], method: :post do |form| %>
         <% if @order.errors[:ideas].any? %>
@@ -290,7 +290,7 @@
         </div>
 
         <div>
-          <%= form.submit 'Añadir Idea Fuerza', class: 'btn btn-primary mt-2' %>
+          <%= form.submit 'Añadir idea fuerza', class: 'btn btn-primary mt-2' %>
         </div>
       <% end %>
     </div>
