@@ -248,7 +248,7 @@
     </div>
 
     <% if @order.fonts.filter(&:persisted?).empty? %>
-      <div class="card-body">La orden no tiene fuentes disponibles.</div>
+      <div class="card-body border-top">La orden no tiene fuentes disponibles.</div>
     <% else %>
       <ul class="list-group list-group-flush">
         <% @order.fonts.filter(&:persisted?).each do |font| %>
@@ -296,7 +296,7 @@
     </div>
 
     <% if @order.ideas.filter(&:persisted?).empty? %>
-      <div class="card-body">La orden no tiene ideas fuerza disponibles.</div>
+      <div class="card-body border-top">La orden no tiene ideas fuerza disponibles.</div>
     <% else %>
       <ul class="list-group list-group-flush">
         <% @order.ideas.filter(&:persisted?).each do |idea| %>
