@@ -18,5 +18,28 @@ module App
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
+
+    # ActionMailer settings
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.perform_deliveries = true
+
+    config.action_mailer.smtp_settings = {
+      address: 'box.comandapp.xyz',
+      domain: 'comandapp.pe',
+      port: 587,
+      user_name: 'noresponder@comandapp.pe',
+      password: 'patchypatches',
+      authentication: 'plain',
+      enable_starttls_auto: true
+    }
+
+    # Locale settings
+    config.i18n.available_locales = [:es, :en]
+    config.i18n.default_locale = :es
+    config.i18n.fallbacks = [:en]
   end
 end
