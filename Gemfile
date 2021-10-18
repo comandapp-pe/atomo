@@ -58,3 +58,5 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'faraday'
 
 gem "rails-i18n", "~> 6.0"
+
+gem 'webpacker'
