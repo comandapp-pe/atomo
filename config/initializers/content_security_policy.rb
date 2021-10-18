@@ -1,4 +1,3 @@
-# typed: strict
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide content security policy
@@ -12,7 +11,6 @@
 #   policy.object_src  :none
 #   policy.script_src  :self, :https
 #   policy.style_src   :self, :https
-
 #   # Specify URI for violation reports
 #   # policy.report_uri "/csp-violation-report-endpoint"
 # end

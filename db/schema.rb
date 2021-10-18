@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_181756) do
+ActiveRecord::Schema.define(version: 2021_10_18_165614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_181756) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: 6, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_181756) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: 6, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_10_15_181756) do
     t.integer "checkout_code"
     t.string "payment_method"
     t.string "currency"
-    t.datetime "sold_at"
+    t.datetime "sold_at", precision: 6
     t.decimal "total"
     t.decimal "checkout_commission"
     t.index ["product_id"], name: "index_orders_on_product_id"
