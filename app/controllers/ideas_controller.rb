@@ -26,7 +26,12 @@ class IdeasController < ApplicationController
 
     respond_to do |format|
       if @idea.save
-        format.turbo_stream { render turbo_stream: [turbo_stream.append(:ideas, @idea), turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new }) ] }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append(:ideas, @idea),
+            turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new })
+          ]
+        end
         format.html { redirect_to [:admin, @order], notice: "Idea was successfully created." }
         format.json { render :show, status: :created, location: @idea }
       else
