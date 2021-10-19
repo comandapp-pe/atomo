@@ -1,14 +1,12 @@
 <%= form_with model: [order, idea], method: :post, id: 'new_idea' do |form| %>
   <% if idea.errors.any? %>
-    <div class="alert alert-danger" role="alert">
-      <h2><%= pluralize(idea.errors[:content].count, "error") %> evitaron guardar esta orden:</h2>
-      <hr>
-      <ul>
-        <% idea.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul class="list-group">
+      <% idea.errors.each do |error| %>
+        <li class="list-group-item list-group-item-danger"><%= error.full_message %></li>
+      <% end %>
+    </ul>
+
+    <br>
   <% end %>
 
   <div class="form-group">
