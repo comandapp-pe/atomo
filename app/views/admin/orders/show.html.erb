@@ -105,7 +105,7 @@
           <% @order.assets.filter(&:persisted?).each do |asset| %>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= asset.id %>">
-                <%= image_tag polymorphic_url(asset.preview(resize: [100, 100]).processed.image, { only_path: true }), class: 'img-thumbnail img-fluid' %>
+                <%= image_tag asset.preview(resize_to_limit: [100, 100]).processed.image, class: 'img-thumbnail img-fluid' %>
                 <div class="text-center"><strong><%= asset.filename %></strong></div>
                 <div class="text-center text-secondary"><%= asset.metadata[:width].round %>x<%= asset.metadata[:height].round %> • <%= number_to_human_size asset.blob.byte_size %> | <%= ActiveSupport::Duration.build(asset.metadata[:duration].round).inspect %></div>
               </div>
