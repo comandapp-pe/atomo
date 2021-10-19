@@ -271,50 +271,16 @@
 
   <br>
 
-  <div class="card">
+  <div class="card" data-controller="empty-state">
     <div class="card-header h5">Ideas fuerza</div>
 
-    <div class="card-body">
-      <%= form_with model: [@order, @idea], method: :post do |form| %>
-        <% if @idea.errors.any? %>
-          <div class="alert alert-danger" role="alert">
-            <h2><%= pluralize(@idea.errors[:content].count, "error") %> evitaron guardar esta orden:</h2>
-            <hr>
-            <ul>
-              <% @idea.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+    <div class="card-body"><%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %></div>
 
-        <div class="form-group">
-          <%= form.text_field :content, class: 'form-control', required: true %>
-          <div class="form-text">Dos palabras como máximo que pueden sumar hasta 30 caracteres.</div>
-        </div>
+    <div data-empty-state-target="emptyState" class="card-body border-top visually-hidden">La orden no tiene ideas fuerza disponibles.</div>
 
-        <div>
-          <%= form.submit 'Añadir idea fuerza', class: 'btn btn-primary mt-2' %>
-        </div>
-      <% end %>
-    </div>
-
-    <% if @order.ideas.filter(&:persisted?).empty? %>
-      <div class="card-body border-top">La orden no tiene ideas fuerza disponibles.</div>
-    <% else %>
-      <ul class="list-group list-group-flush">
-        <% @order.ideas.filter(&:persisted?).each do |idea| %>
-          <li class="list-group-item">
-            <div class="d-flex flex-column flex-md-row justify-content-md-between">
-              <div class="text-truncate"><%= idea.content %></div>
-              <div>
-                <%= link_to 'Borrar', idea, method: :delete, data: { confirm: '¿Estás seguro de borrar esta fuente?' }, class: 'text-decoration-none link-danger me-3' %>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
+    <ul id="ideas" class="list-group list-group-flush">
+      <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
+    </ul>
   </div>
 
   <br>

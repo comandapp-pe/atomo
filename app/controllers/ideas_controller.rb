@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/new
   def new
-    @idea = Idea.new
+    @idea = @order.ideas.new
   end
 
   # GET /ideas/1/edit
@@ -26,9 +26,11 @@ class IdeasController < ApplicationController
 
     respond_to do |format|
       if @idea.save
+        format.turbo_stream { render turbo_stream: [turbo_stream.append(:ideas, @idea), turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new }) ] }
         format.html { redirect_to [:admin, @order], notice: "Idea was successfully created." }
         format.json { render :show, status: :created, location: @idea }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @idea }) }
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
@@ -52,6 +54,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@idea) }
       format.html { redirect_to [:admin, @idea.order], notice: "Idea was successfully destroyed." }
       format.json { head :no_content }
     end

@@ -1,0 +1,10 @@
+<div id="<%= dom_id idea %>" class="list-group-item" data-empty-state-target="item">
+  <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+    <div class="text-truncate">
+      <%= idea.content %>
+    </div>
+    <div>
+      <%= button_to 'Borrar', idea, method: :delete, data: { confirm: '¿Estás seguro de borrar esta idea fuerza?' }, class: 'btn btn-link p-0 text-decoration-none link-danger me-3' %>
+    </div>
+  </div>
+</div>
