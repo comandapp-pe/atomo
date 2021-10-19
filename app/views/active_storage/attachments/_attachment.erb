@@ -1,0 +1,43 @@
+<% asset = attachment %>
+<div id="<%= dom_id asset %>">
+  <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= asset.id %>">
+    <%= image_tag asset.preview(resize_to_limit: [100, 100]).processed.image, class: 'img-thumbnail img-fluid' %>
+    <div class="text-center"><strong><%= asset.filename %></strong></div>
+    <div class="text-center text-secondary"><%= asset.metadata[:width].round %>x<%= asset.metadata[:height].round %> • <%= number_to_human_size asset.blob.byte_size %> | <%= ActiveSupport::Duration.build(asset.metadata[:duration].round).inspect %></div>
+  </div>
+
+  <div class="modal fade" id="modal-<%= asset.id %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= asset.filename %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-flex justify-content-end mb-3">
+            <%= link_to 'Borrar', video_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este video?' }, class: 'text-decoration-none link-danger me-3' %>
+            <%= link_to 'Descargar', rails_blob_path(asset, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
+          </div>
+
+          <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
+            <source src=<%= rails_blob_path asset %> type="video/mp4">
+          </video>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
+              const video = document.getElementById('playback-<%= asset.id %>')
+
+              setTimeout(() => video.pause(), 250)
+          }
+      )
+  </script>
+</div>

@@ -1,9 +1,9 @@
-class AssetsController < ApplicationController
+class VideosController < ApplicationController
   before_action :set_order, only: [:index, :new, :create]
 
   # GET /assets or /assets.json
   def index
-    @assets = @order.assets
+    @assets = @order.videos
   end
 
   # GET /assets/1 or /assets/1.json
@@ -21,7 +21,7 @@ class AssetsController < ApplicationController
 
   # POST /assets or /assets.json
   def create
-    @file = params[:assets]
+    @file = params[:videos]
 
     @blob = ActiveStorage::Blob.create_and_upload!(
       io: @file,
@@ -31,10 +31,13 @@ class AssetsController < ApplicationController
 
     @blob.analyze
 
-    @order.assets.attach(@blob)
+    @order.videos.attach(@blob)
 
     respond_to do |format|
       if @order.save
+        @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
+
+        format.turbo_stream { render turbo_stream: turbo_stream.append(:all_videos, partial: 'videos/video', locals: { video: @video }) }
         format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
@@ -66,6 +69,7 @@ class AssetsController < ApplicationController
     @asset.purge
 
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@asset) }
       format.html { redirect_to [:admin, @order], notice: "Asset was successfully destroyed." }
       format.json { head :no_content }
     end

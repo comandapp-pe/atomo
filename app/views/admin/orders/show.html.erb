@@ -73,13 +73,13 @@
     <h2 class="card-header h5">Videos</h2>
 
     <div class="card-body border-bottom">
-      <%= form_with url: order_attachments_path(@order.id), method: :post do |form| %>
-        <% if @order.errors[:assets].any? %>
+      <%= form_with url: order_videos_path(@order.id), method: :post do |form| %>
+        <% if @order.errors[:videos].any? %>
           <div class="alert alert-danger" role="alert">
             <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
             <hr>
             <ul>
-              <% @order.errors[:assets].each do |error| %>
+              <% @order.errors[:videos].each do |error| %>
                 <li><%= error %></li>
               <% end %>
             </ul>
@@ -87,65 +87,20 @@
         <% end %>
 
         <div class="form-group">
-          <%= form.file_field :assets, class: 'form-control', required: true, accept: 'video/mp4' %>
+          <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4' %>
           <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
         </div>
 
         <div>
-          <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2' %>
+          <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2', data: { disable_with: false } %>
         </div>
       <% end %>
     </div>
 
     <div class="card-body">
-      <div class="row grid g-3" data-masonry='{"percentPosition": true}'>
-        <% if @order.assets.filter(&:persisted?).empty? %>
-        <div>La orden no tiene videos adjuntados.</div>
-        <% else %>
-          <% @order.assets.filter(&:persisted?).each do |asset| %>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div role="button" data-bs-toggle="modal" data-bs-target="#modal-<%= asset.id %>">
-                <%= image_tag asset.preview(resize_to_limit: [100, 100]).processed.image, class: 'img-thumbnail img-fluid' %>
-                <div class="text-center"><strong><%= asset.filename %></strong></div>
-                <div class="text-center text-secondary"><%= asset.metadata[:width].round %>x<%= asset.metadata[:height].round %> • <%= number_to_human_size asset.blob.byte_size %> | <%= ActiveSupport::Duration.build(asset.metadata[:duration].round).inspect %></div>
-              </div>
-
-              <div class="modal fade" id="modal-<%= asset.id %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title"><%= asset.filename %></h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                      <div class="d-flex justify-content-end mb-3">
-                        <%= link_to 'Borrar', attachment_path(asset.id), method: :delete, data: { confirm: '¿Estás seguro de borrar este video?' }, class: 'text-decoration-none link-danger me-3' %>
-                        <%= link_to 'Descargar', rails_blob_path(asset, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
-                      </div>
-
-                      <video id="playback-<%= asset.id %>" controls preload="auto" style="width: 100%; height: 100%;">
-                        <source src=<%= rails_blob_path asset %> type="video/mp4">
-                      </video>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <script>
-                  document.getElementById('modal-<%= asset.id %>').addEventListener('hidden.bs.modal', (event) => {
-                          const video = document.getElementById('playback-<%= asset.id %>')
-
-                          setTimeout(() => video.pause(), 250)
-                      }
-                  )
-              </script>
-            </div>
-          <% end %>
-        <% end %>
+      <div id="all_videos" class=" row g-2" data-controller="empty-state" >
+        <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
+        <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
       </div>
     </div>
   </div>
@@ -395,4 +350,14 @@
     grid.imagesLoaded().progress(() => {
         grid.masonry('layout')
     })
+
+    var observer = new MutationObserver((mutations, observer) => {
+        grid.masonry('reloadItems')
+
+        grid.masonry('layout')
+    })
+
+    var videos = document.getElementById('all_videos')
+
+    observer.observe(videos, { childList: true, subtree: true })
 </script>

@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :product
 
-  has_many_attached :assets
+  has_many_attached :videos
   has_many_attached :photos
   has_many_attached :fonts
   has_many_attached :locutions
@@ -24,50 +24,50 @@ class Order < ApplicationRecord
   private
 
   def videos_mime_types
-    return unless assets.attached?
+    return unless videos.attached?
 
-    valid, invalid = assets.partition { |asset| ['video/mp4'].include?(asset.blob.content_type) }
+    valid, invalid = videos.partition { |asset| ['video/mp4'].include?(asset.blob.content_type) }
 
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:assets, "#{asset.filename} debe estar en formato mp4")
+      errors.add(:videos, "#{asset.filename} debe estar en formato mp4")
     end
   end
 
   def videos_dimensions
-    return unless assets.attached?
+    return unless videos.attached?
 
-    valid, invalid = assets.partition { |asset| asset.metadata.values_at(:width, :height) == [1920, 1080] }
+    valid, invalid = videos.partition { |asset| asset.metadata.values_at(:width, :height) == [1920, 1080] }
 
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:assets, "#{asset.filename} debe tener dimensiones de 1920x1080")
+      errors.add(:videos, "#{asset.filename} debe tener dimensiones de 1920x1080")
     end
   end
 
   def videos_file_sizes
-    return unless assets.attached?
+    return unless videos.attached?
 
-    valid, invalid = assets.partition { |asset| asset.blob.byte_size <= 50.megabytes }
+    valid, invalid = videos.partition { |asset| asset.blob.byte_size <= 50.megabytes }
 
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:assets, "#{asset.filename} debe pesar como máximo 50 MB")
+      errors.add(:videos, "#{asset.filename} debe pesar como máximo 50 MB")
     end
   end
 
   def videos_durations
-    return unless assets.attached?
+    return unless videos.attached?
 
-    valid, invalid = assets.partition { |asset| asset.metadata["duration"] <= 11.seconds }
+    valid, invalid = videos.partition { |asset| asset.metadata["duration"] <= 11.seconds }
 
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:assets, "#{asset.filename} debe durar 10 segundos como máximo")
+      errors.add(:videos, "#{asset.filename} debe durar 10 segundos como máximo")
     end
   end
 

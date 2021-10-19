@@ -1,2 +1,2 @@
-module AssetsHelper
+module VideosHelper
 end

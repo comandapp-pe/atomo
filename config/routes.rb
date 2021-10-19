@@ -1,4 +1,3 @@
-# typed: strict
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'root#index'
@@ -6,7 +5,7 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :orders do
-    resources :assets, shallow: true, path: 'attachments', as: 'attachments'
+    resources :videos, shallow: true
     resources :photos, shallow: true
     resources :fonts, shallow: true
     resources :ideas, shallow: true
