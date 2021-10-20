@@ -38,6 +38,9 @@ class PhotosController < ApplicationController
         format.html { redirect_to [:admin, @order], notice: "La foto fue creada exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(:new_photo, partial: 'photos/form', locals: { order: @order })
+        end
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

@@ -71,7 +71,6 @@
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
-
     <div class="card-body border-bottom">
       <%= render partial: 'videos/form', locals: { order: @order } %>
     </div>
@@ -91,28 +90,7 @@
     <div class="card-header h5">Fotos</div>
 
     <div class="card-body border-bottom">
-      <%= form_with url: order_photos_path(@order.id), method: :post do |form| %>
-        <% if @order.errors[:photos].any? %>
-          <div class="alert alert-danger" role="alert">
-            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
-            <hr>
-            <ul>
-              <% @order.errors[:photos].each do |error| %>
-                <li><%= error %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="form-group">
-          <%= form.file_field :photos, class: 'form-control', required: true, accept: 'image/jpeg,image/png' %>
-          <div class="form-text">Cada foto debe tener dimensiones de 1920x1080 como mínimo y pesar como máximo 10 MB.</div>
-        </div>
-
-        <div>
-          <%= form.submit 'Añadir imagen', class: 'btn btn-primary mt-2' %>
-        </div>
-      <% end %>
+      <%= render partial: 'photos/form', locals: { order: @order } %>
     </div>
 
     <div class="card-body">
