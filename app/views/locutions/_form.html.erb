@@ -1,17 +1,22 @@
-<%= form_with(model: locution) do |form| %>
-  <% if locution.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(locution.errors.count, "error") %> prohibited this locution from being saved:</h2>
-
-      <ul>
-        <% locution.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+<%= form_with id: 'new_locution', url: order_locutions_path(order.id), method: :post do |form| %>
+  <% if order.errors[:locutions].any? %>
+    <div class="alert alert-danger" role="alert">
+      <h2><%= pluralize(order.errors.count, "error evitó", "errores evitaron") %> guardar esta locución:</h2>
+      <hr>
+      <ul class="mb-0">
+        <% order.errors[:locutions].each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.file_field :locutions, class: 'form-control', required: true, accept: 'audio/mpeg' %>
+    <div class="form-text">Cada locución debe estar en formato MP3.</div>
+  </div>
+
+  <div>
+    <%= form.submit 'Añadir locución', class: 'btn btn-primary mt-2', data: { disable_with: 'Añadiendo...' } %>
   </div>
 <% end %>

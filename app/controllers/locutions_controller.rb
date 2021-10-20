@@ -33,11 +33,20 @@ class LocutionsController < ApplicationController
 
     @order.locutions.attach(@blob)
 
+    @locution = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
+
     respond_to do |format|
       if @order.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(:new_locution, partial: 'locutions/form', locals: { order: @order }),
+            turbo_stream.append(:all_locutions, partial: 'locutions/locution', locals: { locution: @locution })
+          ]
+        end
         format.html { redirect_to [:admin, @order], notice: "Locution was successfully created." }
         format.json { render :show, status: :created, location: @locution }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_locution, partial: 'locutions/form', locals: { order: @order }) }
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @locution.errors, status: :unprocessable_entity }
       end
@@ -59,13 +68,14 @@ class LocutionsController < ApplicationController
 
   # DELETE /locutions/1 or /locutions/1.json
   def destroy
-
     @locution = ActiveStorage::Attachment.find(params[:id])
 
     @order = Order.find(@locution.record_id)
 
     @locution.purge
+
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@locution) }
       format.html { redirect_to [:admin, @order], notice: "Locution was successfully destroyed." }
       format.json { head :no_content }
     end
