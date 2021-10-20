@@ -126,18 +126,20 @@
 
   <br>
 
-  <div class="card" data-controller="empty-state">
+  <div class="card">
     <div class="card-header h5">Ideas fuerza</div>
 
     <div class="card-body">
       <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
     </div>
 
-    <div data-empty-state-target="emptyState" class="card-body border-top visually-hidden">La orden no tiene ideas fuerza disponibles.</div>
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
 
-    <ul id="ideas" class="list-group list-group-flush">
-      <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
-    </ul>
+      <ul id="ideas" class="list-group list-group-flush">
+        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
+      </ul>
+    </div>
   </div>
 
   <br>
@@ -149,11 +151,13 @@
       <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
     </div>
 
-<!--    <div class="card-body border-top">La orden no tiene frases comerciales disponibles.</div>-->
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
 
-    <ul id="phrases" class="list-group list-group-flush">
-      <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
-    </ul>
+      <ul id="phrases" class="list-group list-group-flush">
+        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+      </ul>
+    </div>
   </div>
 
   <br>
