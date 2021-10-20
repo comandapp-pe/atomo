@@ -76,10 +76,12 @@
     </div>
 
     <div class="card-body">
-      <div id="all_videos" class="row g-2" data-controller="empty-state" >
+      <div data-controller="empty-state">
         <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-        <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
+        <div id="all_videos" class="masonry row g-2" data-masonry='{"percentPosition": true}'>
+          <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
+        </div>
       </div>
     </div>
   </div>
@@ -94,8 +96,12 @@
     </div>
 
     <div class="card-body">
-      <div id="all_photos" class="masonry row g-2"  data-masonry='{"percentPosition": true}'>
-        <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
+
+        <div id="all_photos" class="masonry row g-2"  data-masonry='{"percentPosition": true}'>
+          <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
+        </div>
       </div>
     </div>
   </div>
@@ -269,21 +275,25 @@
 <%= render 'admin/footer' %>
 
 <script>
-    var grid = $('.masonry').masonry()
+  grid = $('.masonry').masonry()
 
-    grid.imagesLoaded().progress(() => {
+  grid.imagesLoaded().progress(() => {
+    grid.masonry('layout')
+  })
+
+  const observer = new MutationObserver((mutations, observer) => {
+    setTimeout(() => {
+        grid.masonry('reloadItems')
+
         grid.masonry('layout')
-    })
+    }, 100)
+  })
+  
+  const videos = document.getElementById('all_videos')
 
-    var observer = new MutationObserver((mutations, observer) => {
-        setTimeout(() => {
-            grid.masonry('reloadItems')
+  observer.observe(videos, { childList: true, subtree: true })
 
-            grid.masonry('layout')
-        }, 250)
-    })
+  const photos = document.getElementById('all_photos')
 
-    var photos = document.getElementById('all_photos')
-
-    observer.observe(photos, { childList: true, subtree: true })
+  observer.observe(photos, { childList: true, subtree: true })
 </script>
