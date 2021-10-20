@@ -1,7 +1,7 @@
 <%= form_with id: 'new_video', url: order_videos_path(order.id), method: :post do |form| %>
   <% if order.errors[:videos].any? %>
     <div class="alert alert-danger" role="alert">
-      <h2><%= pluralize(order.errors.count, "error evitó", plural: 'errores evitaron') %> guardar este video:</h2>
+      <h2><%= pluralize(order.errors.count, "error evitó", 'errores evitaron') %> guardar este video:</h2>
       <hr>
       <ul class="mb-0">
         <% order.errors[:videos].each do |error| %>

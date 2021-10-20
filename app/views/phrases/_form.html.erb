@@ -1,9 +1,9 @@
-<%= form_with(model: phrase) do |form| %>
+<%= form_with id: 'new_phrase', model: [order, phrase], method: :post do |form| %>
   <% if phrase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(phrase.errors.count, "error") %> prohibited this phrase from being saved:</h2>
-
-      <ul>
+    <div class="alert alert-danger" role="alert">
+      <h2><%= pluralize(phrase.errors[:content].count, "error evitó", "errores evitaron") %> evitaron guardar esta orden:</h2>
+      <hr>
+      <ul class="mb-0">
         <% phrase.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.text_field :content, class: 'form-control', required: true %>
+    <div class="form-text">Frase corta que demuestra la competencia, características, virtudes, fortalezas, objetivos o promociones que desean presentarse en el video. Esta frase se puede dividir a lo largo del video. Máximo 80 caracteres.</div>
+  </div>
+
+  <div>
+    <%= form.submit 'Añadir frase comercial', class: 'btn btn-primary mt-2' %>
   </div>
 <% end %>

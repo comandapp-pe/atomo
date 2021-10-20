@@ -1,12 +1,14 @@
-<%= form_with model: [order, idea], method: :post, id: 'new_idea' do |form| %>
+<%= form_with id: 'new_idea', model: [order, idea], method: :post do |form| %>
   <% if idea.errors.any? %>
-    <ul class="list-group">
-      <% idea.errors.each do |error| %>
-        <li class="list-group-item list-group-item-danger"><%= error.full_message %></li>
-      <% end %>
-    </ul>
-
-    <br>
+    <div class="alert alert-danger" role="alert">
+      <h2><%= pluralize(idea.errors.count, "error evitó", "errores evitaron") %> guardar esta idea fuerza:</h2>
+      <hr>
+      <ul class="mb-0">
+        <% idea.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <div class="form-group">
@@ -15,6 +17,6 @@
   </div>
 
   <div>
-    <%= form.submit 'Añadir idea fuerza', data: { disable_with: false }, class: 'btn btn-primary mt-2' %>
+    <%= form.submit 'Añadir idea fuerza', class: 'btn btn-primary mt-2', data: { disable_with: 'Añadiendo...' } %>
   </div>
 <% end %>

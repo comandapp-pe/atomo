@@ -129,7 +129,9 @@
   <div class="card" data-controller="empty-state">
     <div class="card-header h5">Ideas fuerza</div>
 
-    <div class="card-body"><%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %></div>
+    <div class="card-body">
+      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
+    </div>
 
     <div data-empty-state-target="emptyState" class="card-body border-top visually-hidden">La orden no tiene ideas fuerza disponibles.</div>
 
@@ -144,46 +146,14 @@
     <div class="card-header h5">Frases comerciales</div>
 
     <div class="card-body">
-      <%= form_with model: [@order, @phrase], method: :post do |form| %>
-        <% if @phrase.errors.any? %>
-          <div class="alert alert-danger" role="alert">
-            <h2><%= pluralize(@phrase.errors[:content].count, "error") %> evitaron guardar esta orden:</h2>
-            <hr>
-            <ul>
-              <% @phrase.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="form-group">
-          <%= form.text_field :content, class: 'form-control', required: true %>
-          <div class="form-text">Frase corta que demuestra la competencia, característicicas, virtudes, fortalezas, objetivos o promociones que desean presentarse en el video. Esta frase se puede dividir a lo largo del video. Máximo 80 caracteres.</div>
-        </div>
-
-        <div>
-          <%= form.submit 'Añadir frase comercial', class: 'btn btn-primary mt-2' %>
-        </div>
-      <% end %>
+      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
     </div>
 
-    <% if @order.phrases.filter(&:persisted?).empty? %>
-      <div class="card-body border-top">La orden no tiene frases comerciales disponibles.</div>
-    <% else %>
-      <ul class="list-group list-group-flush">
-        <% @order.phrases.filter(&:persisted?).each do |phrase| %>
-          <li class="list-group-item">
-            <div class="d-flex flex-column flex-md-row justify-content-md-between">
-              <div class="overflow-hidden" style="white-space: nowrap; text-overflow: ellipsis;"><%= phrase.content %></div>
-              <div>
-                <%= link_to 'Borrar', phrase, method: :delete, data: { confirm: '¿Estás seguro de borrar esta frase comercial?' }, class: 'text-decoration-none link-danger me-3' %>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
+<!--    <div class="card-body border-top">La orden no tiene frases comerciales disponibles.</div>-->
+
+    <ul id="phrases" class="list-group list-group-flush">
+      <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+    </ul>
   </div>
 
   <br>

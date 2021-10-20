@@ -35,11 +35,7 @@ class IdeasController < ApplicationController
         format.html { redirect_to [:admin, @order], notice: "Idea was successfully created." }
         format.json { render :show, status: :created, location: @idea }
       else
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @idea })
-          ]
-        end
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @idea }) }
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end

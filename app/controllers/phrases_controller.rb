@@ -26,9 +26,16 @@ class PhrasesController < ApplicationController
 
     respond_to do |format|
       if @phrase.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new }),
+            turbo_stream.append(:phrases, @phrase)
+          ]
+        end
         format.html { redirect_to [:admin, @order], notice: "Phrase was successfully created." }
         format.json { render :show, status: :created, location: @phrase }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @phrase } ) }
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @phrase.errors, status: :unprocessable_entity }
       end
@@ -51,7 +58,9 @@ class PhrasesController < ApplicationController
   # DELETE /phrases/1 or /phrases/1.json
   def destroy
     @phrase.destroy
+
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@phrase) }
       format.html { redirect_to [:admin, @phrase.order], notice: "Phrase was successfully destroyed." }
       format.json { head :no_content }
     end
