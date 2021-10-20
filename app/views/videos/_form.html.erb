@@ -1,17 +1,24 @@
-<%= form_with(model: asset) do |form| %>
-  <% if asset.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(asset.errors.count, "error") %> prohibited this asset from being saved:</h2>
+<%= form_with id: 'new_video', url: order_videos_path(order.id), method: :post do |form| %>
+  <% if order.errors[:videos].any? %>
+    <div class="alert alert-danger" role="alert">
+      <h2><%= pluralize(order.errors.count, "error evitó", plural: 'errores evitaron') %> guardar este video:</h2>
 
-      <ul>
-        <% asset.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+      <hr>
+
+      <ul class="mb-0">
+        <% order.errors[:videos].each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4' %>
+    <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
+  </div>
+
+  <div>
+    <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2', data: { disable_with: false } %>
   </div>
 <% end %>

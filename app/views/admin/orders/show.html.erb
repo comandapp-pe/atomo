@@ -73,33 +73,13 @@
     <h2 class="card-header h5">Videos</h2>
 
     <div class="card-body border-bottom">
-      <%= form_with url: order_videos_path(@order.id), method: :post do |form| %>
-        <% if @order.errors[:videos].any? %>
-          <div class="alert alert-danger" role="alert">
-            <h2><%= pluralize(@order.errors.count, "error") %> evitaron guardar esta orden:</h2>
-            <hr>
-            <ul>
-              <% @order.errors[:videos].each do |error| %>
-                <li><%= error %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="form-group">
-          <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4' %>
-          <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
-        </div>
-
-        <div>
-          <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2', data: { disable_with: false } %>
-        </div>
-      <% end %>
+      <%= render partial: 'videos/form', locals: { order: @order } %>
     </div>
 
     <div class="card-body">
-      <div id="all_videos" class=" row g-2" data-controller="empty-state" >
+      <div id="all_videos" class="row g-2" data-controller="empty-state" >
         <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
+
         <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
       </div>
     </div>
