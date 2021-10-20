@@ -33,11 +33,20 @@ class FontsController < ApplicationController
 
     @order.fonts.attach(@blob)
 
+    @font = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
+
     respond_to do |format|
       if @order.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(:new_font, partial: 'fonts/form', locals: { order: @order }),
+            turbo_stream.append(:all_fonts, partial: 'fonts/font', locals: { font: @font })
+          ]
+        end
         format.html { redirect_to [:admin, @order], notice: "Font was successfully created." }
         format.json { render :show, status: :created, location: @font }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_font, partial: 'fonts/form', locals: { order: @order }) }
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @font.errors, status: :unprocessable_entity }
       end
@@ -65,6 +74,7 @@ class FontsController < ApplicationController
 
     @font.purge
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@font) }
       format.html { redirect_to [:admin, @order], notice: "Font was successfully destroyed." }
       format.json { head :no_content }
     end
