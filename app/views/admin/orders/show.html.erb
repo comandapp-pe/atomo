@@ -94,9 +94,7 @@
     </div>
 
     <div class="card-body">
-      <div id="all_photos" class="row g-2" data-controller="empty-state">
-        <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
-
+      <div id="all_photos" class="masonry row g-2"  data-masonry='{"percentPosition": true}'>
         <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
       </div>
     </div>
@@ -271,19 +269,21 @@
 <%= render 'admin/footer' %>
 
 <script>
-    var grid = $('.grid').masonry()
+    var grid = $('.masonry').masonry()
 
     grid.imagesLoaded().progress(() => {
         grid.masonry('layout')
     })
 
     var observer = new MutationObserver((mutations, observer) => {
-        grid.masonry('reloadItems')
+        setTimeout(() => {
+            grid.masonry('reloadItems')
 
-        grid.masonry('layout')
+            grid.masonry('layout')
+        }, 250)
     })
 
-    var videos = document.getElementById('all_videos')
+    var photos = document.getElementById('all_photos')
 
-    observer.observe(videos, { childList: true, subtree: true })
+    observer.observe(photos, { childList: true, subtree: true })
 </script>
