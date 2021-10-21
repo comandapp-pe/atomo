@@ -142,18 +142,20 @@
 <%= render 'application/footer' %>
 
 <script>
-    grid = $('.masonry').masonry()
+    // TODO: Polish
 
-    grid.imagesLoaded().progress(() => {
+    const grid = $('.grid').masonry()
+
+    grid.imagesLoaded(() => {
         grid.masonry('layout')
     })
 
     const observer = new MutationObserver((mutations, observer) => {
-        setTimeout(() => {
+        grid.imagesLoaded(() => {
             grid.masonry('reloadItems')
 
             grid.masonry('layout')
-        }, 200)
+        })
     })
 
     const videos = document.getElementById('all_videos')
@@ -164,24 +166,26 @@
 
     observer.observe(photos, { childList: true, subtree: true })
 
-    const videoPreviewModal = document.getElementById('video-preview-modal')
+    const videoPreview = document.getElementById('video-preview-modal')
 
-    videoPreviewModal.addEventListener('show.bs.modal', (event) => {
-        const button = event.relatedTarget
+    videoPreview.addEventListener('show.bs.modal', (event) => {
+        const { relatedTarget } = event
 
-        const filename = button.getAttribute('data-bs-video-filename')
+        const videoFilename = relatedTarget.getAttribute('data-bs-video-filename')
 
-        const src = button.getAttribute('data-bs-video-src')
+        const videoSource = relatedTarget.getAttribute('data-bs-video-source')
 
-        videoPreviewModal.querySelector('.modal-title').textContent = filename
+        const title = videoPreview.querySelector('.modal-title')
 
-        videoPreviewModal.querySelector('source').setAttribute('src', src)
+        title.textContent = videoFilename
 
-        videoPreviewModal.querySelector('video').load()
+        videoPreview.querySelector('source').setAttribute('src', videoSource)
+
+        videoPreview.querySelector('video').load()
     })
 
-    videoPreviewModal.addEventListener('hidden.bs.modal', (event) => {
-            const video = videoPreviewModal.querySelector('video')
+    videoPreview.addEventListener('hidden.bs.modal', (event) => {
+            const video = videoPreview.querySelector('video')
 
             setTimeout(() => video.pause(), 100)
         }
