@@ -122,6 +122,8 @@
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Método de pago:</strong> <%= @order.payment_method %></p>
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Total:</strong> S/. <%= @order.total %></p>
                     <hr style="margin-top: 15px; margin-bottom: 15px">
+                    <strong>Instrucciones</strong>
+                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Entra a <a href="<%= order_url(@order) %>"><%= order_url(@order) %></a> para realizar la carga de tus recursos audiovisuales.</p>
                   </td>
                 </tr>
               </table>

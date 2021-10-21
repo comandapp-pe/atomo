@@ -133,4 +133,6 @@ Rails.application.configure do
 
   # Do not log whether partials rendered
   config.action_view.logger = nil
+
+  config.domain = 'socialspots.herokuapp.com'
 end
