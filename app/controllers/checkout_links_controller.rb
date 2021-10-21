@@ -9,7 +9,7 @@ class CheckoutLinksController < ApplicationController
 
     respond_to do |format|
       if @checkout_link.save
-        format.html { redirect_to @checkout_link.url }
+        format.html { redirect_to @checkout_link.url, allow_other_host: true }
       else
         format.html { head :unprocessable_entity }
       end
