@@ -134,5 +134,7 @@ Rails.application.configure do
   # Do not log whether partials rendered
   config.action_view.logger = nil
 
-  config.domain = 'socialspots.herokuapp.com'
+  Rails.application.routes.default_url_options[:protocol] = 'https'
+
+  Rails.application.routes.default_url_options[:host] = 'socialspots.herokuapp.com'
 end

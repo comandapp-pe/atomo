@@ -1,72 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-
 <% @idea = @order.ideas.new unless @idea.present? %>
 <% @phrase = @order.phrases.new unless @phrase.present? %>
 
-<main class="container px-4">
-  <% if notice %>
-    <div id="notice" class="alert alert-success alert-dismissible fade show">
-      <%= notice %>
+<%= render 'application/header' %>
 
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
+<main class="container p-3">
+  <h1 class="text-center">Carga de recursos para la orden #<%= @order.id %></h1>
 
-  <h1>Carga de recursos para la orden #<%= @order.checkout_code %></h1>
+  <p class="text-center">A las <strong><%= @order.created_at.in_time_zone('America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
 
-  <p>A las <strong><%= @order.created_at.in_time_zone('America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
-
-  <div class="card">
-    <h2 class="card-header h5">Cliente</h2>
-    <div class="card-body">
-      <p class="card-text"><strong>Nombres y Apellidos:</strong> <%= @order.customer_first_name %> <%= @order.customer_last_name %></p>
-      <p class="card-text"><strong>Correo:</strong> <%= mail_to @order.customer_email %></p>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h2 class="card-header h5">Producto</h2>
-    <div class="card-body">
-      <p class="card-text"><%= link_to @order.product.name, [:admin, @order.product], class: 'text-decoration-none' %></p>
-      <div class="ratio ratio-16x9">
-        <%= @order.product.preview_html.html_safe %>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h2 class="card-header h5">Formato</h2>
-    <div class="card-body">
-      <p class="card-text"><%= @order.format.titlecase %></p>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h2 class="card-header h5">Metraje</h2>
-    <div class="card-body">
-      <p class="card-text"><%= @order.length %> segundos</p>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h2 class="card-header h5">Pago</h2>
-    <div class="card-body">
-      <p class="card-text"><strong>Método:</strong> <%= @order.payment_method %></p>
-      <p class="card-text"><strong>Comisión de 2Checkout:</strong> <%= number_to_currency @order.checkout_commission %></p>
-      <p class="card-text"><strong>Total:</strong> <%= number_to_currency @order.total %></p>
-    </div>
-  </div>
-
-  <br>
+  <p class="text-center">Por favor lee cuidadosamente las instrucciones para la carga de tu material.</p>
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
@@ -197,7 +139,7 @@
   </div>
 </main>
 
-<%= render 'admin/footer' %>
+<%= render 'application/footer' %>
 
 <script>
     grid = $('.masonry').masonry()

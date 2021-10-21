@@ -115,15 +115,15 @@
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">¡Hola <%= @order.customer_first_name %> <%= @order.customer_last_name %>!</p>
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Tu orden #<%= @order.checkout_code %> en Social Spots fue confirmada.</p>
                     <hr style="margin-top: 15px; margin-bottom: 15px">
-                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Nombre:</strong> <%= @order.payment_method %></p>
-                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Formato:</strong> <%= @order.format %></p>
+                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Nombre:</strong> <%= @order.product.name %></p>
+                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Formato:</strong> <%= @order.format.titlecase %></p>
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Metraje:</strong> <%= @order.length %> segundos</p>
                     <hr style="margin-top: 15px; margin-bottom: 15px">
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Método de pago:</strong> <%= @order.payment_method %></p>
                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Total:</strong> S/. <%= @order.total %></p>
                     <hr style="margin-top: 15px; margin-bottom: 15px">
-                    <strong>Instrucciones</strong>
-                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Entra a <a href="<%= order_url(@order) %>"><%= order_url(@order) %></a> para realizar la carga de tus recursos audiovisuales.</p>
+                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;"><strong>Instrucciones</strong></p>
+                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;">Haz click <a href="<%= order_url(@order) %>">aquí</a> para realizar la carga de tus recursos audiovisuales.</p>
                   </td>
                 </tr>
               </table>
@@ -138,7 +138,7 @@
           <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
             <tr>
               <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;"><a href="https://terminalfusion.rest">Átomo Digital | [Dirección]</a></span>
+                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;"><a href="https://socialspots.herokuapp.com">Átomo Digital | [Dirección]</a></span>
               </td>
             </tr>
             <tr>

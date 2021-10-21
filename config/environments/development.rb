@@ -88,7 +88,12 @@ Rails.application.configure do
   # information to avoid inadvertent exposure of personally identifiable information (PII).
   config.log_level = :info
 
-  config.hosts << "tricky-skunk-24.loca.lt"
+  # Do not log whether partials rendered
+  config.action_view.logger = nil
 
-  config.domain = 'localhost:4444'
+  Rails.application.routes.default_url_options[:protocol] = 'http'
+
+  Rails.application.routes.default_url_options[:host] = 'localhost:4444'
+
+  config.hosts << "tricky-skunk-24.loca.lt"
 end
