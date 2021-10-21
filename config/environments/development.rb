@@ -88,7 +88,7 @@ Rails.application.configure do
   # information to avoid inadvertent exposure of personally identifiable information (PII).
   config.log_level = :info
 
-  config.hosts << "ugly-wombat-91.loca.lt"
+  config.hosts << "tricky-skunk-24.loca.lt"
 
   config.domain = 'localhost:4444'
 end
