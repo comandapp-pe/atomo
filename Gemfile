@@ -51,8 +51,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rubocop', require: false
 
-gem 'jquery-rails', '~> 4.4'
-
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'faraday'

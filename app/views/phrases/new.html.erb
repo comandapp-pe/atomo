@@ -1,7 +1,9 @@
 <main class="container p-4">
   <h1>Nueva frase comercial</h1>
 
-  <%= render partial: 'phrases/form', phrase: @phrase, locals: { order: @order, phrase: @phrase } %>
+  <turbo-frame id="new_phrase">
+    <%= render partial: 'phrases/form', phrase: @phrase, locals: { order: @order, phrase: @phrase } %>
+  </turbo-frame>
 
   <br>
 
