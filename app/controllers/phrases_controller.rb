@@ -12,7 +12,7 @@ class PhrasesController < ApplicationController
 
   # GET /phrases/new
   def new
-    @phrase = Phrase.new
+    @phrase = @order.phrases.new
   end
 
   # GET /phrases/1/edit

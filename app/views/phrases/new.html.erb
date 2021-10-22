@@ -1,5 +1,9 @@
-<h1>New Phrase</h1>
+<main class="container p-4">
+  <h1>Nueva frase comercial</h1>
 
-<%= render 'form', phrase: @phrase %>
+  <%= render partial: 'phrases/form', phrase: @phrase, locals: { order: @order, phrase: @phrase } %>
 
-<%= link_to 'Back', phrases_path %>
+  <br>
+
+  <%= link_to 'Regresar', order_phrases_path(@order) %>
+</main>
