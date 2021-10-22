@@ -95,5 +95,5 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = 'localhost:4444'
 
-  config.hosts << "tricky-skunk-24.loca.lt"
+  config.hosts << "ordinary-parrot-19.loca.lt"
 end

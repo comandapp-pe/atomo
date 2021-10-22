@@ -27,9 +27,12 @@ class PhrasesController < ApplicationController
     respond_to do |format|
       if @phrase.save
         format.turbo_stream do
+          flash.now[:notice] = 'Frase comercial creada.'
+
           render turbo_stream: [
-            turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new }),
-            turbo_stream.append(:phrases, @phrase)
+            turbo_stream.replace(:flash, partial: 'application/flash'),
+            turbo_stream.append(:phrases, @phrase),
+            turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new })
           ]
         end
         format.html { redirect_to [:admin, @order], notice: "Phrase was successfully created." }
@@ -60,7 +63,14 @@ class PhrasesController < ApplicationController
     @phrase.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@phrase) }
+      format.turbo_stream do
+        flash.now[:notice] = 'Frase comercial borrada.'
+
+        render turbo_stream: [
+          turbo_stream.replace(:flash, partial: 'application/flash'),
+          turbo_stream.remove(@phrase)
+        ]
+      end
       format.html { redirect_to [:admin, @phrase.order], notice: "Phrase was successfully destroyed." }
       format.json { head :no_content }
     end
