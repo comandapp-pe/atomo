@@ -38,7 +38,10 @@ class VideosController < ApplicationController
         @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
         format.turbo_stream do
+          flash.now[:notice] = 'Video creado exitosamente.'
+
           render turbo_stream: [
+            turbo_stream.replace(:flash, partial: 'application/flash'),
             turbo_stream.replace(:new_video, partial: 'videos/form', locals: { order: @order }),
             turbo_stream.append(:all_videos, partial: 'videos/video', locals: { video: @video })
           ]
@@ -79,7 +82,14 @@ class VideosController < ApplicationController
     @asset.purge
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@asset) }
+      format.turbo_stream do
+        flash.now[:notice] = 'Video borrado exitosamente.'
+
+        render turbo_stream: [
+          turbo_stream.replace(:flash, partial: 'application/flash'),
+          turbo_stream.remove(@asset)
+        ]
+      end
       format.html { redirect_to [:admin, @order], notice: "Asset was successfully destroyed." }
       format.json { head :no_content }
     end
