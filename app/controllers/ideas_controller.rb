@@ -30,7 +30,7 @@ class IdeasController < ApplicationController
 
           render turbo_stream: [
             turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new }),
-            turbo_stream.append(:ideas, @idea),
+            turbo_stream.append(:all_ideas, @idea),
             turbo_stream.replace(:flash, partial: 'application/flash')
           ]
         end

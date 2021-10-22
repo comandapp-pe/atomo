@@ -1,7 +1,7 @@
 <%= form_with id: 'new_phrase', model: [order, phrase], method: :post do |form| %>
   <% if phrase.errors.any? %>
     <div class="alert alert-danger" role="alert">
-      <h2><%= pluralize(phrase.errors[:content].count, "error evitó", "errores evitaron") %> evitaron guardar esta orden:</h2>
+      <h2><%= pluralize(phrase.errors[:content].count, "error evitó", "errores evitaron") %> guardar esta frase:</h2>
       <hr>
       <ul class="mb-0">
         <% phrase.errors.each do |error| %>

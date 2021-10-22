@@ -30,7 +30,7 @@ class PhrasesController < ApplicationController
 
           render turbo_stream: [
             turbo_stream.replace(:flash, partial: 'application/flash'),
-            turbo_stream.append(:phrases, @phrase),
+            turbo_stream.append(:all_phrases, @phrase),
             turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new })
           ]
         end

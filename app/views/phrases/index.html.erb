@@ -1,5 +1,6 @@
 <main class="container p-4">
   <h1>Frases comerciales de la orden #<%= @order.id %></h1>
+
   <turbo-frame id="phrases">
     <% @phrase = @order.phrases.new unless @phrase.present? %>
 
@@ -13,7 +14,7 @@
       <div class="border-top" data-controller="empty-state">
         <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
 
-        <ul id="phrases" class="list-group list-group-flush">
+        <ul id="all_phrases" class="list-group list-group-flush">
           <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
         </ul>
       </div>
