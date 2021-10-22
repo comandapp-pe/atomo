@@ -38,7 +38,10 @@ class LocutionsController < ApplicationController
     respond_to do |format|
       if @order.save
         format.turbo_stream do
+          flash.now[:notice] = 'Locución creada exitosamente.'
+
           render turbo_stream: [
+            turbo_stream.replace(:flash, partial: 'application/flash'),
             turbo_stream.replace(:new_locution, partial: 'locutions/form', locals: { order: @order }),
             turbo_stream.append(:all_locutions, partial: 'locutions/locution', locals: { locution: @locution })
           ]
@@ -75,7 +78,14 @@ class LocutionsController < ApplicationController
     @locution.purge
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@locution) }
+      format.turbo_stream do
+        flash.now[:notice] = 'Locución borrada exitosamente.'
+
+        render turbo_stream: [
+          turbo_stream.replace(:flash, partial: 'application/flash'),
+          turbo_stream.remove(@locution)
+        ]
+      end
       format.html { redirect_to [:admin, @order], notice: "Locution was successfully destroyed." }
       format.json { head :no_content }
     end
