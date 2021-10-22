@@ -1,22 +1,82 @@
-<p id="notice"><%= notice %></p>
+<main class="container p-4">
+  <h1>Videos de la orden <%= @order.id %></h1>
 
-<h1>Assets</h1>
+  <turbo-frame id="videos">
+    <div class="card">
+      <h2 class="card-header h5">Videos</h2>
+      <div class="card-body border-bottom">
+        <%= render partial: 'videos/form', locals: { order: @order } %>
+      </div>
 
-<%= form_with url: "/orders/#{@order.id}/assets", method: :post do |form| %>
-  <div class="form-group">
-    <%= form.label :videos %>
-    <%= form.file_field :videos, class: 'form-control-file' %>
-  </div>
+      <div class="card-body">
+        <div data-controller="empty-state">
+          <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-  <div>
-    <%= form.submit class: 'btn btn-primary mt-3' %>
-  </div>
-<% end %>
+          <div id="all_videos" class="grid row" data-masonry='{"percentPosition": true}'>
+            <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<% @assets.each do |asset| %>
-  <video controls preload="auto">
-    <source src=<%= rails_blob_path asset %> type="video/mp4">
-  </video>
-<% end %>
+    <div id="video-preview-modal" class="modal fade" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <video controls preload="auto" style="width: 100%; height: 100%;">
+              <source id="video-preview-modal-src" src="" type="video/mp4">
+            </video>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<%#= link_to 'New Asset', new_asset_path %>
+    <script>
+        (() => {
+            const videos = document.getElementById('all_videos')
+
+            const masonry = new Masonry('#all_videos')
+
+            imagesLoaded(videos, () => { masonry.layout() })
+
+            const observer = new MutationObserver((mutations, observer) => {
+                imagesLoaded(videos, () => {
+                    masonry.reloadItems()
+
+                    masonry.layout()
+                })
+            })
+
+            observer.observe(videos, { childList: true, subtree: true })
+
+            const videoPreview = document.getElementById('video-preview-modal')
+
+            videoPreview.addEventListener('show.bs.modal', (event) => {
+                const { relatedTarget } = event
+
+                const { bsVideoFilename, bsVideoSource } = relatedTarget.dataset
+
+                videoPreview.querySelector('h5').textContent = bsVideoFilename
+
+                videoPreview.querySelector('source').setAttribute('src', bsVideoSource)
+
+                videoPreview.querySelector('video').load()
+            })
+
+            videoPreview.addEventListener('hidden.bs.modal', (event) => {
+                    const video = videoPreview.querySelector('video')
+
+                    setTimeout(() => video.pause(), 100)
+                }
+            )
+        })()
+    </script>
+  </turbo-frame>
+</main>

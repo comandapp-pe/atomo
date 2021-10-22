@@ -3,68 +3,18 @@
 
 <%= render 'application/flash' %>
 
-<main class="container p-3">
+<main class="container p-4">
   <h1 class="text-center">Carga de recursos para la orden #<%= @order.id %></h1>
 
   <p class="text-center">A las <strong><%= @order.created_at.in_time_zone('America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
 
   <p class="text-center">Lee cuidadosamente las instrucciones para la carga de tu material.</p>
 
-  <div class="card">
-    <h2 class="card-header h5">Videos</h2>
-    <div class="card-body border-bottom">
-      <%= render partial: 'videos/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body">
-      <div data-controller="empty-state">
-        <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
-
-        <div id="all_videos" class="grid row" data-masonry='{"percentPosition": true}'>
-          <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="video-preview-modal" class="modal fade" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Video filename</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <video controls preload="auto" style="width: 100%; height: 100%;">
-            <source id="video-preview-modal-src" src="" type="video/mp4">
-          </video>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="videos" src="<%= order_videos_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Fotos</div>
-
-    <div class="card-body border-bottom">
-      <%= render partial: 'photos/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body">
-      <div data-controller="empty-state">
-        <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
-
-        <div id="all_photos" class="grid row"  data-masonry='{"percentPosition": true}'>
-          <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="photos" src="<%= order_photos_path(@order) %>"></turbo-frame>
 
   <br>
 
@@ -138,54 +88,3 @@
     </div>
   </div>
 </main>
-
-<script>
-    // TODO: Polish
-
-    const grid = $('.grid').masonry()
-
-    grid.imagesLoaded(() => {
-        grid.masonry('layout')
-    })
-
-    const observer = new MutationObserver((mutations, observer) => {
-        grid.imagesLoaded(() => {
-            grid.masonry('reloadItems')
-
-            grid.masonry('layout')
-        })
-    })
-
-    const videos = document.getElementById('all_videos')
-
-    observer.observe(videos, { childList: true, subtree: true })
-
-    const photos = document.getElementById('all_photos')
-
-    observer.observe(photos, { childList: true, subtree: true })
-
-    const videoPreview = document.getElementById('video-preview-modal')
-
-    videoPreview.addEventListener('show.bs.modal', (event) => {
-        const { relatedTarget } = event
-
-        const videoFilename = relatedTarget.getAttribute('data-bs-video-filename')
-
-        const videoSource = relatedTarget.getAttribute('data-bs-video-source')
-
-        const title = videoPreview.querySelector('.modal-title')
-
-        title.textContent = videoFilename
-
-        videoPreview.querySelector('source').setAttribute('src', videoSource)
-
-        videoPreview.querySelector('video').load()
-    })
-
-    videoPreview.addEventListener('hidden.bs.modal', (event) => {
-            const video = videoPreview.querySelector('video')
-
-            setTimeout(() => video.pause(), 100)
-        }
-    )
-</script>

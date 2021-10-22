@@ -1,25 +1,41 @@
-<p id="notice"><%= notice %></p>
+<main class="container p-4">
+  <h1>Fotos de la orden #<%= @order.id %></h1>
 
-<h1>Photos</h1>
+  <turbo-frame id="photos">
+    <div class="card">
+      <div class="card-header h5">Fotos</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="card-body border-bottom">
+        <%= render partial: 'photos/form', locals: { order: @order } %>
+      </div>
 
-  <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="card-body">
+        <div data-controller="empty-state">
+          <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
 
-<br>
+          <div id="all_photos" class="row"  data-masonry='{"percentPosition": true}'>
+            <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<%= link_to 'New Photo', new_photo_path %>
+    <script>
+      const photos = document.getElementById('all_photos')
+
+      const masonry = new Masonry('#all_photos')
+
+      imagesLoaded(photos, () => { masonry.layout() })
+
+      const observer = new MutationObserver((mutations, observer) => {
+          imagesLoaded(photos, () => {
+              masonry.reloadItems()
+
+              masonry.layout()
+          })
+      })
+
+      observer.observe(photos, { childList: true, subtree: true })
+    </script>
+  </turbo-frame>
+</main>

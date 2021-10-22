@@ -3,7 +3,6 @@ class VideosController < ApplicationController
 
   # GET /assets or /assets.json
   def index
-    @assets = @order.videos
   end
 
   # GET /assets/1 or /assets/1.json
