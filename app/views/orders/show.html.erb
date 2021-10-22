@@ -3,14 +3,12 @@
 
 <%= render 'application/flash' %>
 
-<%= render 'application/header' %>
-
 <main class="container p-3">
   <h1 class="text-center">Carga de recursos para la orden #<%= @order.id %></h1>
 
   <p class="text-center">A las <strong><%= @order.created_at.in_time_zone('America/Lima').strftime('%Y/%m/%d - %H:%M') %></strong></p>
 
-  <p class="text-center">Por favor lee cuidadosamente las instrucciones para la carga de tu material.</p>
+  <p class="text-center">Lee cuidadosamente las instrucciones para la carga de tu material.</p>
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
@@ -140,8 +138,6 @@
     </div>
   </div>
 </main>
-
-<%= render 'application/footer' %>
 
 <script>
     // TODO: Polish
