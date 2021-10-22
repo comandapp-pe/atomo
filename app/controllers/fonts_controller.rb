@@ -38,7 +38,10 @@ class FontsController < ApplicationController
     respond_to do |format|
       if @order.save
         format.turbo_stream do
+          flash.now[:notice] = 'Fuente creada exitosamente.'
+
           render turbo_stream: [
+            turbo_stream.replace(:flash, partial: 'application/flash'),
             turbo_stream.replace(:new_font, partial: 'fonts/form', locals: { order: @order }),
             turbo_stream.append(:all_fonts, partial: 'fonts/font', locals: { font: @font })
           ]
@@ -74,7 +77,14 @@ class FontsController < ApplicationController
 
     @font.purge
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@font) }
+      format.turbo_stream do
+        flash.now[:notice] = 'Fuente borrada exitosamente.'
+
+        render turbo_stream: [
+          turbo_stream.replace(:flash, partial: 'application/flash'),
+          turbo_stream.remove(@font)
+        ]
+      end
       format.html { redirect_to [:admin, @order], notice: "Font was successfully destroyed." }
       format.json { head :no_content }
     end
