@@ -1,25 +1,21 @@
-<p id="notice"><%= notice %></p>
+<main class="container p-4">
+  <h1>Locuciones de la orden #<%= @order.id %></h1>
 
-<h1>Locutions</h1>
+  <turbo-frame id="locutions">
+    <div class="card">
+      <div class="card-header h5">Locuciones</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="card-body">
+        <%= render partial: 'locutions/form', locals: { order: @order } %>
+      </div>
 
-  <tbody>
-    <% @locutions.each do |locution| %>
-      <tr>
-        <td><%= link_to 'Show', locution %></td>
-        <td><%= link_to 'Edit', edit_locution_path(locution) %></td>
-        <td><%= link_to 'Destroy', locution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="card-body border-top" data-controller="empty-state">
+        <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
 
-<br>
-
-<%= link_to 'New Locution', new_locution_path %>
+        <div id="all_locutions" class="row">
+          <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
+        </div>
+      </div>
+    </div>
+  </turbo-frame>
+</main>

@@ -1,25 +1,21 @@
-<p id="notice"><%= notice %></p>
+<main class="container p-4">
+  <h1>Fuentes (Tipos de letra) de la orden #<%= @order.id %></h1>
 
-<h1>Fonts</h1>
+  <turbo-frame id="fonts">
+    <div class="card">
+      <div class="card-header h5">Fuentes (Tipos de letra)</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="card-body">
+        <%= render partial: 'fonts/form', locals: { order: @order } %>
+      </div>
 
-  <tbody>
-    <% @fonts.each do |font| %>
-      <tr>
-        <td><%= link_to 'Show', font %></td>
-        <td><%= link_to 'Edit', edit_font_path(font) %></td>
-        <td><%= link_to 'Destroy', font, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="border-top" data-controller="empty-state">
+        <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
 
-<br>
-
-<%= link_to 'New Font', new_font_path %>
+        <ul id="all_fonts" class="list-group list-group-flush">
+          <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
+        </ul>
+      </div>
+    </div>
+  </turbo-frame>
+</main>

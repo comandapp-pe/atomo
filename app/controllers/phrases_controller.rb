@@ -4,7 +4,6 @@ class PhrasesController < ApplicationController
 
   # GET /phrases or /phrases.json
   def index
-    @phrases = Phrase.all
   end
 
   # GET /phrases/1 or /phrases/1.json

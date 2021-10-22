@@ -1,25 +1,22 @@
-<p id="notice"><%= notice %></p>
+<main class="container p-4">
+  <h1>Frases comerciales de la orden #<%= @order.id %></h1>
+  <turbo-frame id="phrases">
+    <% @phrase = @order.phrases.new unless @phrase.present? %>
 
-<h1>Phrases</h1>
+    <div class="card">
+      <div class="card-header h5">Frases comerciales</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="card-body">
+        <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
+      </div>
 
-  <tbody>
-    <% @phrases.each do |phrase| %>
-      <tr>
-        <td><%= link_to 'Show', phrase %></td>
-        <td><%= link_to 'Edit', edit_phrase_path(phrase) %></td>
-        <td><%= link_to 'Destroy', phrase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="border-top" data-controller="empty-state">
+        <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
 
-<br>
-
-<%= link_to 'New Phrase', new_phrase_path %>
+        <ul id="phrases" class="list-group list-group-flush">
+          <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+        </ul>
+      </div>
+    </div>
+  </turbo-frame>
+</main>

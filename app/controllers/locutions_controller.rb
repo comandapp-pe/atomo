@@ -3,7 +3,6 @@ class LocutionsController < ApplicationController
 
   # GET /locutions or /locutions.json
   def index
-    @locutions = Locution.all
   end
 
   # GET /locutions/1 or /locutions/1.json

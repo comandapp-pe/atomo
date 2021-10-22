@@ -3,7 +3,6 @@ class FontsController < ApplicationController
 
   # GET /fonts or /fonts.json
   def index
-    @fonts = Font.all
   end
 
   # GET /fonts/1 or /fonts/1.json

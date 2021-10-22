@@ -1,6 +1,3 @@
-<% @idea = @order.ideas.new unless @idea.present? %>
-<% @phrase = @order.phrases.new unless @phrase.present? %>
-
 <%= render 'application/flash' %>
 
 <main class="container p-4">
@@ -18,73 +15,17 @@
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Locuciones</div>
-
-    <div class="card-body">
-      <%= render partial: 'locutions/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body border-top" data-controller="empty-state">
-      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
-
-      <div id="all_locutions" class="row">
-        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="locutions" src="<%= order_locutions_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Fuentes (Tipos de letra)</div>
-
-    <div class="card-body">
-      <%= render partial: 'fonts/form', locals: { order: @order } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
-
-      <ul id="all_fonts" class="list-group list-group-flush">
-        <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="fonts" src="<%= order_fonts_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Ideas fuerza</div>
-
-    <div class="card-body">
-      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
-
-      <ul id="ideas" class="list-group list-group-flush">
-        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="ideas" src="<%= order_ideas_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Frases comerciales</div>
-
-    <div class="card-body">
-      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
-
-      <ul id="phrases" class="list-group list-group-flush">
-        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="phrases" src="<%= order_phrases_path(@order) %>"></turbo-frame>
 </main>
