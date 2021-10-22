@@ -24,12 +24,15 @@ class IdeasController < ApplicationController
   def create
     @idea = @order.ideas.new(idea_params)
 
+    flash[:success] = 'Idea fuerza creada.'
+
     respond_to do |format|
       if @idea.save
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace(:new_idea, partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new }),
-            turbo_stream.append(:ideas, @idea)
+            turbo_stream.append(:ideas, @idea),
+            turbo_stream.replace(:flash, partial: 'application/flash')
           ]
         end
         format.html { redirect_to [:admin, @order], notice: "Idea was successfully created." }
@@ -58,8 +61,16 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1 or /ideas/1.json
   def destroy
     @idea.destroy
+
+    flash[:success] = 'Idea fuerza borrada.'
+
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@idea) }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove(@idea),
+          turbo_stream.replace(:flash, partial: 'application/flash')
+        ]
+      end
       format.html { redirect_to [:admin, @idea.order], notice: "Idea was successfully destroyed." }
       format.json { head :no_content }
     end

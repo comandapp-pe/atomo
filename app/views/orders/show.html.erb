@@ -1,6 +1,8 @@
 <% @idea = @order.ideas.new unless @idea.present? %>
 <% @phrase = @order.phrases.new unless @phrase.present? %>
 
+<%= render 'application/flash' %>
+
 <%= render 'application/header' %>
 
 <main class="container p-3">
@@ -20,7 +22,7 @@
       <div data-controller="empty-state">
         <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-        <div id="all_videos" class="masonry row" data-masonry='{"percentPosition": true}'>
+        <div id="all_videos" class="grid row" data-masonry='{"percentPosition": true}'>
           <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
         </div>
       </div>
@@ -59,7 +61,7 @@
       <div data-controller="empty-state">
         <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
 
-        <div id="all_photos" class="masonry row"  data-masonry='{"percentPosition": true}'>
+        <div id="all_photos" class="grid row"  data-masonry='{"percentPosition": true}'>
           <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
         </div>
       </div>
