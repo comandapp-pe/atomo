@@ -8,3 +8,6 @@ application.register("empty-state", EmptyStateController)
 
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import MasonryController from "./masonry_controller.js"
+application.register("masonry", MasonryController)

@@ -12,7 +12,7 @@
         <div data-controller="empty-state">
           <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-          <div id="all_videos" class="grid row" data-masonry='{"percentPosition": true}'>
+          <div id="all_videos" class="row" data-controller="masonry">
             <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
           </div>
         </div>
@@ -39,44 +39,25 @@
     </div>
 
     <script>
-        (() => {
-            const videos = document.getElementById('all_videos')
+      const videoPreview = document.getElementById('video-preview-modal')
 
-            const masonry = new Masonry('#all_videos')
+      videoPreview.addEventListener('show.bs.modal', (event) => {
+        const { relatedTarget } = event
 
-            imagesLoaded(videos, () => { masonry.layout() })
+        const { bsVideoFilename, bsVideoSource } = relatedTarget.dataset
 
-            const observer = new MutationObserver((mutations, observer) => {
-                imagesLoaded(videos, () => {
-                    masonry.reloadItems()
+        videoPreview.querySelector('h5').textContent = bsVideoFilename
 
-                    masonry.layout()
-                })
-            })
+        videoPreview.querySelector('source').setAttribute('src', bsVideoSource)
 
-            observer.observe(videos, { childList: true, subtree: true })
+        videoPreview.querySelector('video').load()
+      })
 
-            const videoPreview = document.getElementById('video-preview-modal')
+      videoPreview.addEventListener('hidden.bs.modal', (event) => {
+        const video = videoPreview.querySelector('video')
 
-            videoPreview.addEventListener('show.bs.modal', (event) => {
-                const { relatedTarget } = event
-
-                const { bsVideoFilename, bsVideoSource } = relatedTarget.dataset
-
-                videoPreview.querySelector('h5').textContent = bsVideoFilename
-
-                videoPreview.querySelector('source').setAttribute('src', bsVideoSource)
-
-                videoPreview.querySelector('video').load()
-            })
-
-            videoPreview.addEventListener('hidden.bs.modal', (event) => {
-                    const video = videoPreview.querySelector('video')
-
-                    setTimeout(() => video.pause(), 100)
-                }
-            )
-        })()
+        video.pause()
+      })
     </script>
   </turbo-frame>
 </main>
