@@ -1,7 +1,11 @@
+<%= render 'application/flash' %>
+
 <main class="container p-4">
   <h1>Frases comerciales de la orden #<%= @order.id %></h1>
 
   <turbo-frame id="phrases">
+    <%= turbo_stream_from @order, :phrases %>
+
     <% @phrase = @order.phrases.new unless @phrase.present? %>
 
     <div class="card">
