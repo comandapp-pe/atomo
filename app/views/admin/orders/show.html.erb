@@ -69,184 +69,27 @@
 
   <br>
 
-  <div class="card">
-    <h2 class="card-header h5">Videos</h2>
-    <div class="card-body border-bottom">
-      <%= render partial: 'videos/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body">
-      <div data-controller="empty-state">
-        <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
-
-        <div id="all_videos" class="grid row" data-masonry='{ "percentPosition": true }'>
-          <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="video-preview-modal" class="modal fade" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Video filename</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <video controls preload="auto" style="width: 100%; height: 100%;">
-            <source id="video-preview-modal-src" src="" type="video/mp4">
-          </video>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="videos" src="<%= order_videos_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Fotos</div>
-
-    <div class="card-body border-bottom">
-      <%= render partial: 'photos/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body">
-      <div data-controller="empty-state">
-        <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
-
-        <div id="all_photos" class="grid row"  data-masonry='{"percentPosition": true}'>
-          <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="photos" src="<%= order_photos_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Locuciones</div>
-
-    <div class="card-body">
-      <%= render partial: 'locutions/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body border-top" data-controller="empty-state">
-      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
-
-      <div id="all_locutions" class="row">
-        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
-      </div>
-    </div>
-  </div>
+  <turbo-frame id="locutions" src="<%= order_locutions_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Fuentes (Tipos de letra)</div>
-
-    <div class="card-body">
-      <%= render partial: 'fonts/form', locals: { order: @order } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
-
-      <ul id="all_fonts" class="list-group list-group-flush">
-        <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="fonts" src="<%= order_fonts_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Ideas fuerza</div>
-
-    <div class="card-body">
-      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
-
-      <ul id="ideas" class="list-group list-group-flush">
-        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="ideas" src="<%= order_ideas_path(@order) %>"></turbo-frame>
 
   <br>
 
-  <div class="card">
-    <div class="card-header h5">Frases comerciales</div>
-
-    <div class="card-body">
-      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
-    </div>
-
-    <div class="border-top" data-controller="empty-state">
-      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
-
-      <ul id="phrases" class="list-group list-group-flush">
-        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
-      </ul>
-    </div>
-  </div>
+  <turbo-frame id="phrases" src="<%= order_phrases_path(@order) %>"></turbo-frame>
 </main>
 
 <%= render 'admin/footer' %>
-
-<script>
-  // TODO: Polish
-
-  const grid = $('.grid').masonry()
-
-  grid.imagesLoaded(() => {
-      grid.masonry('layout')
-  })
-
-  const observer = new MutationObserver((mutations, observer) => {
-      grid.imagesLoaded(() => {
-          grid.masonry('reloadItems')
-
-          grid.masonry('layout')
-      })
-  })
-
-  const videos = document.getElementById('all_videos')
-
-  observer.observe(videos, { childList: true, subtree: true })
-
-  const photos = document.getElementById('all_photos')
-
-  observer.observe(photos, { childList: true, subtree: true })
-
-  const videoPreview = document.getElementById('video-preview-modal')
-
-  videoPreview.addEventListener('show.bs.modal', (event) => {
-      const { relatedTarget } = event
-
-      const videoFilename = relatedTarget.getAttribute('data-bs-video-filename')
-
-      const videoSource = relatedTarget.getAttribute('data-bs-video-source')
-
-      const title = videoPreview.querySelector('.modal-title')
-
-      title.textContent = videoFilename
-
-      videoPreview.querySelector('source').setAttribute('src', videoSource)
-
-      videoPreview.querySelector('video').load()
-  })
-
-  videoPreview.addEventListener('hidden.bs.modal', (event) => {
-          const video = videoPreview.querySelector('video')
-
-          setTimeout(() => video.pause(), 100)
-      }
-  )
-</script>
