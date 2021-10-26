@@ -19,12 +19,4 @@
   <div>
     <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2', data: { disable_with: 'Añadiendo...' } %>
   </div>
-
-  <script>
-      const form = document.querySelector('#new_video')
-
-      form.addEventListener('submit', (event) => {
-          console.log(event)
-      })
-  </script>
 <% end %>
