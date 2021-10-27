@@ -27,11 +27,3 @@
 
   <%= render 'application/footer' %>
 </div>
-
-<script>
-  var grid = $('.grid').masonry()
-
-  grid.imagesLoaded().progress(() => {
-      grid.masonry('layout')
-  })
-</script>
