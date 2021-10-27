@@ -17,51 +17,15 @@
     <h1 class="card-header h3">Productos</h1>
 
     <div class="card-body">
-      <% if @products.empty? %>
-        <div class="alert alert-primary mb-0">
-          No hay datos disponibles.
-          <hr>
-          Crea un producto.
-        </div>
-      <% else %>
-        <div class="grid row g-2" data-masonry='{"percentPosition": true}'>
-          <% @products.each do |product| %>
-            <%= link_to [:admin, product], class: 'col-12 col-sm-6 col-md-4 col-lg-3 text-decoration-none wrap' do %>
-              <div class="card" role="button">
-                <img class="img-fluid" src="https://vumbnail.com/<%= product.vimeo_url.split('/').last %>.jpg">
-                <div class="card-body text-center">
-                  <h5 class="card-title"><%= product.name %></h5>
-                  <div class="card-subtitle text-muted">
-                    <% if product.category_id? %>
-                      <span><%= product.category.name %></span>
-                    <% else %>
-                      <span>Sin categoría</span>
-                    <% end %>
-                  </div>
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">No hay videos disponibles.</div>
 
-                  <% if product.published %>
-                    <div class="card-text text-success">Publicado</div>
-                  <% else %>
-                    <div class="card-text text-danger">No publicado</div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
+        <div id="all_products" data-controller="masonry">
+          <%= render partial: 'admin/products/product', collection: @products %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </main>
 
 <%= render 'admin/footer' %>
-
-
-<script>
-  var grid = $('.grid').masonry()
-
-  grid.imagesLoaded().progress(() => {
-      grid.masonry('layout')
-  })
-</script>
-
