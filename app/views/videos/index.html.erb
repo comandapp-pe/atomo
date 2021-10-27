@@ -18,46 +18,5 @@
         </div>
       </div>
     </div>
-
-    <div id="video-preview-modal" class="modal fade" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <video controls preload="auto" style="width: 100%; height: 100%;">
-              <source id="video-preview-modal-src" src="" type="video/mp4">
-            </video>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const videoPreview = document.getElementById('video-preview-modal')
-
-      videoPreview.addEventListener('show.bs.modal', (event) => {
-        const { relatedTarget } = event
-
-        const { bsVideoFilename, bsVideoSource } = relatedTarget.dataset
-
-        videoPreview.querySelector('h5').textContent = bsVideoFilename
-
-        videoPreview.querySelector('source').setAttribute('src', bsVideoSource)
-
-        videoPreview.querySelector('video').load()
-      })
-
-      videoPreview.addEventListener('hidden.bs.modal', (event) => {
-        const video = videoPreview.querySelector('video')
-
-        video.pause()
-      })
-    </script>
   </turbo-frame>
 </main>

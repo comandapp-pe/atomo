@@ -11,3 +11,6 @@ application.register("hello", HelloController)
 
 import MasonryController from "./masonry_controller.js"
 application.register("masonry", MasonryController)
+
+import VideoPreviewController from "./video_preview_controller.js"
+application.register("video-preview", VideoPreviewController)

@@ -8,17 +8,20 @@ class Order < ApplicationRecord
   has_many :ideas
   has_many :phrases
 
-  alias_attribute :CUSTOMEREMAIL, :customer_email
+  alias_attribute :CUSTOMEREMAIL, :customer_email # TODO: Remove this
 
   validate :videos_mime_types
   validate :videos_dimensions
   validate :videos_file_sizes
   validate :videos_durations
+
   validate :photos_mime_types
   validate :photos_dimensions
   validate :photos_file_sizes
+
   validate :fonts_mime_types
   validate :fonts_file_sizes
+
   validate :locutions_mime_types
 
   private
