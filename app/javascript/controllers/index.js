@@ -6,6 +6,9 @@ import { application } from "./application"
 import EmptyStateController from "./empty_state_controller.js"
 application.register("empty-state", EmptyStateController)
 
+import FileUploadController from "./file_upload_controller.js"
+application.register("file-upload", FileUploadController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 

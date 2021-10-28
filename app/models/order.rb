@@ -118,7 +118,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:fonts, "#{asset.filename} debe estar en formato ZIP.")
+      errors.add(:fonts, "#{asset.filename} debe estar en formato ZIP")
     end
   end
 
@@ -142,7 +142,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:locutions, "#{asset.filename} debe estar en formato MP3.")
+      errors.add(:locutions, "#{asset.filename} debe estar en formato MP3")
     end
   end
 end

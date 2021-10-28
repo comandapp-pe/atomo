@@ -1,4 +1,4 @@
-<%= form_with id: 'new_video', url: order_videos_path(order.id), method: :post, remote: true do |form| %>
+<%= form_with id: 'new_video', url: order_videos_path(order.id), method: :post, data: { turbo: false } do |form| %>
   <% if order.errors[:videos].any? %>
     <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(order.errors.count, "error evitó", 'errores evitaron') %> guardar este video:</h2>
@@ -11,8 +11,12 @@
     </div>
   <% end %>
 
+  <div class="progress mb-3">
+    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+  </div>
+
   <div class="form-group">
-    <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4' %>
+    <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4', direct_upload: true %>
     <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
   </div>
 
@@ -20,3 +24,23 @@
     <%= form.submit 'Añadir video', class: 'btn btn-primary mt-2', data: { disable_with: 'Añadiendo...' } %>
   </div>
 <% end %>
+
+<script>
+  addEventListener('direct-upload:initialize', event => {
+      console.log('fffffuck')
+  })
+
+  addEventListener('direct-upload:progress', event => {
+      const { id, progress } = event.detail
+
+      const progressBar = document.getElementById('progress-bar')
+
+      console.log(event)
+
+      console.log(event.detail)
+
+      progressBar.style.width = `${Math.trunc(progress)}%`
+
+      progressBar.textContent = `${Math.trunc(progress)}%`
+  })
+</script>

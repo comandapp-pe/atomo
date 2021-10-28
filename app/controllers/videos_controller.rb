@@ -20,13 +20,9 @@ class VideosController < ApplicationController
 
   # POST /assets or /assets.json
   def create
-    @file = params[:videos]
+    @signed_id = params[:videos]
 
-    @blob = ActiveStorage::Blob.create_and_upload!(
-      io: @file,
-      filename: @file.original_filename,
-      content_type: @file.content_type
-    )
+    @blob = ActiveStorage::Blob.find_signed(@signed_id)
 
     @blob.analyze
 
@@ -36,7 +32,15 @@ class VideosController < ApplicationController
       if @order.save
         @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
-        format.turbo_stream { render turbo_stream: turbo_stream.append(:all_videos, partial: 'videos/video', locals: { video: @video })}
+        format.turbo_stream do
+          flash.now[:notice] = 'Foto creada exitosamente.'
+
+          render turbo_stream: [
+            turbo_stream.replace(:flash, partial: 'application/flash'),
+            turbo_stream.replace(:new_video, partial: 'videos/form', locals: { order: @order }),
+            turbo_stream.append(:all_videos, partial: 'videos/video', locals: { video: @video })
+          ]
+        end
         format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
