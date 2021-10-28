@@ -58,21 +58,14 @@ class VideosController < ApplicationController
 
   # DELETE /assets/1 or /assets/1.json
   def destroy
-    @asset = ActiveStorage::Attachment.find(params[:id])
+    @video = ActiveStorage::Attachment.find(params[:id])
 
-    @order = Order.find(@asset.record_id)
+    @order = Order.find(@video.record_id)
 
-    @asset.purge
+    @video.purge
 
     respond_to do |format|
-      format.turbo_stream do
-        flash.now[:notice] = 'Video borrado exitosamente.'
-
-        render turbo_stream: [
-          turbo_stream.replace(:flash, partial: 'application/flash'),
-          turbo_stream.remove(@asset)
-        ]
-      end
+      format.js
       format.html { redirect_to [:admin, @order], notice: "Asset was successfully destroyed." }
       format.json { head :no_content }
     end

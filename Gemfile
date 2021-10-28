@@ -62,3 +62,5 @@ gem 'webpacker'
 gem 'turbo-rails'
 
 gem 'stimulus-rails'
+
+gem "jquery-rails", "~> 4.4"

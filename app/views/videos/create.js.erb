@@ -1,9 +1,7 @@
-form = document.getElementById('new-video')
+{
+    $('#new-video').html("<%= j render partial: 'videos/form', locals: { order: @order } %>")
 
-form.outerHTML = "<%= j render partial: 'videos/form', locals: { order: @order } %>"
-
-<% if @video %>
-videos = document.getElementById('all_videos')
-
-videos.insertAdjacentHTML('beforeend', "<%= j render partial: 'videos/video', locals: { video: @video } %>")
-<% end %>
+    <% if @video %>
+    $('#all-videos').append("<%= j render partial: 'videos/video', locals: { video: @video } %>")
+    <% end %>
+}
