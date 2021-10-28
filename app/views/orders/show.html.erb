@@ -1,5 +1,3 @@
-<%#= render 'application/flash' %>
-
 <main class="container p-4">
   <h1 class="text-center">Carga de recursos para la orden #<%= @order.id %></h1>
 
@@ -83,7 +81,23 @@
 
   <br>
 
-  <turbo-frame id="ideas" src="<%= order_ideas_path(@order) %>"></turbo-frame>
+  <% @idea = @order.ideas.new unless @idea.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Ideas fuerza</div>
+
+    <div class="card-body">
+      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
+
+      <ul id="all-ideas" class="list-group list-group-flush">
+        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 
   <br>
 

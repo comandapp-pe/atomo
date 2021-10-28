@@ -1,23 +1,21 @@
 <main class="container p-4">
   <h1>Ideas de la orden #<%= @order.id %></h1>
 
-  <turbo-frame id="ideas">
-    <% @idea = @order.ideas.new unless @idea.present? %>
+  <% @idea = @order.ideas.new unless @idea.present? %>
 
-    <div class="card">
-      <div class="card-header h5">Ideas fuerza</div>
+  <div class="card">
+    <div class="card-header h5">Ideas fuerza</div>
 
-      <div class="card-body">
-        <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
-      </div>
-
-      <div class="border-top" data-controller="empty-state">
-        <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
-
-        <ul id="all_ideas" class="list-group list-group-flush">
-          <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
-        </ul>
-      </div>
+    <div class="card-body">
+      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
     </div>
-  </turbo-frame>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
+
+      <ul id="all_ideas" class="list-group list-group-flush">
+        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 </main>

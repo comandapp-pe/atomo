@@ -1,0 +1,9 @@
+{
+    <% if @idea.persisted? %>
+    $('#new-idea').html("<%= j render partial: 'ideas/form', locals: { order: @order, idea: @order.ideas.new } %>")
+
+    $('#all-ideas').append("<%= j render @idea %>")
+    <% else %>
+    $('#new-idea').html("<%= j render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>")
+    <% end %>
+}

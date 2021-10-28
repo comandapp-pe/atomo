@@ -1,4 +1,4 @@
-<%= form_with id: 'new_idea', model: [order, idea], method: :post do |form| %>
+<%= form_with id: 'new-idea', model: [order, idea], remote: true do |form| %>
   <% if idea.errors.any? %>
     <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(idea.errors.count, "error evitó", "errores evitaron") %> guardar esta idea fuerza:</h2>
