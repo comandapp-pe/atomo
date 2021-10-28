@@ -20,35 +20,23 @@ class FontsController < ApplicationController
 
   # POST /fonts or /fonts.json
   def create
-    @file = params[:fonts]
+    @signed_id = params[:fonts]
 
-    @blob = ActiveStorage::Blob.create_and_upload!(
-      io: @file,
-      filename: @file.original_filename,
-      content_type: @file.content_type
-    )
+    @blob = ActiveStorage::Blob.find_signed(@signed_id)
 
     @blob.analyze
 
     @order.fonts.attach(@blob)
 
-    @font = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
-
     respond_to do |format|
       if @order.save
-        format.turbo_stream do
-          flash.now[:notice] = 'Fuente creada exitosamente.'
+        @font = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
-          render turbo_stream: [
-            turbo_stream.replace(:flash, partial: 'application/flash'),
-            turbo_stream.replace(:new_font, partial: 'fonts/form', locals: { order: @order }),
-            turbo_stream.append(:all_fonts, partial: 'fonts/font', locals: { font: @font })
-          ]
-        end
+        format.js
         format.html { redirect_to [:admin, @order], notice: "Font was successfully created." }
         format.json { render :show, status: :created, location: @font }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_font, partial: 'fonts/form', locals: { order: @order }) }
+        format.js
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @font.errors, status: :unprocessable_entity }
       end
@@ -76,14 +64,7 @@ class FontsController < ApplicationController
 
     @font.purge
     respond_to do |format|
-      format.turbo_stream do
-        flash.now[:notice] = 'Fuente borrada exitosamente.'
-
-        render turbo_stream: [
-          turbo_stream.replace(:flash, partial: 'application/flash'),
-          turbo_stream.remove(@font)
-        ]
-      end
+      format.js
       format.html { redirect_to [:admin, @order], notice: "Font was successfully destroyed." }
       format.json { head :no_content }
     end

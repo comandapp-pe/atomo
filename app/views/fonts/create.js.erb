@@ -1,0 +1,7 @@
+{
+    $('#new-font').html("<%= j render partial: 'fonts/form', locals: { order: @order } %>")
+
+    <% if @font %>
+    $('#all-fonts').append("<%= j render partial: 'fonts/font', locals: { font: @font } %>")
+    <% end %>
+}

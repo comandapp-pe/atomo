@@ -1,21 +1,19 @@
 <main class="container p-4">
   <h1>Fuentes (Tipos de letra) de la orden #<%= @order.id %></h1>
 
-  <turbo-frame id="fonts">
-    <div class="card">
-      <div class="card-header h5">Fuentes (Tipos de letra)</div>
+  <div class="card">
+    <div class="card-header h5">Fuentes (Tipos de letra)</div>
 
-      <div class="card-body">
-        <%= render partial: 'fonts/form', locals: { order: @order } %>
-      </div>
-
-      <div class="border-top" data-controller="empty-state">
-        <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
-
-        <ul id="all_fonts" class="list-group list-group-flush">
-          <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
-        </ul>
-      </div>
+    <div class="card-body">
+      <%= render partial: 'fonts/form', locals: { order: @order } %>
     </div>
-  </turbo-frame>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
+
+      <ul id="all-fonts" class="list-group list-group-flush">
+        <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 </main>
