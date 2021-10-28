@@ -69,11 +69,42 @@
 
   <br>
 
-  <turbo-frame id="videos" src="<%= order_videos_path(@order) %>"></turbo-frame>
+  <div class="card">
+    <h2 class="card-header h5">Videos</h2>
+    <div class="card-body border-bottom">
+      <%= render partial: 'videos/form', locals: { order: @order } %>
+    </div>
+
+    <div class="card-body">
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
+
+        <div id="all_videos" class="row" data-controller="masonry">
+          <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <br>
 
-  <turbo-frame id="photos" src="<%= order_photos_path(@order) %>"></turbo-frame>
+  <div class="card">
+    <div class="card-header h5">Fotos</div>
+
+    <div class="card-body border-bottom">
+      <%= render partial: 'photos/form', locals: { order: @order } %>
+    </div>
+
+    <div class="card-body">
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
+
+        <div id="all_photos" class="row" data-controller="masonry">
+          <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <br>
 

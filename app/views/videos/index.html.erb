@@ -3,6 +3,7 @@
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
+
     <div class="card-body border-bottom">
       <%= render partial: 'videos/form', locals: { order: @order } %>
     </div>
@@ -18,13 +19,3 @@
     </div>
   </div>
 </main>
-
-<script>
-    window.addEventListener('ajax:success', (event) => {
-        const [data, status, xhr] = event.detail
-
-        const { responseText } = xhr
-
-        document.getElementById('all_videos').insertAdjacentHTML('beforeend', responseText)
-    })
-</script>

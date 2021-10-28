@@ -20,13 +20,9 @@ class PhotosController < ApplicationController
 
   # POST /photos or /photos.json
   def create
-    @file = params[:photos]
+    @signed_id = params[:photos]
 
-    @blob = ActiveStorage::Blob.create_and_upload!(
-      io: @file,
-      filename: @file.original_filename,
-      content_type: @file.content_type
-    )
+    @blob = ActiveStorage::Blob.find_signed(@signed_id)
 
     @blob.analyze
 

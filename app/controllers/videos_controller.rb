@@ -32,9 +32,8 @@ class VideosController < ApplicationController
       if @order.save
         @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
-        format.js { render partial: 'videos/video', locals: { video: @video }, format: :html, layout: false, content_type: 'text/html' }
         format.turbo_stream do
-          flash.now[:notice] = 'Foto creada exitosamente.'
+          flash.now[:notice] = 'Video creado exitosamente.'
 
           render turbo_stream: [
             turbo_stream.replace(:flash, partial: 'application/flash'),
