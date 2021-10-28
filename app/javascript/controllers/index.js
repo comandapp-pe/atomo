@@ -9,6 +9,9 @@ application.register("empty-state", EmptyStateController)
 import FileUploadController from "./file_upload_controller.js"
 application.register("file-upload", FileUploadController)
 
+import FormController from "./form_controller.js"
+application.register("form", FormController)
+
 import FrameController from "./frame_controller.js"
 application.register("frame", FrameController)
 
