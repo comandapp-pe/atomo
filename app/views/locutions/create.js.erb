@@ -1,0 +1,7 @@
+{
+    $('#new-locution').html("<%= j render partial: 'locutions/form', locals: { order: @order } %>")
+
+    <% if @locution %>
+    $('#all-locutions').append("<%= j render partial: 'locutions/locution', locals: { locution: @locution } %>")
+    <% end %>
+}

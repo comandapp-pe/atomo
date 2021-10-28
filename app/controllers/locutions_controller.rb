@@ -20,35 +20,23 @@ class LocutionsController < ApplicationController
 
   # POST /locutions or /locutions.json
   def create
-    @file = params[:locutions]
+    @signed_id = params[:locutions]
 
-    @blob = ActiveStorage::Blob.create_and_upload!(
-      io: @file,
-      filename: @file.original_filename,
-      content_type: @file.content_type
-    )
+    @blob = ActiveStorage::Blob.find_signed(@signed_id)
 
     @blob.analyze
 
     @order.locutions.attach(@blob)
 
-    @locution = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
-
     respond_to do |format|
       if @order.save
-        format.turbo_stream do
-          flash.now[:notice] = 'Locución creada exitosamente.'
+        @locution = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
-          render turbo_stream: [
-            turbo_stream.replace(:flash, partial: 'application/flash'),
-            turbo_stream.replace(:new_locution, partial: 'locutions/form', locals: { order: @order }),
-            turbo_stream.append(:all_locutions, partial: 'locutions/locution', locals: { locution: @locution })
-          ]
-        end
+        format.js
         format.html { redirect_to [:admin, @order], notice: "Locution was successfully created." }
         format.json { render :show, status: :created, location: @locution }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_locution, partial: 'locutions/form', locals: { order: @order }) }
+        format.js
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @locution.errors, status: :unprocessable_entity }
       end
@@ -77,14 +65,7 @@ class LocutionsController < ApplicationController
     @locution.purge
 
     respond_to do |format|
-      format.turbo_stream do
-        flash.now[:notice] = 'Locución borrada exitosamente.'
-
-        render turbo_stream: [
-          turbo_stream.replace(:flash, partial: 'application/flash'),
-          turbo_stream.remove(@locution)
-        ]
-      end
+      format.js
       format.html { redirect_to [:admin, @order], notice: "Locution was successfully destroyed." }
       format.json { head :no_content }
     end

@@ -9,6 +9,7 @@
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
+
     <div class="card-body border-bottom">
       <%= render partial: 'videos/form', locals: { order: @order } %>
     </div>
@@ -46,7 +47,21 @@
 
   <br>
 
-  <turbo-frame id="locutions" src="<%= order_locutions_path(@order) %>"></turbo-frame>
+  <div class="card">
+    <div class="card-header h5">Locuciones</div>
+
+    <div class="card-body">
+      <%= render partial: 'locutions/form', locals: { order: @order } %>
+    </div>
+
+    <div class="card-body border-top" data-controller="empty-state">
+      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
+
+      <div id="all_locutions" class="row">
+        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
+      </div>
+    </div>
+  </div>
 
   <br>
 
