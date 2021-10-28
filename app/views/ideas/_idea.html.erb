@@ -4,7 +4,7 @@
       <%= idea.content %>
     </div>
     <div>
-      <%= button_to 'Borrar', idea, method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta idea fuerza?' }, class: 'btn btn-link link-danger text-decoration-none p-0' %>
+      <%= button_to 'Borrar', idea, method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta idea fuerza?', disable_with: 'Borrando...' }, class: 'btn btn-link link-danger text-decoration-none p-0' %>
     </div>
   </div>
 </div>

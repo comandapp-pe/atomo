@@ -6,7 +6,7 @@
   </div>
 
   <div class="d-flex justify-content-center align-items-center">
-    <%= button_to 'Borrar', photo_path(photo.id), method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta foto?' }, class: 'btn btn-link text-decoration-none link-danger me-3' %>
+    <%= button_to 'Borrar', photo_path(photo.id), method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta foto?', disable_with: 'Borrando...' }, class: 'btn btn-link text-decoration-none link-danger me-3' %>
     <%= link_to 'Descargar', rails_blob_path(photo, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
   </div>
 

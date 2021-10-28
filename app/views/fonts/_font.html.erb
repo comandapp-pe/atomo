@@ -2,7 +2,7 @@
   <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-sm-center">
     <div class="text-truncate"><%= font.filename %></div>
     <div class="d-flex align-items-center">
-      <%= button_to 'Borrar', font_path(font.id), method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta fuente?' }, class: 'btn btn-link text-decoration-none link-danger me-3' %>
+      <%= button_to 'Borrar', font_path(font.id), method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta fuente?', disable_with: 'Borrando...' }, class: 'btn btn-link text-decoration-none link-danger me-3' %>
       <%= link_to 'Descargar', rails_blob_path(font, disposition: 'attachment'), class: 'text-decoration-none link-primary' %>
     </div>
   </div>

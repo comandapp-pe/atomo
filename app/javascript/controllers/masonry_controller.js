@@ -12,6 +12,10 @@ export default class extends Controller {
     imagesLoaded(element).on('progress', () => { masonry.layout() })
 
     this.observer = new MutationObserver((mutations, observer) => {
+      masonry.reloadItems()
+
+      masonry.layout()
+      
       imagesLoaded(element).on('always', () => {
         masonry.reloadItems()
 
