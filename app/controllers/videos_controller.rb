@@ -36,6 +36,7 @@ class VideosController < ApplicationController
       if @order.save
         @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
+        format.js { render partial: 'videos/video', locals: { video: @video }, format: :html, layout: false, content_type: 'text/html' }
         format.turbo_stream { render turbo_stream: turbo_stream.append(:all_videos, partial: 'videos/video', locals: { video: @video })}
         format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
         format.json { render :show, status: :created, location: @order }

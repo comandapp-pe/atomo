@@ -1,22 +1,30 @@
 <main class="container p-4">
   <h1>Videos de la orden <%= @order.id %></h1>
 
-  <turbo-frame id="videos">
-    <div class="card">
-      <h2 class="card-header h5">Videos</h2>
-      <div class="card-body border-bottom">
-        <%= render partial: 'videos/form', locals: { order: @order } %>
-      </div>
+  <div class="card">
+    <h2 class="card-header h5">Videos</h2>
+    <div class="card-body border-bottom">
+      <%= render partial: 'videos/form', locals: { order: @order } %>
+    </div>
 
-      <div class="card-body">
-        <div data-controller="empty-state">
-          <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
+    <div class="card-body">
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-          <div id="all_videos" class="row" data-controller="masonry">
-            <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
-          </div>
+        <div id="all_videos" class="row" data-controller="masonry">
+          <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
         </div>
       </div>
     </div>
-  </turbo-frame>
+  </div>
 </main>
+
+<script>
+    window.addEventListener('ajax:success', (event) => {
+        const [data, status, xhr] = event.detail
+
+        const { responseText } = xhr
+
+        document.getElementById('all_videos').insertAdjacentHTML('beforeend', responseText)
+    })
+</script>

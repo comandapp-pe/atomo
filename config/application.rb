@@ -40,6 +40,6 @@ module App
     config.i18n.default_locale = :es
     config.i18n.fallbacks = [:en]
 
-    config.action_view.form_with_generates_remote_forms = false
+    config.action_view.form_with_generates_remote_forms = true
   end
 end
