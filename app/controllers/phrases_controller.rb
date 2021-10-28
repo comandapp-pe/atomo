@@ -25,18 +25,11 @@ class PhrasesController < ApplicationController
 
     respond_to do |format|
       if @phrase.save
-        format.turbo_stream do
-          flash.now[:notice] = 'Frase comercial creada.'
-
-          render turbo_stream: [
-            turbo_stream.replace(:flash, partial: 'application/flash'),
-            turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new })
-          ]
-        end
+        format.js
         format.html { redirect_to [:admin, @order], notice: "Phrase was successfully created." }
         format.json { render :show, status: :created, location: @phrase }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_phrase, partial: 'phrases/form', locals: { order: @order, phrase: @phrase } ) }
+        format.js
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @phrase.errors, status: :unprocessable_entity }
       end
@@ -61,13 +54,7 @@ class PhrasesController < ApplicationController
     @phrase.destroy
 
     respond_to do |format|
-      format.turbo_stream do
-        flash.now[:notice] = 'Frase comercial borrada.'
-
-        render turbo_stream: [
-          turbo_stream.replace(:flash, partial: 'application/flash')
-        ]
-      end
+      format.js
       format.html { redirect_to [:admin, @phrase.order], notice: "Phrase was successfully destroyed." }
       format.json { head :no_content }
     end

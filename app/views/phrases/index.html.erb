@@ -3,25 +3,21 @@
 <main class="container p-4">
   <h1>Frases comerciales de la orden #<%= @order.id %></h1>
 
-  <turbo-frame id="phrases">
-    <%= turbo_stream_from @order, :phrases %>
+  <% @phrase = @order.phrases.new unless @phrase.present? %>
 
-    <% @phrase = @order.phrases.new unless @phrase.present? %>
+  <div class="card">
+    <div class="card-header h5">Frases comerciales</div>
 
-    <div class="card">
-      <div class="card-header h5">Frases comerciales</div>
-
-      <div class="card-body">
-        <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
-      </div>
-
-      <div class="border-top" data-controller="empty-state">
-        <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
-
-        <ul id="all_phrases" class="list-group list-group-flush">
-          <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
-        </ul>
-      </div>
+    <div class="card-body">
+      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
     </div>
-  </turbo-frame>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
+
+      <ul id="all_phrases" class="list-group list-group-flush">
+        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 </main>

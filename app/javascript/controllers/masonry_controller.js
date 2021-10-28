@@ -15,7 +15,7 @@ export default class extends Controller {
       masonry.reloadItems()
 
       masonry.layout()
-      
+
       imagesLoaded(element).on('always', () => {
         masonry.reloadItems()
 

@@ -101,5 +101,21 @@
 
   <br>
 
-  <turbo-frame id="phrases" src="<%= order_phrases_path(@order) %>"></turbo-frame>
+  <% @phrase = @order.phrases.new unless @phrase.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Frases comerciales</div>
+
+    <div class="card-body">
+      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
+
+      <ul id="all-phrases" class="list-group list-group-flush">
+        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 </main>

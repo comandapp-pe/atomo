@@ -1,0 +1,9 @@
+{
+    <% if @phrase.persisted? %>
+    $('#new-phrase').html("<%= j render partial: 'phrases/form', locals: { order: @order, phrase: @order.phrases.new } %>")
+
+    $('#all-phrases').append("<%= j render @phrase %>")
+    <% else %>
+    $('#new-phrase').html("<%= j render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>")
+    <% end %>
+}
