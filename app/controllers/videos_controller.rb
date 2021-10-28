@@ -33,7 +33,7 @@ class VideosController < ApplicationController
         @video = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
         format.js
-        format.html { redirect_to [:admin, @order], notice: "El asset fue creado exitosamente." }
+        format.html { redirect_to [:admin, @order], notice: "Video creado exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
         format.js
@@ -66,7 +66,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.html { redirect_to [:admin, @order], notice: "Asset was successfully destroyed." }
+      format.html { redirect_to [:admin, @order], notice: "Video borrado exitosamente." }
       format.json { head :no_content }
     end
   end

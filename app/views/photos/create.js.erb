@@ -1,0 +1,7 @@
+{
+    $('#new-photo').html("<%= j render partial: 'photos/form', locals: { order: @order } %>")
+
+    <% if @photo %>
+    $('#all-photos').append("<%= j render partial: 'photos/photo', locals: { photo: @photo } %>")
+    <% end %>
+}

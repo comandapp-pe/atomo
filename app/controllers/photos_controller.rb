@@ -28,23 +28,15 @@ class PhotosController < ApplicationController
 
     @order.photos.attach(@blob)
 
-    @photo = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
-
     respond_to do |format|
       if @order.save
-        format.turbo_stream do
-          flash.now[:notice] = 'Foto creada exitosamente.'
+        @photo = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
 
-          render turbo_stream: [
-            turbo_stream.replace(:flash, partial: 'application/flash'),
-            turbo_stream.replace(:new_photo, partial: 'photos/form', locals: { order: @order }),
-            turbo_stream.append(:all_photos, partial: 'photos/photo', locals: { photo: @photo })
-          ]
-        end
-        format.html { redirect_to [:admin, @order], notice: "La foto fue creada exitosamente." }
+        format.js
+        format.html { redirect_to [:admin, @order], notice: "Foto creada exitosamente." }
         format.json { render :show, status: :created, location: @order }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_photo, partial: 'photos/form', locals: { order: @order }) }
+        format.js
         format.html { render 'admin/orders/show', status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
@@ -72,14 +64,7 @@ class PhotosController < ApplicationController
 
     @photo.purge
     respond_to do |format|
-      format.turbo_stream do
-        flash.now[:notice] = 'Foto borrada exitosamente.'
-
-        render turbo_stream: [
-          turbo_stream.replace(:flash, partial: 'application/flash'),
-          turbo_stream.remove(@photo)
-        ]
-      end
+      format.js
       format.html { redirect_to [:admin, @order], notice: "La foto fue borrada exitosamente." }
       format.json { head :no_content }
     end
