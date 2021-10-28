@@ -57,7 +57,7 @@
     <div class="card-body border-top" data-controller="empty-state">
       <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
 
-      <div id="all_locutions" class="row">
+      <div id="all-locutions" class="row">
         <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
       </div>
     </div>
