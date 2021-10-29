@@ -11,16 +11,16 @@ class Order < ApplicationRecord
   alias_attribute :CUSTOMEREMAIL, :customer_email # TODO: Remove this
 
   validate :videos_mime_types
-  validate :videos_dimensions
-  validate :videos_file_sizes
+  validate :videos_dimensions, if: -> { errors.where(:videos, :invalid_format).empty? }
+  validate :videos_file_sizes, if: -> { errors.where(:videos, :invalid_format).empty? }
   validate :videos_durations, if: -> { errors.where(:videos, :invalid_format).empty? }
 
   validate :photos_mime_types
   validate :photos_dimensions, if: -> { errors.where(:photos, :invalid_format).empty? }
-  validate :photos_file_sizes
+  validate :photos_file_sizes, if: -> { errors.where(:photos, :invalid_format).empty? }
 
   validate :fonts_mime_types
-  validate :fonts_file_sizes
+  validate :fonts_file_sizes, if: -> { errors.where(:fonts, :invalid_format).empty? }
 
   validate :locutions_mime_types
 
@@ -34,7 +34,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:videos, :invalid_format, message: "#{asset.filename} debe estar en formato mp4")
+      errors.add(:videos, :invalid_format, message: "#{asset.filename} debe estar en formato MP4")
     end
   end
 
@@ -118,7 +118,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:fonts, "#{asset.filename} debe estar en formato ZIP")
+      errors.add(:fonts, :invalid_format, message: "#{asset.filename} debe estar en formato ZIP")
     end
   end
 
