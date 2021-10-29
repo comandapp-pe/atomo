@@ -71,6 +71,7 @@
 
   <div class="card">
     <h2 class="card-header h5">Videos</h2>
+
     <div class="card-body border-bottom">
       <%= render partial: 'videos/form', locals: { order: @order } %>
     </div>
@@ -79,7 +80,7 @@
       <div data-controller="empty-state">
         <div data-empty-state-target="emptyState">La orden no tiene videos disponibles.</div>
 
-        <div id="all_videos" class="row" data-controller="masonry">
+        <div id="all-videos" class="row" data-controller="masonry">
           <%= render partial: 'videos/video', collection: @order.videos.filter(&:persisted?) %>
         </div>
       </div>
@@ -99,7 +100,7 @@
       <div data-controller="empty-state">
         <div data-empty-state-target="emptyState">La orden no tiene fotos disponibles.</div>
 
-        <div id="all_photos" class="row" data-controller="masonry">
+        <div id="all-photos" class="row" data-controller="masonry">
           <%= render partial: 'photos/photo', collection: @order.photos.filter(&:persisted?) %>
         </div>
       </div>
@@ -108,19 +109,80 @@
 
   <br>
 
-  <turbo-frame id="locutions" src="<%= order_locutions_path(@order) %>"></turbo-frame>
+  <div class="card">
+    <div class="card-header h5">Locuciones</div>
+
+    <div class="card-body">
+      <%= render partial: 'locutions/form', locals: { order: @order } %>
+    </div>
+
+    <div class="card-body border-top" data-controller="empty-state">
+      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
+
+      <div id="all-locutions" class="row">
+        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
+      </div>
+    </div>
+  </div>
 
   <br>
 
-  <turbo-frame id="fonts" src="<%= order_fonts_path(@order) %>"></turbo-frame>
+  <div class="card">
+    <div class="card-header h5">Fuentes (Tipos de letra)</div>
+
+    <div class="card-body">
+      <%= render partial: 'fonts/form', locals: { order: @order } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene fuentes disponibles.</div>
+
+      <ul id="all-fonts" class="list-group list-group-flush">
+        <%= render partial: 'fonts/font', collection: @order.fonts.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 
   <br>
 
-  <turbo-frame id="ideas" src="<%= order_ideas_path(@order) %>"></turbo-frame>
+  <% @idea = @order.ideas.new unless @idea.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Ideas fuerza</div>
+
+    <div class="card-body">
+      <%= render partial: 'ideas/form', locals: { order: @order, idea: @idea } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene ideas fuerza disponibles.</div>
+
+      <ul id="all-ideas" class="list-group list-group-flush">
+        <%= render partial: 'ideas/idea', collection: @order.ideas.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 
   <br>
 
-  <turbo-frame id="phrases" src="<%= order_phrases_path(@order) %>"></turbo-frame>
+  <% @phrase = @order.phrases.new unless @phrase.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Frases comerciales</div>
+
+    <div class="card-body">
+      <%= render partial: 'phrases/form', locals: { order: @order, phrase: @phrase } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene frases comerciales disponibles.</div>
+
+      <ul id="all-phrases" class="list-group list-group-flush">
+        <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
+
 </main>
 
 <%= render 'admin/footer' %>
