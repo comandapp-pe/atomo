@@ -1,4 +1,4 @@
-<%= form_with id: 'new-phrase', model: [order, phrase], remote: true do |form| %>
+<%= form_with id: 'new-phrase', model: [order, phrase], data: { remote: true } do |form| %>
   <% if phrase.errors.any? %>
     <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(phrase.errors[:content].count, "error evitó", "errores evitaron") %> guardar esta frase:</h2>
