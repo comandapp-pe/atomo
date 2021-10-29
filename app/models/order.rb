@@ -13,10 +13,10 @@ class Order < ApplicationRecord
   validate :videos_mime_types
   validate :videos_dimensions
   validate :videos_file_sizes
-  validate :videos_durations
+  validate :videos_durations, if: -> { errors.where(:videos, :invalid_format).empty? }
 
   validate :photos_mime_types
-  validate :photos_dimensions
+  validate :photos_dimensions, if: -> { errors.where(:photos, :invalid_format).empty? }
   validate :photos_file_sizes
 
   validate :fonts_mime_types
@@ -34,7 +34,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:videos, "#{asset.filename} debe estar en formato mp4")
+      errors.add(:videos, :invalid_format, message: "#{asset.filename} debe estar en formato mp4")
     end
   end
 
@@ -82,7 +82,7 @@ class Order < ApplicationRecord
     return if invalid.empty?
 
     invalid.each do |asset|
-      errors.add(:photos, "#{asset.filename} debe estar en formato JPEG o PNG")
+      errors.add(:photos, :invalid_format, message: "#{asset.filename} debe estar en formato JPEG o PNG")
     end
   end
 
