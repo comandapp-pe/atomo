@@ -15,7 +15,7 @@
 
   <div class="form-group">
     <%= form.file_field :videos, class: 'form-control', required: true, accept: 'video/mp4', direct_upload: true, data: { controller: 'progress' } %>
-    <div class="form-text">Cada video puede durar 10 segundos como máximo. Además, debe tener dimensiones de 1920x1080 y pesar como máximo 50 MB.</div>
+    <div class="form-text">Cada video debe estar en formato MP4 y tener dimensiones de 1920x1080. Además, puede durar hasta 10 segundos y pesar como máximo 50 MB.</div>
   </div>
 
   <div>
