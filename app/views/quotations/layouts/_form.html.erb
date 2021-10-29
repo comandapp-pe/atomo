@@ -1,0 +1,17 @@
+<%= form_with(model: quotations_layout) do |form| %>
+  <% if quotations_layout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quotations_layout.errors.count, "error") %> prohibited this quotations_layout from being saved:</h2>
+
+      <ul>
+        <% quotations_layout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

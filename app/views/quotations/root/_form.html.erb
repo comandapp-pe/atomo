@@ -1,0 +1,17 @@
+<%= form_with(model: quotations_root) do |form| %>
+  <% if quotations_root.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quotations_root.errors.count, "error") %> prohibited this quotations_root from being saved:</h2>
+
+      <ul>
+        <% quotations_root.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module Quotations::LeadsHelper
+end

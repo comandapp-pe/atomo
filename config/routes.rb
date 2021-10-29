@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'thanks/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'root#index'
 
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
     resources :phrases, shallow: true
     resources :locutions, shallow: true
   end
+
+  get 'thanks', to: 'thanks#index'
 
   resources :checkout_links, only: [:create]
 

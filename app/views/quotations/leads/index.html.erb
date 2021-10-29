@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Quotations Leads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quotations_leads.each do |quotations_lead| %>
+      <tr>
+        <td><%= link_to 'Show', quotations_lead %></td>
+        <td><%= link_to 'Edit', edit_quotations_lead_path(quotations_lead) %></td>
+        <td><%= link_to 'Destroy', quotations_lead, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quotations Lead', new_quotations_lead_path %>
