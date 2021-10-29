@@ -20,7 +20,7 @@ class CheckoutLink < ApplicationRecord
       prod: self.product.checkout_code,
       qty: '1',
       'return-type': 'redirect',
-      'return-url': 'https://socialspots.herokuapp.com',
+      'return-url': 'https://socialspots.herokuapp.com/thanks',
     }.sort.to_h # the signable's keys must be ordered alphabetically
 
     concat = signable.to_a.map { |key, value| "#{value.length}#{value}" }.join
