@@ -1,7 +1,9 @@
 {
-    $('#new-locution').html("<%= j render partial: 'locutions/form', locals: { order: @order } %>")
+    <% if @locution.persisted? %>
+    $('#new-locution').html("<%= j render partial: 'locutions/form', locals: { order: @order, locution: @order.locutions.new } %>")
 
-    <% if @locution %>
-    $('#all-locutions').append("<%= j render partial: 'locutions/locution', locals: { locution: @locution } %>")
+    $('#all-locutions').append("<%= j render @locution %>")
+    <% else %>
+    $('#all-locutions').append("<%= j render partial: 'locutions/locution', locals: { order: @order, locution: @locution } %>")
     <% end %>
 }
