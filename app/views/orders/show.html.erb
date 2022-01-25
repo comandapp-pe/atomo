@@ -47,24 +47,6 @@
   <br>
 
   <div class="card">
-    <div class="card-header h5">Locuciones</div>
-
-    <div class="card-body">
-      <%= render partial: 'locutions/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body border-top" data-controller="empty-state">
-      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
-
-      <div id="all-locutions" class="row">
-        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
     <div class="card-header h5">Fuentes (Tipos de letra)</div>
 
     <div class="card-body">
@@ -116,6 +98,26 @@
 
       <ul id="all-phrases" class="list-group list-group-flush">
         <%= render partial: 'phrases/phrase', collection: @order.phrases.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <% @locution = @order.locutions.new unless @locution.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Locuciones</div>
+
+    <div class="card-body">
+      <%= render partial: 'locutions/form', locals: { order: @order, locution: @locution } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
+
+      <ul id="all-locutions" class="list-group list-group-flush">
+        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
       </ul>
     </div>
   </div>

@@ -1,5 +1,6 @@
 class LocutionsController < ApplicationController
   before_action :set_order, only: [:index, :new, :create]
+  before_action :set_locution, only: %i[ show edit update destroy ]
 
   # GET /locutions or /locutions.json
   def index
@@ -20,18 +21,10 @@ class LocutionsController < ApplicationController
 
   # POST /locutions or /locutions.json
   def create
-    @signed_id = params[:locutions]
-
-    @blob = ActiveStorage::Blob.find_signed(@signed_id)
-
-    @blob.analyze
-
-    @order.locutions.attach(@blob)
+    @locution = @order.locutions.new(locution_params)
 
     respond_to do |format|
       if @order.save
-        @locution = ActiveStorage::Attachment.find_by(blob_id: @blob.id)
-
         format.js
         format.html { redirect_to [:admin, @order], notice: "Locution was successfully created." }
         format.json { render :show, status: :created, location: @locution }
@@ -58,11 +51,7 @@ class LocutionsController < ApplicationController
 
   # DELETE /locutions/1 or /locutions/1.json
   def destroy
-    @locution = ActiveStorage::Attachment.find(params[:id])
-
-    @order = Order.find(@locution.record_id)
-
-    @locution.purge
+    @locution.destroy
 
     respond_to do |format|
       format.js
@@ -76,8 +65,12 @@ class LocutionsController < ApplicationController
     def set_order
       @order = Order.find(params[:order_id])
     end
+
+  def set_locution
+    @locution = Locution.find(params[:id])
+  end
     # Only allow a list of trusted parameters through.
     def locution_params
-      params.fetch(:locution, {})
+      params.require(:locution).permit(:content)
     end
 end

@@ -19,6 +19,11 @@
             <%= form.select :format, [['Horizontal', 'horizontal'], ['Vertical', 'vertical'], ['Cuadrado', 'square']], { include_blank: 'Selecciona un formato' }, class: 'form-select', required: true %>
           </div>
 
+          <div class="mb-3">
+            <%= form.label :locution, 'Locución (opcional)', class: 'form-label' %>
+            <%= form.select :locution, [['Opción 1 (+ USD $10)', 15], ['Opción 2 (+ USD $20)', 20], ['Opción 3 (+ USD $30)', 30]], { include_blank: 'Selecciona una locución' }, class: 'form-select', required: true %>
+          </div>
+
           <%= form.submit 'Ir al checkout', class: 'btn btn-outline-primary w-100', data: { turbo: false } %>
         <% end %>
       </div>

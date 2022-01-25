@@ -4,9 +4,9 @@ class Order < ApplicationRecord
   has_many_attached :videos
   has_many_attached :photos
   has_many_attached :fonts
-  has_many_attached :locutions
   has_many :ideas
   has_many :phrases
+  has_many :locutions
 
   alias_attribute :CUSTOMEREMAIL, :customer_email # TODO: Remove this
 
@@ -21,8 +21,6 @@ class Order < ApplicationRecord
 
   validate :fonts_mime_types
   validate :fonts_file_sizes, if: -> { errors.where(:fonts, :invalid_format).empty? }
-
-  validate :locutions_mime_types
 
   private
 
@@ -131,18 +129,6 @@ class Order < ApplicationRecord
 
     invalid.each do |asset|
       errors.add(:fonts, "#{asset.filename} debe pesar como máximo 10 MB")
-    end
-  end
-
-  def locutions_mime_types
-    return unless locutions.attached?
-
-    valid, invalid = locutions.partition { |asset| ['audio/mpeg'].include?(asset.blob.content_type) }
-
-    return if invalid.empty?
-
-    invalid.each do |asset|
-      errors.add(:locutions, "#{asset.filename} debe estar en formato MP3")
     end
   end
 end

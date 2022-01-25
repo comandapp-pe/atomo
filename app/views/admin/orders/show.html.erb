@@ -1,8 +1,5 @@
 <%= render 'admin/header' %>
 
-<% @idea = @order.ideas.new unless @idea.present? %>
-<% @phrase = @order.phrases.new unless @phrase.present? %>
-
 <main class="container px-4">
   <% if notice %>
     <div id="notice" class="alert alert-success alert-dismissible fade show">
@@ -110,24 +107,6 @@
   <br>
 
   <div class="card">
-    <div class="card-header h5">Locuciones</div>
-
-    <div class="card-body">
-      <%= render partial: 'locutions/form', locals: { order: @order } %>
-    </div>
-
-    <div class="card-body border-top" data-controller="empty-state">
-      <div data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
-
-      <div id="all-locutions" class="row">
-        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="card">
     <div class="card-header h5">Fuentes (Tipos de letra)</div>
 
     <div class="card-body">
@@ -183,6 +162,25 @@
     </div>
   </div>
 
+  <br>
+
+  <% @locution = @order.locutions.new unless @locution.present? %>
+
+  <div class="card">
+    <div class="card-header h5">Locuciones</div>
+
+    <div class="card-body">
+      <%= render partial: 'locutions/form', locals: { order: @order, locution: @locution } %>
+    </div>
+
+    <div class="border-top" data-controller="empty-state">
+      <div class="card-body" data-empty-state-target="emptyState">La orden no tiene locuciones disponibles.</div>
+
+      <ul id="all-locutions" class="list-group list-group-flush">
+        <%= render partial: 'locutions/locution', collection: @order.locutions.filter(&:persisted?) %>
+      </ul>
+    </div>
+  </div>
 </main>
 
 <%= render 'admin/footer' %>
