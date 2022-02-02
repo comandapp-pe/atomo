@@ -1,13 +1,17 @@
 <footer class="d-flex flex-column flex-lg-row justify-content-center py-4 border-top text-center">
-  <ul class="list-unstyled ps-lg-4">
+<% if false %>
+		<ul class="list-unstyled ps-lg-4">
     <li><%= link_to 'Guía del usuario', image_path('user-guide.pdf'), class: 'link-secondary text-decoration-none' %></li>
-    <li><%= link_to 'FAQ', image_path('faq.pdf'), class: 'link-secondary text-decoration-none' %></li>
   </ul>
   <ul class="list-unstyled ps-lg-4">
     <li><%= link_to 'Términos de servicio', image_path('terms-of-service.pdf'), class: 'link-secondary text-decoration-none' %></li>
+  </ul>
+  <ul class="list-unstyled ps-lg-4">
     <li><%= link_to 'Política de privacidad', image_path('privacy-policy.pdf'), class: 'link-secondary text-decoration-none' %></li>
   </ul>
   <ul class="list-unstyled ps-lg-4">
     <li><%= link_to 'Administrador', admin_root_path, class: 'link-secondary text-decoration-none' %></li>
   </ul>
+	<% end %>
+  
 </footer>
