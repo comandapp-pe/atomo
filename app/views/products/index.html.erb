@@ -20,7 +20,7 @@
         <h6>No hay plantillas disponibles.</h6>
       </div>
 
-      <div id="all_products" class="row">
+      <div id="all_products" class="row" data-controller="masonry">
         <%= render partial: 'products/product', collection: @products %>
       </div>
     </div>
