@@ -16,5 +16,5 @@
 
 .bg-dots {
     background-image: url("bg.svg");
-    background-size: cover;
+    background-position: repeat-y;
 }
