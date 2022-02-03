@@ -6,22 +6,19 @@
   <%= render 'application/header' %>
 
   <main class="container p-4 flex-grow-1">
-    <% if @category %>
-      <h1 class="text-center mb-2"><%= @category.name %></h1>
-    <% else %>
-      <h1 class="text-center mb-2">Todas las plantillas</h1>
-    <% end %>
-
-    <nav class="nav d-flex justify-content-center py-2 mb-2">
-      <%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2' %>
-
+    <div class='card'>
+    <nav class="nav d-flex justify-content-center py-2">
+      <%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2 text-muted' %>
       <% Category.all.each do |category| %>
-        <%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2' %>
+        <%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2 text-muted' %>
       <% end %>
     </nav>
+    </div>
 
     <div data-controller="empty-state">
-      <div data-empty-state-target="emptyState">No hay plantillas disponibles.</div>
+      <div data-empty-state-target="emptyState" class='d-flex justify-content-center align-items-center p-5'>
+        <h6>No hay plantillas disponibles.</h6>
+      </div>
 
       <div id="all_products" class="row" data-controller="masonry">
         <%= render partial: 'products/product', collection: @products %>

@@ -59,7 +59,7 @@ gem "rails-i18n", "~> 6.0"
 
 gem 'webpacker'
 
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 1.0'
 
 gem 'stimulus-rails'
 
