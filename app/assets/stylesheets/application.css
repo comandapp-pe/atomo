@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.bg-dots {
+    background-image: url("bg.svg");
+}
