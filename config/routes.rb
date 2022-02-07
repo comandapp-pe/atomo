@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get 'thanks/index'
+  # get 'thanks/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'root#index'
+
+  get 'inicio', to: 'root#inicio'
 
   resources :products
   resources :categories
