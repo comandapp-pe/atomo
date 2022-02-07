@@ -5,4 +5,7 @@ class RootController < ApplicationController
   
   def inicio
   end
+
+  def widgets
+  end
 end

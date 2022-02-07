@@ -64,3 +64,8 @@ gem 'turbo-rails', '~> 1.0'
 gem 'stimulus-rails'
 
 gem "jquery-rails", "~> 4.4"
+
+gem 'bootstrap'
+
+gem 'sass-rails'
+

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'root#index'
 
   get 'inicio', to: 'root#inicio'
+  get 'widgets', to: 'root#widgets'
 
   resources :products
   resources :categories
