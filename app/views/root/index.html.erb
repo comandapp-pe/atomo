@@ -1,4 +1,19 @@
-<div class="min-vh-100 d-flex flex-column" style="background-image: url(<%= image_path "heroBg.svg"%>); background-position: center; background-size: cover;">
+<div class="min-vh-100 d-flex flex-column d-lg-none" style="background-image: url(<%= image_path "heroBgMobile.svg"%>); background-position: center; background-size: cover;">
+
+	<main class="flex-grow-1 d-flex">
+		<div class='container flex-grow-1 d-flex flex-column justify-content-center align-items-center'>
+			<%= image_tag "logo.png", height: 180, class: 'mb-5' %>
+			<h1 class='text-center mb-5'>
+				Muy pronto estaremos en línea <br/>
+				<small>para trearte la mejor alternativa de promoción <br/> para tus redes sociales...!!!</small>
+			</h1>
+			<button class='btn btn-outline-primary'>Quiero saber más...</button>
+		</div>	
+	</main>
+
+</div>
+
+<div class="min-vh-100 flex-column d-none d-lg-flex" style="background-image: url(<%= image_path "heroBg.svg"%>); background-position: center; background-size: cover;">
 
 	<main class="flex-grow-1 d-flex">
 		<div class='container flex-grow-1 d-flex flex-column justify-content-center align-items-center'>
