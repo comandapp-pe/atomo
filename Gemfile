@@ -69,3 +69,5 @@ gem 'bootstrap'
 
 gem 'sass-rails'
 
+gem 'pagy'
+

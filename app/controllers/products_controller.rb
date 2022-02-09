@@ -1,4 +1,6 @@
 # typed: false
+include Pagy::Backend
+
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
@@ -13,8 +15,8 @@ class ProductsController < ApplicationController
 
       query = query.merge({ category: @category })
     end
-
-    @products = Product.where(query).order(created_at: :desc)
+    
+    @pagy, @products = pagy(Product.where(query).order(created_at: :desc))
   end
 
   # GET /product/1 or /product/1.json
