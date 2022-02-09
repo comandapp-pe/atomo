@@ -7,13 +7,9 @@
   </div>
 
   <div class="modal fade" id="modal-<%= product.checkout_code %>" data-product="<%= product.checkout_code %>" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><%= product.name %></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+        <div class="modal-body p-0">
           <% video = Nokogiri::HTML product.preview_html.html_safe %>
           <% width = video.at('iframe')['width'] %>
           <% height = video.at('iframe')['height'] %>
@@ -22,13 +18,9 @@
           <div class="ratio ratio-<%= ratio %>">
             <%= product.preview_html.html_safe %>
           </div>
-
-          <br>
-
-          <p class="mb-0"><%= product.description %></p>
         </div>
         <div class="modal-footer">
-          <%= link_to 'Customizar', new_order_path(params: { product_id: product.id }), class: 'btn btn-outline-primary btn-lg w-100' %>
+          <%= link_to 'Personalizar', new_order_path(params: { product_id: product.id }), class: 'btn btn-outline-primary btn-lg w-100' %>
         </div>
       </div>
     </div>
