@@ -15,7 +15,12 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
+    @productId = params[:product_id]
     @product = Product.find(params[:product_id])
+    @length = params[:length]
+    @format = params[:format]
+
+    
 
     @order = Order.new
   end
