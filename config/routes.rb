@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
     resources :orders
+    resources :locutions
     resource :session, only: [:new, :create, :destroy]
   end
 end

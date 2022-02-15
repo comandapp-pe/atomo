@@ -1,0 +1,38 @@
+<div class="min-vh-100 d-flex flex-column" style="background-image: url(<%= image_path "heroBg.svg"%>); background-position: center; background-size: cover;">
+  <%= render 'application/header' %>
+
+  <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+    <div class='card rounded-top-left-8 rounded-bottom-right-8 px-4 py-5 border-0 mx-5' style="background-image: url(<%= image_path "gradient-1.svg"%>); background-position: center; background-size: cover;">
+        <div class='px-5 d-flex flex-column text-center text-light mb-4'>
+          <span style='font-family: "EuroStile-Bold"; font-size: 140px; line-height: 140px'>15</span>
+          <span style='font-family: "EuroStile"; font-size: 100px; line-height: 100px'>SEG</span>
+        </div>
+        <span class='text-center mb-5' style='font-family: "EuroStile-Bold"; font-size: 80px; line-height: 80px'>$20</span>
+        <div class='text-center'>
+          <%= form_with url: "/orders/new", method: :get do |form| %>
+            <%= form.hidden_field :product_id, value: params[:product_id] %>
+            <%= form.hidden_field :length, value: '15' %>
+            <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+          <% end %>
+        </div>
+    </div>
+
+    <div class='card rounded-top-left-8 rounded-bottom-right-8 px-4 py-5 border-0 mx-5' style="background-image: url(<%= image_path "gradient-2.svg"%>); background-position: center; background-size: cover;">
+        <div class='px-5 d-flex flex-column text-center text-light mb-4'>
+          <span style='font-family: "EuroStile-Bold"; font-size: 140px; line-height: 140px'>30</span>
+          <span style='font-family: "EuroStile"; font-size: 100px; line-height: 100px'>SEG</span>
+        </div>
+        <span class='text-center mb-5' style='font-family: "EuroStile-Bold"; font-size: 80px; line-height: 80px'>$50</span>
+        <div class='text-center'>
+          <%= form_with url: "/orders/new", method: :get do |form| %>
+            <%= form.hidden_field :product_id, value: params[:product_id] %>
+            <%= form.hidden_field :length, value: '30' %>
+            <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+          <% end %>
+        </div>
+    </div>
+  </main>
+
+  <%= render 'application/footer' %>
+  </div>
+

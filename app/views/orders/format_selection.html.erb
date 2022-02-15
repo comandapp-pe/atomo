@@ -1,0 +1,42 @@
+<div class="min-vh-100 d-flex flex-column" style="background-image: url(<%= image_path "heroBg.svg"%>); background-position: center; background-size: cover;">
+  <%= render 'application/header' %>
+
+  <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+    <div class='card px-4 py-5 border-0 rounded-5'>
+      <%= image_tag "horizontal.svg", width: 250 %>
+      <div class='text-center'>
+        <%= form_with url: "/orders/new", method: :get do |form| %>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: params[:length] %>
+          <%= form.hidden_field :format, value: 'horizontal' %>
+          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+        <% end %>
+      </div>
+    </div> 
+    <div class='card px-4 py-5 border-0 rounded-5'>
+        <%= image_tag "vertical.svg", width: 250 %>
+        <div class='text-center'>
+          <%= form_with url: "/orders/new", method: :get do |form| %>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: params[:length] %>
+          <%= form.hidden_field :format, value: 'vertical' %>
+          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+        <% end %>
+        </div>
+    </div>
+    <div class='card px-4 py-5 border-0 rounded-5'>
+        <%= image_tag "cuadrado.svg", width: 250 %>
+        <div class='text-center'>
+          <%= form_with url: "/orders/new", method: :get do |form| %>
+          <%= form.hidden_field :product_id, value: params[:product_id] %>
+          <%= form.hidden_field :length, value: params[:length] %>
+          <%= form.hidden_field :format, value: 'square' %>
+          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+        <% end %>
+        </div>
+    </div>
+  </main>
+
+  <%= render 'application/footer' %>
+  </div>
+

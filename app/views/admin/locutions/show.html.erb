@@ -1,0 +1,76 @@
+<%= render 'admin/header' %>
+
+<main class="container px-4" >
+  <div class="mb-4">
+    <%= link_to '< Regresar', admin_locutions_path, class: 'text-decoration-none' %>
+  </div>
+
+  <% if notice %>
+    <div id="notice" class="alert alert-success alert-dismissible">
+      <%= notice %> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <h1 class="card-header h3"><%= @locution.name_in_database %></h1>
+    <div class="card-body">
+      <%= form_with model: @locution, url: [:admin, @locution] do |form| %>
+        <% if @locution.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@locution.errors.count, "error") %> evitaron guardar este locutiono:</h2>
+            <hr>
+            <ul>
+              <% @locution.errors.each do |error| %>
+                <li><%= error.full_message %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-2">
+          <%= form.label :vimeo_url, 'URL de Vimeo', class: 'form-label' %>
+          <%= form.text_field :vimeo_url, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :name, 'Nombre', class: 'form-label' %>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :description, 'Descripción', class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control', rows: 5 %>
+        </div>
+
+        <div class="mb-2">
+          <%= form.label :published, 'Publicado', class: 'form-label' %>
+          <%= form.select :published, [['Sí', true], ['No', false]], {}, class: 'form-select' %>
+        </div>
+
+        <%= form.submit class: 'btn btn-primary mt-3' %>
+      <% end %>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Borrar locucion', [:admin, @locution], method: :delete, data: { confirm: '¿Estás seguro de borrar este locutiono?' }, class: 'text-decoration-none link-danger' %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h2 class="card-header h3">Prevista</h2>
+    <div class="card-body">
+      <% video = Nokogiri::HTML @locution.preview_html.html_safe %>
+      <% width = video.at('iframe')['width'] %>
+      <% height = video.at('iframe')['height'] %>
+      <% ratio = width == height ? '1x1' : '16x9' %>
+
+      <div class="ratio ratio-<%= ratio %>">
+        <%= @locution.preview_html.html_safe %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%= render 'admin/footer' %>

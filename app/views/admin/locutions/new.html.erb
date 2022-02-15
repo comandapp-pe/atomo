@@ -1,0 +1,17 @@
+<%= render 'admin/header' %>
+
+<main class="container px-4">
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="mb-2">
+    <%= link_to '< Regresar', admin_locutions_path, class: 'text-decoration-none' %>
+  </div>
+
+  <h1>Nueva Locucion</h1>
+
+  <%= render 'form', locution: @locution %>
+</main>
+
+<%= render 'admin/footer' %>

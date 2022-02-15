@@ -14,5 +14,14 @@
  *= require_self
  */
 
- @import "theme";
- @import "bootstrap";
+@import "theme";
+@import "bootstrap";
+
+@font-face {
+    font-family: 'Eurostile';
+    src: url('eurostile.ttf');
+}
+@font-face {
+    font-family: 'Eurostile Bold';
+    src: url('eurostile-bold.otf');
+}

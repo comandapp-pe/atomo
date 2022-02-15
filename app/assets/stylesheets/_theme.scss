@@ -1,9 +1,42 @@
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 5,
+  8: $spacer * 6,
+  9: $spacer * 7,
+  2rem: 2rem
+);
+
 $border-radius:               .25rem;
 $border-radius-sm:            .2rem;
 $border-radius-lg:            .3rem;
 $border-radius-pill:          50rem;
 
 $utilities: (
+    "padding": (
+      responsive: true,
+      property: padding,
+      class: p,
+      values: $spacers
+    ),
+    "padding-x": (
+      responsive: true,
+      property: padding-right padding-left,
+      class: px,
+      values: $spacers
+    ),
+    "padding-y": (
+      responsive: true,
+      property: padding-top padding-bottom,
+      class: py,
+      values: $spacers
+    ),
     "rounded": (
         property: border-radius,
         class: rounded,
@@ -30,6 +63,34 @@ $utilities: (
             3: $border-radius-lg,
             4: .5rem,
             5: .75rem,
+        )
+    ),
+    "rounded-top-left": (
+        property: border-top-left-radius,
+        class: rounded-top-left,
+        values: (
+            null: $border-radius,
+            0: 0,
+            1: $border-radius-sm,
+            2: $border-radius,
+            3: $border-radius-lg,
+            4: .5rem,
+            5: .75rem,
+            8: 8rem
+        )
+    ),
+    "rounded-bottom-right": (
+        property: border-bottom-right-radius,
+        class: rounded-bottom-right,
+        values: (
+            null: $border-radius,
+            0: 0,
+            1: $border-radius-sm,
+            2: $border-radius,
+            3: $border-radius-lg,
+            4: .5rem,
+            5: .75rem,
+            8: 8rem
         )
     ),
 );

@@ -15,12 +15,26 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @productId = params[:product_id]
     @product = Product.find(params[:product_id])
+
     @length = params[:length]
     @format = params[:format]
-
+    @loc = params[:loc]
     
+    unless @length
+      render 'length_selection'
+      return
+    end
+
+    unless @format
+      render 'format_selection'
+      return
+    end
+
+    unless @loc
+      render 'loc_selection'
+      return
+    end
 
     @order = Order.new
   end

@@ -1,0 +1,31 @@
+<%= render 'admin/header' %>
+
+<main class="container px-4">
+  <% if notice %>
+    <div id="notice" class="alert alert-success alert-dismissible fade show">
+      <%= notice %> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div>
+    <%= link_to 'Crear Locucion', new_admin_locution_path, class: 'btn btn-primary' %>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h1 class="card-header h3">Locuciones</h1>
+
+    <div class="card-body">
+      <div data-controller="empty-state">
+        <div data-empty-state-target="emptyState">No hay locuciones disponibles.</div>
+
+        <div id="all_products" data-controller="masonry">
+          <%= render partial: 'admin/locutions/locution', collection: @locutions %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%= render 'admin/footer' %>

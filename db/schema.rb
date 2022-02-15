@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_06_144731) do
+ActiveRecord::Schema.define(version: 2022_02_15_210843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,11 +82,15 @@ ActiveRecord::Schema.define(version: 2021_11_06_144731) do
   end
 
   create_table "locutions", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_locutions_on_order_id"
+    t.string "vimeo_url"
+    t.string "name"
+    t.string "preview_html"
+    t.string "description"
+    t.string "thumbnail_url"
+    t.string "thumbnail_url_with_play_button"
+    t.boolean "published"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -135,7 +139,6 @@ ActiveRecord::Schema.define(version: 2021_11_06_144731) do
   add_foreign_key "admin_sessions", "admin_users"
   add_foreign_key "checkout_links", "products"
   add_foreign_key "ideas", "orders"
-  add_foreign_key "locutions", "orders"
   add_foreign_key "orders", "products"
   add_foreign_key "phrases", "orders"
   add_foreign_key "products", "categories"

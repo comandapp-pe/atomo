@@ -1,0 +1,15 @@
+<%= link_to [:admin, locution], class: 'col-12 col-sm-6 col-md-4 col-lg-3 text-decoration-none p-1', data: { empty_state_target: 'item' } do %>
+  <div class="card">
+    <img class="img-fluid" src="https://vumbnail.com/<%= locution.vimeo_url.split('/').last %>.jpg">
+
+    <div class="card-body text-center">
+      <h5 class="card-title"><%= locution.name %></h5>
+
+      <% if locution.published %>
+        <div class="card-text text-success">Publicado</div>
+      <% else %>
+        <div class="card-text text-danger">No publicado</div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
