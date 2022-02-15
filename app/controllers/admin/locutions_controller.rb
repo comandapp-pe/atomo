@@ -32,6 +32,14 @@ class Admin::LocutionsController < ApplicationController
         end
     end
 
+    def destroy
+      @locution.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_locutions_url, notice: "Borraste una locucion exitosamente." }
+        format.json { head :no_content }
+      end
+    end
+
     def admin_locution_create_params
         params.require(:locution).permit(:vimeo_url)
     end
