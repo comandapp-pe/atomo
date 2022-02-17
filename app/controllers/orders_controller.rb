@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @product = Product.find(params[:product_id])
+    @locutions = Locution.where({ published: true }).order(name: :asc)
 
     @length = params[:length]
     @format = params[:format]

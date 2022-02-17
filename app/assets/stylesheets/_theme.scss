@@ -19,6 +19,15 @@ $border-radius-lg:            .3rem;
 $border-radius-pill:          50rem;
 
 $utilities: (
+    "bg-image": (
+        responsive: true,
+        property: background-image,
+        class: bg-image,
+        values: (
+            1: image-url("heroBgMobile.svg"),
+            2: image-url("heroBg.svg")
+        )
+    ),
     "padding": (
       responsive: true,
       property: padding,

@@ -1,10 +1,16 @@
-<li id="<%= dom_id locution %>" class="list-group-item" data-empty-state-target="item">
-  <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-    <div>
-      <%= locution.content %>
+<div class="col col-12 col-sm-6 col-md-4 col-lg-3 my-3">
+  <div class="card h-100">
+    <% video = Nokogiri::HTML locution.preview_html.html_safe %>
+          <% width = video.at('iframe')['width'] %>
+          <% height = video.at('iframe')['height'] %>
+          <% ratio = width == height ? '1x1' : '16x9' %>
+
+          <div class="ratio ratio-<%= ratio %>">
+            <%= locution.preview_html.html_safe %>
+          </div>
+
+    <div class="card-body text-center">
+      <h5 class="card-title"><%= locution.name %></h5>
     </div>
-    <div>
-      <%= button_to 'Borrar', locution, method: :delete, remote: true, data: { confirm: '¿Estás seguro de borrar esta locución?', disable_with: 'Borrando...' }, class: 'btn btn-link link-danger text-decoration-none p-0' %>
-    </div>
-  </div>
-</li>
+</div>
+</div>

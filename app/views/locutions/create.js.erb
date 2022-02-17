@@ -1,9 +1,0 @@
-{
-    <% if @locution.persisted? %>
-    $('#new-locution').html("<%= j render partial: 'locutions/form', locals: { order: @order, locution: @order.locutions.new } %>")
-
-    $('#all-locutions').append("<%= j render @locution %>")
-    <% else %>
-    $('#all-locutions').append("<%= j render partial: 'locutions/locution', locals: { order: @order, locution: @locution } %>")
-    <% end %>
-}
