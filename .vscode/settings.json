@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.erb": "erb"
+      },
+      "vscode-erb-beautify.tab": true,
+      "[erb]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+      },
+}

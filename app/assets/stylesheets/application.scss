@@ -17,6 +17,10 @@
 @import "theme";
 @import "bootstrap";
 
+body {
+    background-color: #e8f0f7;
+}
+
 @font-face {
     font-family: 'Eurostile';
     src: url('eurostile.ttf');
@@ -24,4 +28,8 @@
 @font-face {
     font-family: 'Eurostile Bold';
     src: url('eurostile-bold.otf');
+}
+@font-face {
+    font-family: 'Monofur';
+    src: url('monofur.ttf');
 }
