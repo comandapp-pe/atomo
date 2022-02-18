@@ -1,7 +1,15 @@
-<div class="min-vh-100 d-flex flex-column bg-image-1 bg-image-lg-2" style="background-position: center; background-size: cover;">
+<div class="min-vh-100 d-flex flex-column bg-image-1 bg-image-lg-2" style="background-position: center; background-attachment: fixed; background-size: cover;">
   <%= render 'application/header' %>
 
   <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+  <div class='row justify-content-center align-items-center'>
+  <div class='col-12'>
+      <h1 class='text-center mt-5 mt-lg-0 mb-0 mb-lg-6'style='font-family: "EuroStile"'>
+        Escoge el formato de tu videospot
+      </h1>
+    </div>
+
+    <div class='col d-flex justify-content-center my-5 my-lg-0'>
     <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
       <%= image_tag "horizontal.svg", width: 250, class: 'mb-5 border rounded-5' %>
       <div class='text-center'>
@@ -13,6 +21,9 @@
         <% end %>
       </div>
     </div> 
+    </div>
+
+    <div class='col d-flex justify-content-center my-5 my-lg-0'>
     <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
         <%= image_tag "vertical.svg", width: 250, class: 'mb-5 border rounded-5' %>
         <div class='text-center'>
@@ -24,6 +35,9 @@
         <% end %>
         </div>
     </div>
+    </div>
+
+    <div class='col d-flex justify-content-center my-5 my-lg-0'>
     <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
         <%= image_tag "cuadrado.svg", width: 250, class: 'mb-5 border rounded-5' %>
         <div class='text-center'>
@@ -34,6 +48,8 @@
           <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
         <% end %>
         </div>
+    </div>
+    </div>
     </div>
   </main>
 
