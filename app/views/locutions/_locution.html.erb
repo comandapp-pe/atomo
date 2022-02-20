@@ -1,16 +1,15 @@
 <div class="col col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-  <div class="card h-100">
-    <% video = Nokogiri::HTML locution.preview_html.html_safe %>
-          <% width = video.at('iframe')['width'] %>
-          <% height = video.at('iframe')['height'] %>
-          <% ratio = width == height ? '1x1' : '16x9' %>
-
-          <div class="ratio ratio-<%= ratio %>">
-            <%= locution.preview_html.html_safe %>
-          </div>
-
-    <div class="card-body text-center">
-      <h5 class="card-title"><%= locution.name %></h5>
-    </div>
-</div>
+	<div class="card border-0 rounded-5 h-100">
+		<div class="card-body">
+			<% video = Nokogiri::HTML locution.preview_html.html_safe %>
+			<% width = video.at('iframe')['width'] %>
+			<% height = video.at('iframe')['height'] %>
+			<% ratio = width == height ? '1x1' : '16x9' %>
+			<div class="ratio ratio-<%= ratio %> mb-3">
+				<%= locution.preview_html.html_safe %>
+			</div>
+			<h5 class="card-title mb-0 fw-bold" style='font-family: monofur'><%= locution.name.split(' - ')[1] %></h5>
+			<h6 class="card-title mb-0 fw-bold" style='font-family: monofur'><%= locution.name.split(' - ')[0] %></h6>
+		</div>
+	</div>
 </div>
