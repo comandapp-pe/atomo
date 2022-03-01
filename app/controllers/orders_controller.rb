@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    product = Product.find_by(checkout_code: params['IPN_PCODE'].first)
+    product = Product.find_by(checkout_code: 'y6TO2GBQhd')
 
     product_checkout_code = params['IPN_PID'].first
 
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
       customer_email: customer_email,
       customer_first_name: customer_first_name,
       customer_last_name: customer_last_name,
-      product: 'y6TO2GBQhd',
+      product: product,
       format: product_checkout_format,
       length: product_checkout_length,
       payment_method: payment_method,
