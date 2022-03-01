@@ -50,15 +50,9 @@ class OrdersController < ApplicationController
 
     product_checkout_code = params['IPN_PID'].first
 
-    product_checkout_additional_fields_text = params["IPN_CUSTOM_#{product_checkout_code}_TEXT"]
+    product_checkout_format = 'vertical'
 
-    product_checkout_additional_fields_value = params["IPN_CUSTOM_#{product_checkout_code}_VALUE"]
-
-    product_checkout_additional_fields = product_checkout_additional_fields_text.zip(product_checkout_additional_fields_value).to_h
-
-    product_checkout_format = product_checkout_additional_fields['format']
-
-    product_checkout_length = product_checkout_additional_fields['length']
+    product_checkout_length = 30
 
     customer_email = params["CUSTOMEREMAIL"]
 
