@@ -28,11 +28,11 @@ class CheckoutLink < ApplicationRecord
 
     concat = signable.to_a.map { |key, value| "#{value.length}#{value}" }.join
 
-    secret_word = 'ZbWt7rWB*wB!GT2Fu7Uje!9jXj&m&@-Cc2?TeHpA5U7HGdKS?qQst85Xg8Fq4*sn'
+    secret_word = '*wxG8Hck7jhPKsuHy3R%sTP8ugurJ7mNQG-h!&rm6Ey&kXs!y3@bzfT9J2Gb?A42'
 
     args = {
       'empty-cart': '1',
-      merchant: '251018994895',
+      merchant: '251047031009',
       'product-additional-fields': "format:#{self.format},length:#{self.length}",
     }.merge(signable)
 

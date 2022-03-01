@@ -43,11 +43,11 @@ class Product < ApplicationRecord
   end
 
   def sync_checkout
-    vendor_code = '251018994895'
+    vendor_code = '251047031009'
 
     date = Time.now.utc.strftime '%Y-%m-%d %H:%M:%S'
 
-    key = '~o^76=q+zaZSDue5CLc%'
+    key = '?s=%mWtHCUlTdS)7~BRp'
 
     data = vendor_code.length.to_s + vendor_code + date.length.to_s + date
 
