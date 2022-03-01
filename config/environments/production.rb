@@ -75,7 +75,9 @@ Rails.application.configure do
     user_name: 'noresponder@quipustudio.digital',
     password: 'abc123',
     authentication: 'plain', 
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    ssl: true,
+    tls: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
