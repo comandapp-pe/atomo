@@ -108,6 +108,7 @@ class OrdersController < ApplicationController
     tag = "<EPAYMENT>#{ipn_date}|#{result}</EPAYMENT>"
 
     respond_to do |format|
+      OrderMailer.with(order: @order).confirmation_email.deliver_later
       if @order.save
         OrderMailer.with(order: @order).confirmation_email.deliver_later
 
