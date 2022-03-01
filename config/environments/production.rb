@@ -70,13 +70,14 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.smtp_settings = {
-    address: 'box.comandapp.xyz',
-    domain: 'comandapp.pe',
-    port: 587,
-    user_name: 'noresponder@comandapp.pe',
-    password: 'patchypatches',
-    authentication: 'plain',
-    enable_starttls_auto: true
+    address: 'admin.quipustudio.digital',
+    port: 465,
+    user_name: 'noresponder@quipustudio.digital',
+    password: 'abc123',
+    authentication: 'plain', 
+    enable_starttls_auto: true,
+    ssl: true,
+    tls: true,
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
