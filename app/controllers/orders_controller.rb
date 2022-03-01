@@ -93,6 +93,21 @@ class OrdersController < ApplicationController
       total: total
     )
 
+    puts {
+      checkout_code: checkout_code,
+      customer_email: customer_email,
+      customer_first_name: customer_first_name,
+      customer_last_name: customer_last_name,
+      product: product,
+      format: product_checkout_format,
+      length: product_checkout_length,
+      payment_method: payment_method,
+      currency: currency,
+      sold_at: sold_at,
+      checkout_commission: checkout_commission,
+      total: total
+    }
+
     pid = params["IPN_PID"].first
 
     pname = params["IPN_PNAME"].first
@@ -108,7 +123,6 @@ class OrdersController < ApplicationController
     tag = "<EPAYMENT>#{ipn_date}|#{result}</EPAYMENT>"
 
     respond_to do |format|
-      puts @order
       if @order.save
         OrderMailer.with(order: @order).confirmation_email.deliver_later
 
