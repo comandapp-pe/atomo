@@ -1,17 +1,7 @@
-<footer class="d-none d-lg-flex flex-row justify-content-center py-4 border-top text-center">
-		<ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Guía del usuario', image_path('user-guide.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Términos de servicio', image_path('terms-of-service.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de privacidad', image_path('politica-de-privacidad.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de entrega', image_path('politica-de-entrega.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de reembolso', image_path('politica-de-reembolso.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
+<footer class="d-flex flex-column flex-lg-row justify-content-center border-top text-center">
+	<%= link_to 'Guía del usuario', image_path('user-guide.pdf'), class: 'px-3 py-2 py-lg-3 link-dark text-decoration-none' %>
+	<%= link_to 'Términos de servicio', image_path('terms-of-service.pdf'), class: 'px-3 py-2 py-lg-3 link-dark text-decoration-none' %>
+	<%= link_to 'Política de privacidad', image_path('politica-de-privacidad.pdf'), class: 'px-3 py-2 py-lg-3 link-dark text-decoration-none' %>
+	<%= link_to 'Política de entrega', image_path('politica-de-entrega.pdf'), class: 'px-3 py-2 py-lg-3 link-dark text-decoration-none' %>
+	<%= link_to 'Política de reembolso', image_path('politica-de-reembolso.pdf'), class: 'px-3 py-2 py-lg-3 link-dark text-decoration-none' %>
 </footer>

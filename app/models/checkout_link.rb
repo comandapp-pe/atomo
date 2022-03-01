@@ -9,10 +9,13 @@ class CheckoutLink < ApplicationRecord
 
   def url
     price = case self.length
-              when 15 then 20
-              when 30 then 30
-              when 60 then 40
-            end
+        when 15 then 20
+        when 30 then 50
+    end
+
+	if :ocution
+		price += 20
+	end
 
     signable = {
       currency: 'USD',

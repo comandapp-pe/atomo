@@ -1,55 +1,12 @@
 <header class="border-bottom">
-  <!-- Default header -->
-  <div class="container px-4 py-3 d-none d-md-block">
-    <div class="row">
-      <div class='col'>
-        <%= link_to root_path, class: 'd-flex align-items-center justify-content-center' do %>
-          <%= image_tag "logo.png", height: 80, class: 'px-3' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <!-- Small header -->
-  <div class="container px-4 py-3 d-md-none">
-    <div class="d-flex justify-content-between align-items-center">
-
-      <%= link_to root_path, class: 'd-flex align-items-center justify-content-start link-dark text-decoration-none' do %>
-        <%= image_tag "logo.png", height: 40, class: 'pe-3' %>
-      <% end %>
-
-      <div class="py-2 ps-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-        <i class="fas fa-bars fa-lg"></i>
-      </div>
-    </div>
-  </div>
+	<!-- Default header -->
+	<div class="container px-4 py-1">
+		<div class="row">
+			<div class='col'>
+				<%= link_to root_path, class: 'd-flex align-items-center justify-content-center' do %>
+					<%= image_tag "logo.png", height: 80 %>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </header>
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas">
-  <div class="offcanvas-header">
-    <%= link_to root_path, class: 'd-flex align-items-center justify-content-start link-dark text-decoration-none' do %>
-      <%= image_tag "logo.png", height: 40, class: 'px-3' %>
-    <% end %>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body border-top d-flex flex-column justify-content-between">
-        <div class='mt-auto'>
-        <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Guía del usuario', image_path('user-guide.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Términos de servicio', image_path('terms-of-service.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de privacidad', image_path('politica-de-privacidad.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de entrega', image_path('politica-de-entrega.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul>
-  <ul class="list-unstyled m-0 px-3">
-    <li><%= link_to 'Política de reembolso', image_path('politica-de-reembolso.pdf'), class: 'link-secondary text-decoration-none' %></li>
-  </ul></div>
-
-
-  </div>
-</div>

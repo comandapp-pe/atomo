@@ -1,58 +1,57 @@
-<div class="min-vh-100 d-flex flex-column bg-image-1 bg-image-lg-2" style="background-position: center; background-attachment: fixed; background-size: cover;">
-  <%= render 'application/header' %>
-
-  <main class="flex-grow-1 d-flex justify-content-center align-items-center">
-  <div class='row justify-content-center align-items-center'>
-  <div class='col-12'>
-      <h1 class='text-center mt-5 mt-lg-0 mb-0 mb-lg-6'style='font-family: "EuroStile"'>
-        Escoge el formato de tu videospot
-      </h1>
-    </div>
-
-    <div class='col d-flex justify-content-center my-5 my-lg-0'>
-    <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
-      <%= image_tag "horizontal.svg", width: 250, class: 'mb-5 border rounded-5' %>
-      <div class='text-center'>
-        <%= form_with url: "/orders/new", method: :get do |form| %>
-          <%= form.hidden_field :product_id, value: params[:product_id] %>
-          <%= form.hidden_field :length, value: params[:length] %>
-          <%= form.hidden_field :format, value: 'horizontal' %>
-          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
-        <% end %>
-      </div>
-    </div> 
-    </div>
-
-    <div class='col d-flex justify-content-center my-5 my-lg-0'>
-    <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
-        <%= image_tag "vertical.svg", width: 250, class: 'mb-5 border rounded-5' %>
-        <div class='text-center'>
-          <%= form_with url: "/orders/new", method: :get do |form| %>
-          <%= form.hidden_field :product_id, value: params[:product_id] %>
-          <%= form.hidden_field :length, value: params[:length] %>
-          <%= form.hidden_field :format, value: 'vertical' %>
-          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
-        <% end %>
-        </div>
-    </div>
-    </div>
-
-    <div class='col d-flex justify-content-center my-5 my-lg-0'>
-    <div class='card px-4 py-5 border-0 rounded-5 mx-5'>
-        <%= image_tag "cuadrado.svg", width: 250, class: 'mb-5 border rounded-5' %>
-        <div class='text-center'>
-          <%= form_with url: "/orders/new", method: :get do |form| %>
-          <%= form.hidden_field :product_id, value: params[:product_id] %>
-          <%= form.hidden_field :length, value: params[:length] %>
-          <%= form.hidden_field :format, value: 'square' %>
-          <%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
-        <% end %>
-        </div>
-    </div>
-    </div>
-    </div>
-  </main>
-
-  <%= render 'application/footer' %>
-  </div>
-
+<div class="min-vh-100 d-flex flex-column" style="background-image: url(<%= image_path "bg.svg"%>); background-position: center; background-attachment: fixed; background-size: cover;">
+	<%= render 'application/header' %>
+	<main class="flex-grow-1 d-flex justify-content-center align-items-center container">
+		<div class='row justify-content-center align-items-center my-5'>
+			<div class='col-12 d-flex justify-content-center mb-3'>
+				<%= link_to 'javascript:history.back()', class: 'btn btn-dark' do %>
+					Regresar
+				<% end %>
+			</div>
+			<div class='col-12 mb-3'>
+				<h1 class='text-center mb-0'style='font-family: EuroStile'>
+					Escoge el formato de tu videospot
+				</h1>
+			</div>
+			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
+				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "horizontal.svg", width: 250, class: 'mb-5 border rounded-5' %>
+					<div class='text-center'>
+						<%= form_with url: "/orders/new", method: :get do |form| %>
+							<%= form.hidden_field :product_id, value: params[:product_id] %>
+							<%= form.hidden_field :length, value: params[:length] %>
+							<%= form.hidden_field :format, value: 'horizontal' %>
+							<%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
+				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "vertical.svg", width: 250, class: 'mb-5 border rounded-5' %>
+					<div class='text-center'>
+						<%= form_with url: "/orders/new", method: :get do |form| %>
+							<%= form.hidden_field :product_id, value: params[:product_id] %>
+							<%= form.hidden_field :length, value: params[:length] %>
+							<%= form.hidden_field :format, value: 'vertical' %>
+							<%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
+				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "cuadrado.svg", width: 250, class: 'mb-5 border rounded-5' %>
+					<div class='text-center'>
+						<%= form_with url: "/orders/new", method: :get do |form| %>
+							<%= form.hidden_field :product_id, value: params[:product_id] %>
+							<%= form.hidden_field :length, value: params[:length] %>
+							<%= form.hidden_field :format, value: 'square' %>
+							<%= form.submit 'Escoger', class: 'btn btn-dark btn-lg', data: { turbo: false } %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<%= render 'application/footer' %>
+</div>

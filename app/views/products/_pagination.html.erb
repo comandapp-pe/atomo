@@ -15,7 +15,7 @@
 		<%   if    item.is_a?(Integer) -%>
 			<%== link.call(item, item, 'class="btn btn-light bg-white"') %>
 		<%   elsif item.is_a?(String)  -%>
-			<%== link.call(item, item, 'class="btn btn-primary"') %>
+			<%== link.call(item, item, 'class="btn" style="background-color: #64cdcd"') %>
 		<%   elsif item == :gap        -%>
 			<a href="#" class="page-link"><%== pagy_t('pagy.nav.gap') %></a>
 		<%   end                       -%>
