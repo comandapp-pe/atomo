@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
 
     ipn_date = params["IPN_DATE"]
 
-    key = '~o^76=q+zaZSDue5CLc%'
+    key = '?s=%mWtHCUlTdS)7~BRp'
 
     data = [pid, pname, ipn_date, ipn_date].map { |value| "#{value.bytesize}#{value}" }.join.to_s
 
