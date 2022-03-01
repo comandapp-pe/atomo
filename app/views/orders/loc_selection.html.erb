@@ -1,14 +1,30 @@
 <div class="min-vh-100 d-flex flex-column bg-image-1 bg-image-lg-2" style="background-attachment: fixed; background-position: center; background-size: cover;">
-  <%= render 'application/header' %>
-
-  <main class="flex-grow-1">
-    <div class='container'>
-      <div class='row'>
-        <%= render partial: 'locutions/locution', collection: @locutions %>
-      </div>
-    </div>
-  </main>
-
-  <%= render 'application/footer' %>
-  </div>
-
+	<%= render 'application/header' %>
+	<main class="flex-grow-1">
+		<div class='container'>
+			<div class='row my-5'>
+				<div class='col-12 d-flex justify-content-center mb-3'>
+					<%= link_to 'javascript:history.back()', class: 'btn btn-dark' do %>
+						Regresar
+					<% end %>
+				</div>
+				<div class='col-12 mb-3'>
+					<h1 class='text-center mb-0'style='font-family: EuroStile'>
+						Agrega Locuciones de Inteligencia Artificial
+					</h1>
+					<h5 class='text-center mb-0'style='font-family: EuroStile'>Tendrá un costo adicional de $20</h5>
+				</div>
+				<%= render partial: 'locutions/locution', collection: @locutions %>
+				<div class='col-12 d-flex justify-content-center mt-4'>
+					<%= form_with model: CheckoutLink.new do |form| %>
+						<%= form.hidden_field :product_id, value: params[:product_id] %>
+						<%= form.hidden_field :length, value: params[:length] %>
+						<%= form.hidden_field :format, value: params[:format] %>
+						<%= form.submit 'Continuar Sin Locucion', class: 'btn btn-dark', data: { turbo: false } %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</main>
+	<%= render 'application/footer' %>
+</div>

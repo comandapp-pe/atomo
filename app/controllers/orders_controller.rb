@@ -108,12 +108,12 @@ class OrdersController < ApplicationController
     tag = "<EPAYMENT>#{ipn_date}|#{result}</EPAYMENT>"
 
     respond_to do |format|
-      OrderMailer.with(order: @order).confirmation_email.deliver_later
       if @order.save
         OrderMailer.with(order: @order).confirmation_email.deliver_later
 
         format.html { render html: tag.html_safe, layout: 'application' }
       else
+        puts @order.errors.full_messages
         format.html { head :unprocessable_entity }
       end
     end
