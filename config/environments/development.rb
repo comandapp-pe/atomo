@@ -76,9 +76,7 @@ Rails.application.configure do
     user_name: 'noresponder@quipustudio.digital',
     password: 'abc123',
     authentication: 'plain', 
-    enable_starttls_auto: true,
-    ssl: true,
-    tls: true,
+    enable_starttls_auto: true
   }
 
   config.i18n.available_locales = [:es, :en]
