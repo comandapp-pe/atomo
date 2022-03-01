@@ -13,7 +13,7 @@ class CheckoutLink < ApplicationRecord
         when 30 then 50
     end
 
-	if :ocution
+	if :locution
 		price += 20
 	end
 
