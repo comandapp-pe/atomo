@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
       customer_email: customer_email,
       customer_first_name: customer_first_name,
       customer_last_name: customer_last_name,
-      product: product,
+      product: 'y6TO2GBQhd',
       format: product_checkout_format,
       length: product_checkout_length,
       payment_method: payment_method,
