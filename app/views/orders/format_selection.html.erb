@@ -13,8 +13,8 @@
 				</h1>
 			</div>
 			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
-				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
-					<%= image_tag "horizontal.svg", width: 250, class: 'mb-5 border rounded-5' %>
+				<div class='card shadow-xxl rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "horizontal.svg", width: 250, class: 'mb-5 border rounded-5 shadow-lg' %>
 					<div class='text-center'>
 						<%= form_with url: "/orders/new", method: :get do |form| %>
 							<%= form.hidden_field :product_id, value: params[:product_id] %>
@@ -26,8 +26,8 @@
 				</div>
 			</div>
 			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
-				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
-					<%= image_tag "vertical.svg", width: 250, class: 'mb-5 border rounded-5' %>
+				<div class='card shadow-xxl rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "vertical.svg", width: 250, class: 'mb-5 border rounded-5 shadow-lg' %>
 					<div class='text-center'>
 						<%= form_with url: "/orders/new", method: :get do |form| %>
 							<%= form.hidden_field :product_id, value: params[:product_id] %>
@@ -39,8 +39,8 @@
 				</div>
 			</div>
 			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
-				<div class='card rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
-					<%= image_tag "cuadrado.svg", width: 250, class: 'mb-5 border rounded-5' %>
+				<div class='card shadow-xxl rounded-5 px-4 py-5 border-0' style="background-image: url(<%= image_path "orange.svg"%>); background-position: center; background-size: cover;">
+					<%= image_tag "cuadrado.svg", width: 250, class: 'mb-5 border rounded-5 shadow-lg' %>
 					<div class='text-center'>
 						<%= form_with url: "/orders/new", method: :get do |form| %>
 							<%= form.hidden_field :product_id, value: params[:product_id] %>

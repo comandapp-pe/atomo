@@ -1,5 +1,5 @@
 <div class="col col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-	<div class="card border-0 rounded-5 h-100">
+	<div class="card shadow-xxl border-0 rounded-5 h-100">
 		<div class="card-body">
 			<% video = Nokogiri::HTML locution.preview_html.html_safe %>
 			<% width = video.at('iframe')['width'] %>
