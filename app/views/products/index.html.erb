@@ -5,22 +5,24 @@
 	<%= render 'application/header' %>
 	<main class=" flex-grow-1">
 		<div class='container py-3 py-lg-5'>
-			<div class='card rounded-5 border-0 mb-3 shadow-xxl'>
-				<nav class="nav d-flex flex-column flex-lg-row justify-content-center py-2">
-					<% if params[:category_id] -%>
-						<%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2 rounded-5 btn text-muted' %>
-					<% else %>
-						<%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2 rounded-5 btn', style: 'background-color: #64cdcd' %>
-					<% end %>
-					<% Category.all.each do |category| %>
-						<% if params[:category_id].to_i == category.id -%>
-							<%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2 rounded-5 btn', style: 'background-color: #64cdcd' %>
+			<% if false -%>
+				<div class='card rounded-5 border-0 mb-3 shadow-xxl'>
+					<nav class="nav d-flex flex-column flex-lg-row justify-content-center py-2">
+						<% if params[:category_id] -%>
+							<%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2 rounded-5 btn text-muted' %>
 						<% else %>
-							<%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2 rounded-5 btn text-muted' %>
+							<%= link_to 'Todas las plantillas', products_path, class: 'text-decoration-none mx-2 rounded-5 btn', style: 'background-color: #64cdcd' %>
 						<% end %>
-					<% end %>
-				</nav>
-			</div>
+						<% Category.all.each do |category| %>
+							<% if params[:category_id].to_i == category.id -%>
+								<%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2 rounded-5 btn', style: 'background-color: #64cdcd' %>
+							<% else %>
+								<%= link_to category.name, products_path(category_id: category.id), class: 'text-decoration-none mx-2 rounded-5 btn text-muted' %>
+							<% end %>
+						<% end %>
+					</nav>
+				</div>
+			<% end %>
 			<div data-controller="empty-state">
 				<div data-empty-state-target="emptyState" class='d-flex justify-content-center align-items-center my-5 px-3 text-muted text-center'>
 					<h6 class='mb-0'>No hay plantillas disponibles en esta categoria.</h6>

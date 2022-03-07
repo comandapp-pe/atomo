@@ -1,9 +1,15 @@
-<main class="d-flex justify-content-center align-items-center vh-100">
-  <div class="p-2 text-center">
-    <h1>¡Tu orden ha sido confirmada!</h1>
-
-    <p>Te enviamos un correo con los pasos a seguir.</p>
-
-    <%= image_tag 'success.png' %>
-  </div>
-</main>
+<div class="min-vh-100 d-flex flex-column">
+	<%= render 'application/header' %>
+	<main class="flex-grow-1 d-flex">
+		<div class='flex-grow-1 d-flex flex-column justify-content-center container'>
+			<div class='row'>
+				<div class='col text-center'>
+					<h1>¡Tu orden ha sido confirmada!</h1>
+					<p>Te enviamos un correo con los pasos a seguir.</p>
+					<%= image_tag 'success.png' %>
+				</div>
+			</div>
+		</div>
+	</main>
+	<%= render 'application/footer' %>
+</div>
