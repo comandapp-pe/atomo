@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    query = { published: true }
+    query = { published: true }.order(id: :asc)
 
     if params[:category_id]
       return redirect_to root_path unless Category.exists?(params[:category_id])
