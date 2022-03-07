@@ -3,8 +3,8 @@
 		<div class="card-body">
 			<img class="img-fluid rounded-5" src="https://vumbnail.com/<%= product.vimeo_url.split('/').last %>.jpg">
 			<div>
-				<h5 class="mb-0 fw-bold" style='font-family: monofur'><%= product.name %></h5>
-				<h6 class="mb-0 fw-bold" style='font-family: monofur'>SKU: <%= sprintf '%03d', product.id %></h6>
+				<h5 class="mb-0"><%= product.name %></h5>
+				<h6 class="mb-0">SKU: <%= sprintf '%03d', product.id %></h6>
 			</div>
 		</div>
 	</div>

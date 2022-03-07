@@ -10,8 +10,8 @@
 			</div>
 			<div class='d-flex justify-content-between'>
 				<div>
-					<h5 class="mb-0 fw-bold" style='font-family: monofur'><%= locution.name.split(' - ')[1] %></h5>
-					<h6 class="mb-0 fw-bold" style='font-family: monofur'><%= locution.name.split(' - ')[0] %></h6>
+					<h5 class="mb-0 fw-bold"><%= locution.name.split(' - ')[1] %></h5>
+					<h6 class="mb-0 fw-bold"><%= locution.name.split(' - ')[0] %></h6>
 				</div>
 				<%= form_with model: CheckoutLink.new do |form| %>
 					<%= form.hidden_field :product_id, value: params[:product_id] %>

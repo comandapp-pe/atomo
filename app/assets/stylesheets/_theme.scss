@@ -26,6 +26,12 @@ $box-shadow-sm:               0 .125rem .25rem rgba(black, .075);
 $box-shadow-lg:               0 1rem 3rem rgba(black, .175);
 $box-shadow-xxl:               0 1rem 3rem rgba(black, .5);
 $box-shadow-inset:            inset 0 1px 2px rgba(black, .075);
+
+$font-weight-lighter:         lighter;
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-bold:            700;
+$font-weight-bolder:          bolder;
     
 $aspect-ratios: (
   "1x1": 100%,
@@ -56,6 +62,26 @@ $utilities: (
         sm: $box-shadow-sm,
         lg: $box-shadow-lg,
         none: none,
+      )
+    ),
+    "font-weight": (
+      property: font-weight,
+      class: fw,
+      values: (
+        light: $font-weight-light,
+        lighter: $font-weight-lighter,
+        normal: $font-weight-normal,
+        bold: $font-weight-bold,
+        bolder: $font-weight-bolder,
+        100: 100,
+        200: 200,
+        300: 300,
+        400: 400,
+        500: 500,
+        600: 600,
+        700: 700,
+        800: 800,
+        900: 900,
       )
     ),
     "bg-image": (
