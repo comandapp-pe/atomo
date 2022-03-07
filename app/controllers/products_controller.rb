@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    query = { published: true }.order(id: :asc)
+    query = { published: true }
 
     if params[:category_id]
       return redirect_to root_path unless Category.exists?(params[:category_id])
@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
       query = query.merge({ category: @category })
     end
     
-    @pagy, @products = pagy(Product.where(query).order(created_at: :desc))
+    @pagy, @products = pagy(Product.where(query).order(id: :asc))
   end
 
   # GET /product/1 or /product/1.json
