@@ -21,7 +21,7 @@ $border-radius-pill:          50rem;
 $modal-backdrop-opacity:      .89;
 
 $box-shadow:                  0 .5rem 1rem rgba(black, .15);
-$box-shadow-strong:           0 .5rem 1rem rgba(black, .5);
+$box-shadow-strong:           0  1rem 3rem rgba(black, .4);
 $box-shadow-sm:               0 .125rem .25rem rgba(black, .075);
 $box-shadow-lg:               0 1rem 3rem rgba(black, .175);
 $box-shadow-xxl:               0 1rem 3rem rgba(black, .5);
@@ -49,6 +49,7 @@ $utilities: (
         null: $box-shadow,
         sm: $box-shadow-sm,
         lg: $box-shadow-lg,
+        strong: $box-shadow-strong,
         xxl: $box-shadow-xxl,
         none: none,
       )
