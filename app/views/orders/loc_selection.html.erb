@@ -12,7 +12,8 @@
 					<h1 class='text-center mb-0'>
 						Agrega Locuciones de Inteligencia Artificial
 					</h1>
-					<h5 class='text-center mb-0'>Tendrá un costo adicional de $20</h5>
+					<h5 class='text-center'>Tendrá un costo adicional de $20</h5>
+					<h6 class='text-center'>Recuerda que las locuciones de inteligencia artificial son un recurso novedoso, sin embargo, aún no alcanza el énfasis, tonalidad y emoción de la voz humana. Te recomendamos usarlas para fines informativos.</h6>
 				</div>
 				<%= render partial: 'locutions/locution', collection: @locutions %>
 				<div class='col-12 d-flex justify-content-center mt-4'>
@@ -20,7 +21,7 @@
 						<%= form.hidden_field :product_id, value: params[:product_id] %>
 						<%= form.hidden_field :length, value: params[:length] %>
 						<%= form.hidden_field :format, value: params[:format] %>
-						<%= form.submit 'Continuar Sin Locucion', class: 'btn btn-dark', data: { turbo: false } %>
+						<%= form.submit 'Continuar Sin Locución', class: 'btn btn-dark', data: { turbo: false } %>
 					<% end %>
 				</div>
 			</div>
