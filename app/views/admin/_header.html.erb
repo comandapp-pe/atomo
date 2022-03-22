@@ -10,6 +10,7 @@
 				<li class="nav-item"><%= link_to 'Productos', admin_products_path, class: "nav-link #{params[:controller] == 'admin/products' ? 'link-primary' : 'link-secondary'}" %></li>
 				<li class="nav-item"><%= link_to 'Categorías', admin_categories_path, class: "nav-link #{params[:controller] == 'admin/categories' ? 'link-primary' : 'link-secondary'}" %></li>
 				<li class="nav-item"><%= link_to 'Locuciones', admin_locutions_path, class: "nav-link #{params[:controller] == 'admin/locutions' ? 'link-primary' : 'link-secondary'}" %></li>
+				<li class="nav-item"><%= link_to 'Preguntas Frecuentes', admin_faqs_path, class: "nav-link #{params[:controller] == 'admin/faqs' ? 'link-primary' : 'link-secondary'}" %></li>
 			</ul>
 			<%= link_to 'Cerrar sesión', admin_session_path, method: :delete, class: 'link-danger text-decoration-none' %>
 		</div>

@@ -4,6 +4,9 @@ es:
       category:
         one: 'Categoría'
         other: 'Categorías'
+      faq:
+        one: 'Pregunta Frecuente'
+        other: 'Preguntas Frecuentes'
     attributes:
       category:
         name: 'Nombre'

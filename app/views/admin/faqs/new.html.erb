@@ -5,19 +5,13 @@
 			<%= notice %> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 	<% end %>
-	<div>
-		<%= link_to 'Crear Producto', new_admin_product_path, class: 'btn btn-primary' %>
+	<div class="mb-2">
+		<%= link_to '< Regresar', admin_faqs_path, class: 'text-decoration-none' %>
 	</div>
-	<br>
+	<h1>Nueva Pregunta Frecuente</h1>
 	<div class="card">
-		<h1 class="card-header h3">Productos</h1>
 		<div class="card-body">
-			<div data-controller="empty-state">
-				<div data-empty-state-target="emptyState">No hay videos disponibles.</div>
-				<div id="all_products">
-					<%= render partial: 'admin/products/product', collection: @products %>
-				</div>
-			</div>
+			<%= render 'form', faq: @faq %>
 		</div>
 	</div>
 </main>

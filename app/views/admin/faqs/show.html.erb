@@ -1,0 +1,23 @@
+<%= render 'admin/header' %>
+<main class="container px-4">
+	<% if notice %>
+		<div id="notice" class="alert alert-success alert-dismissible fade show">
+			<%= notice %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	<% end %>
+	<div class="mb-3">
+		<%= link_to '< Regresar', admin_faqs_path, class: 'text-decoration-none' %>
+	</div>
+	<div class="card">
+		<h1 class="card-header h3">
+			<%= @faq.question_in_database %>
+		</h1>
+		<div class="card-body">
+			<%= render 'form', faq: @faq %>
+		</div>
+		<div class="card-footer">
+			<%= link_to 'Borrar categoría', [:admin, @faq], method: :delete, data: { confirm: "¿Estás seguro de borrar esta categoría?" }, class: 'text-decoration-none link-danger' %>
+		</div>
+	</div>
+</main>
+<%= render 'admin/footer' %>

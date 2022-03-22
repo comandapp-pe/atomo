@@ -1,0 +1,23 @@
+<%= form_with model: [:admin, faq] do |form| %>
+	<% if faq.errors.any? %>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<h4>Hubieron errores guardando esta categoría:</h4>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<hr>
+			<ul>
+				<% faq.errors.each do |error| %>
+					<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="mb-2">
+		<%= form.label :question, 'Pregunta', class: 'form-label' %>
+		<%= form.text_field :question, class: 'form-control' %>
+	</div>
+	<div class="mb-2">
+		<%= form.label :answer, 'Respuesta', class: 'form-label' %>
+		<%= form.text_area :answer, class: 'form-control' %>
+	</div>
+	<%= form.submit class: 'btn btn-primary mt-3' %>
+<% end %>
