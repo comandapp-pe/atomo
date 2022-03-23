@@ -7,6 +7,9 @@ es:
       faq:
         one: 'Pregunta Frecuente'
         other: 'Preguntas Frecuentes'
+      product:
+        one: 'Producto'
+        other: 'Productos'
     attributes:
       category:
         name: 'Nombre'

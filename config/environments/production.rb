@@ -72,12 +72,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'admin.quipustudio.digital',
     port: 465,
-    user_name: 'noresponder@quipustudio.digital',
-    password: 'abc123',
+    user_name: 'noresponder@socialspots.quipustudio.digital',
+    password: 's3MpOJBP',
     authentication: 'plain', 
-    enable_starttls_auto: true,
-    ssl: true,
-    tls: true
+    enable_starttls_auto: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
