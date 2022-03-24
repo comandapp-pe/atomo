@@ -41,5 +41,7 @@ module App
     config.i18n.fallbacks = [:en]
 
     config.action_view.form_with_generates_remote_forms = false 
+
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end
