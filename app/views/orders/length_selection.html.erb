@@ -15,10 +15,10 @@
 			<div class='col d-flex justify-content-center mb-5 mb-lg-0'>
 				<div class='card shadow-xxl w-100 rounded-top-left-8 rounded-bottom-right-8 px-4 py-5 border-0 ms-lg-8' style="max-width: 350px; background-image: url(<%= image_path "gradient-1.svg"%>); background-position: center; background-size: cover;">
 					<div class='d-flex flex-column text-center text-light mb-4'>
-						<span class='text-shadow-strong' style='font-family: "EuroStile-Bold"; font-size: 140px; line-height: 140px'>15</span>
-						<span class='text-shadow-strong' style='font-family: "EuroStile-Bold"; font-size: 100px; line-height: 100px'>SEG</span>
+						<span class='text-shadow-strong length-card-length'>15</span>
+						<span class='text-shadow-strong length-card-length' style='font-size: 100px; line-height: 100px'>SEG</span>
 					</div>
-					<span class='text-center mb-5' style='font-family: "EuroStile-Bold"; font-size: 80px; line-height: 80px'>$20</span>
+					<span class='text-center mb-5 length-card-price'>$20</span>
 					<div class='text-center'>
 						<%= form_with url: "/orders/new", method: :get do |form| %>
 							<%= form.hidden_field :product_id, value: params[:product_id] %>
@@ -31,10 +31,10 @@
 			<div class='col d-flex justify-content-center'>
 				<div class='card shadow-xxl w-100 rounded-top-left-8 rounded-bottom-right-8 px-4 py-5 border-0 me-lg-8' style="max-width: 350px; background-image: url(<%= image_path "gradient-2.svg"%>); background-position: center; background-size: cover;">
 					<div class='d-flex flex-column text-center text-light mb-4'>
-						<span class='text-shadow-strong' style='font-family: "EuroStile-Bold"; font-size: 140px; line-height: 140px'>30</span>
-						<span class='text-shadow-strong' style='font-family: "EuroStile-Bold"; font-size: 100px; line-height: 100px'>SEG</span>
+						<span class='text-shadow-strong length-card-length'>30</span>
+						<span class='text-shadow-strong length-card-length' style='font-size: 100px; line-height: 100px'>SEG</span>
 					</div>
-					<span class='text-center mb-5' style='font-family: "EuroStile-Bold"; font-size: 80px; line-height: 80px'>$50</span>
+					<span class='text-center mb-5 length-card-price'>$50</span>
 					<div class='text-center'>
 						<%= form_with url: "/orders/new", method: :get do |form| %>
 							<%= form.hidden_field :product_id, value: params[:product_id] %>
